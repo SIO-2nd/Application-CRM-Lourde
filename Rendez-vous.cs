@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application_Lourde_CRM
 {
-    class Rendez_vous
+    public class Rendez_vous
     {
 
         #region Champs
