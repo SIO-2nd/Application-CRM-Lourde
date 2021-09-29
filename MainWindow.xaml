@@ -14,7 +14,7 @@
             <TabControl.Background>
                 <ImageBrush ImageSource="background_transparent.png"/>
             </TabControl.Background>
-            <TabItem Header="Prospects" Background="#FFE5E5E5" BorderBrush="#FFACACAC" Opacity="0.9">
+            <TabItem Header="Prospects" Background="#FFE5E5E5" BorderBrush="#FFACACAC" Opacity="0.8">
                 <Grid Opacity="0.95">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
@@ -33,7 +33,7 @@
                     <TextBox x:Name="txtVille1" HorizontalAlignment="Left" Height="23" Margin="471,238,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75"/>
                     <Button x:Name="btnSupprimer1" Content="Supprimer" HorizontalAlignment="Left" Margin="471,375,0,0" VerticalAlignment="Top" Width="123"/>
                     <Button x:Name="btnModifier1" Content="Modifier" HorizontalAlignment="Left" Margin="471,350,0,0" VerticalAlignment="Top" Width="123"/>
-                    <Button x:Name="btnAjouter1" Content="Ajouter" HorizontalAlignment="Left" Margin="471,325,0,0" VerticalAlignment="Top" Width="123"/>
+                    <Button x:Name="btnAjouter1" Content="Ajouter" HorizontalAlignment="Left" Margin="471,325,0,0" VerticalAlignment="Top" Width="123" Click="btnAjouter1_Click"/>
                     <Label x:Name="lblID1" Content="ID :" HorizontalAlignment="Left" Margin="442,6,0,0" VerticalAlignment="Top" Height="26" Foreground="White"/>
                     <Label x:Name="lblNom1" Content="Nom :" HorizontalAlignment="Left" Margin="427,45,0,0" VerticalAlignment="Top" Foreground="White"/>
                     <Label x:Name="lblPrenom1" Content="Prénom :" HorizontalAlignment="Left" Margin="412,83,0,0" VerticalAlignment="Top" Foreground="White"/>
@@ -45,7 +45,7 @@
                     <Label x:Name="lblCP" Content="Code postal :" HorizontalAlignment="Left" Margin="388,272,0,0" VerticalAlignment="Top" Foreground="White"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Clients" Opacity="0.9">
+            <TabItem Header="Clients" Opacity="0.8">
                 <Grid>
                     <DataGrid x:Name="datagrid2" HorizontalAlignment="Left" Height="385" Margin="10,10,0,0" VerticalAlignment="Top" Width="375">
                         <DataGrid.Background>
@@ -73,27 +73,31 @@
                     <Label x:Name="lblCP2" Content="Code postal :" HorizontalAlignment="Left" Margin="388,272,0,0" VerticalAlignment="Top" Foreground="White"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Rendez-vous" Opacity="0.9">
+            <TabItem Header="Rendez-vous" Opacity="0.8">
                 <Grid>
-                    <DataGrid x:Name="datagrid3" HorizontalAlignment="Left" Height="385" Margin="10,10,0,0" VerticalAlignment="Top" Width="375">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="107*"/>
+                        <ColumnDefinition Width="195*"/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="datagrid3" HorizontalAlignment="Left" Height="385" Margin="10,10,0,0" VerticalAlignment="Top" Width="375" Grid.ColumnSpan="2">
                         <DataGrid.Background>
                             <ImageBrush ImageSource="background_transparent_white.png"/>
                         </DataGrid.Background>
                     </DataGrid>
-                    <TextBox x:Name="txtID3" HorizontalAlignment="Left" Height="23" Margin="471,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
-                    <TextBox x:Name="txtDate" HorizontalAlignment="Left" Height="23" Margin="471,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75"/>
-                    <TextBox x:Name="txtProspect" HorizontalAlignment="Left" Height="23" Margin="471,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75"/>
-                    <TextBox x:Name="txtClient" HorizontalAlignment="Left" Height="23" Margin="471,124,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75"/>
-                    <Button Content="Supprimer" HorizontalAlignment="Left" Margin="471,375,0,0" VerticalAlignment="Top" Width="123"/>
-                    <Button Content="Modifier" HorizontalAlignment="Left" Margin="471,350,0,0" VerticalAlignment="Top" Width="123"/>
-                    <Button Content="Ajouter" HorizontalAlignment="Left" Margin="471,325,0,0" VerticalAlignment="Top" Width="123"/>
-                    <Label x:Name="lblID3" Content="ID :" HorizontalAlignment="Left" Margin="442,6,0,0" VerticalAlignment="Top" Height="26" Foreground="White"/>
-                    <Label x:Name="lblDate" Content="Date :" HorizontalAlignment="Left" Margin="429,45,0,0" VerticalAlignment="Top" Foreground="White"/>
-                    <Label x:Name="lblProspect" Content="Prospect :" HorizontalAlignment="Left" Margin="409,83,0,0" VerticalAlignment="Top" Foreground="White"/>
-                    <Label x:Name="lblClient" Content="Client :" HorizontalAlignment="Left" Margin="424,120,0,0" VerticalAlignment="Top" Foreground="White"/>
+                    <TextBox x:Name="txtID3" HorizontalAlignment="Left" Height="23" Margin="257,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Grid.Column="1"/>
+                    <TextBox x:Name="txtProspect" HorizontalAlignment="Left" Height="23" Margin="257,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75" Grid.Column="1"/>
+                    <TextBox x:Name="txtCommercial" HorizontalAlignment="Left" Height="23" Margin="257,124,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75" Grid.Column="1"/>
+                    <Button Content="Supprimer" HorizontalAlignment="Left" Margin="257,375,0,0" VerticalAlignment="Top" Width="123" Grid.Column="1"/>
+                    <Button Content="Modifier" HorizontalAlignment="Left" Margin="257,350,0,0" VerticalAlignment="Top" Width="123" Grid.Column="1"/>
+                    <Button Content="Ajouter" HorizontalAlignment="Left" Margin="257,325,0,0" VerticalAlignment="Top" Width="123" Grid.Column="1"/>
+                    <Label x:Name="lblID3" Content="ID :" HorizontalAlignment="Left" Margin="228,6,0,0" VerticalAlignment="Top" Height="26" Foreground="White" Grid.Column="1"/>
+                    <Label x:Name="lblDate" Content="Date :" HorizontalAlignment="Left" Margin="215,45,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="1"/>
+                    <Label x:Name="lblProspect" Content="Prospect :" HorizontalAlignment="Left" Margin="195,83,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="1"/>
+                    <Label x:Name="lblClient" Content="Commercial :" HorizontalAlignment="Left" Margin="179,120,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="1"/>
+                    <DatePicker x:Name="pickDate" HorizontalAlignment="Left" Height="26" Margin="254,48,0,0" VerticalAlignment="Top" Width="135" Background="{x:Null}" Foreground="#FF333333" BorderBrush="{x:Null}" Opacity="0.75" Grid.Column="1"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Factures" Opacity="0.9">
+            <TabItem Header="Factures" Opacity="0.8">
                 <Grid>
                     <DataGrid x:Name="datagrid4" HorizontalAlignment="Left" Height="385" Margin="10,10,0,0" VerticalAlignment="Top" Width="375">
                         <DataGrid.Background>
@@ -103,13 +107,13 @@
                     <TextBox x:Name="txtID4" HorizontalAlignment="Left" Height="23" Margin="471,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Opacity="0.75"/>
                     <TextBox x:Name="txtIdAchat" HorizontalAlignment="Left" Height="23" Margin="471,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Opacity="0.75"/>
                     <TextBox x:Name="txtIdCli" HorizontalAlignment="Left" Height="23" Margin="471,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Opacity="0.75"/>
-                    <TextBox x:Name="txtQt" HorizontalAlignment="Left" Height="23" Margin="471,124,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Opacity="0.75"/>
+                    <TextBox x:Name="txtTotal" HorizontalAlignment="Left" Height="23" Margin="472,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Opacity="0.75"/>
                     <Label x:Name="lblID4" Content="ID :" HorizontalAlignment="Left" Margin="442,6,0,0" VerticalAlignment="Top" Height="26" Foreground="White"/>
                     <Label x:Name="lblIdAchat" Content="ID d'achat :" HorizontalAlignment="Left" Margin="401,45,0,0" VerticalAlignment="Top" Foreground="White"/>
                     <Label x:Name="LblIdCli" Content="ID du client :" HorizontalAlignment="Left" Margin="394,83,0,0" VerticalAlignment="Top" Foreground="White"/>
-                    <Label x:Name="lblQt" Content="Quantité :" HorizontalAlignment="Left" Margin="408,120,0,0" VerticalAlignment="Top" Foreground="White"/>
-                    <TextBox x:Name="txtPrix" HorizontalAlignment="Left" Height="23" Margin="471,162,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" IsEnabled="False" Opacity="0.75"/>
-                    <Label x:Name="lblPrix" Content="Prix :" HorizontalAlignment="Left" Margin="432,159,0,0" VerticalAlignment="Top" Foreground="White"/>
+                    <Label x:Name="lblTotal" Content="Total :" HorizontalAlignment="Left" Margin="429,159,0,0" VerticalAlignment="Top" Foreground="White"/>
+                    <Label x:Name="lblTotal_Copy" Content="Date :" HorizontalAlignment="Left" Margin="429,121,0,0" VerticalAlignment="Top" Foreground="White"/>
+                    <TextBox x:Name="txtDate" HorizontalAlignment="Left" Height="23" Margin="472,124,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Opacity="0.75"/>
                 </Grid>
             </TabItem>
         </TabControl>
