@@ -269,8 +269,7 @@ namespace Application_Lourde_CRM
                 requete.Parameters.AddWithValue("@IdProd", facture.ID_Facture);
                 requete.Parameters.AddWithValue("@TypeProd", facture.Date_Facture);
                 requete.Parameters.AddWithValue("@PrixProd", facture.I);
-                requete.Parameters.AddWithValue("@NomProd", .);
-                requete.Parameters.AddWithValue("@LibProd", .);
+
 
                 //Exécution de la commande SQL
                 requete.ExecuteNonQuery();
