@@ -1,27 +1,30 @@
 ﻿using System;
-
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Application_Lourde_CRM
 {
-	public class Facture
-	{
+    public class Achats
+    {
         #region Champs
 
         private int Id;
-        private Client Id_Client;
-        private Produits Id_Produits;
-        private string Date;
+        private int Id_Client;
+        private int Id_Produits;
+        private int Quantite;
 
         #endregion
 
         #region Constructeurs
 
-        public Facture(int id, Client id_client, Produits id_produit, string date)
+        public Achats(int id, Client client, Produits produits, int quantite)
         {
             Id = id;
-            Id_Client = id_client;
-            Id_Produits = id_produit;
-            Date = date;
+            Id_Client = client.ID_Client;
+            Id_Produits = produits.ID;
+            Quantite = quantite;
         }
 
         #endregion
@@ -34,24 +37,23 @@ namespace Application_Lourde_CRM
             set { Id = value; }
         }
 
-        public Client ID_CLIENT
+        public int ID_Client
         {
             get { return Id_Client; }
             set { Id_Client = value; }
         }
 
-        public Produits ID_PRODUITS
+        public int ID_Produits
         {
             get { return Id_Produits; }
             set { Id_Produits = value; }
         }
 
-        public string DATE
+        public int QUANTITE
         {
-            get { return Date; }
-            set { Date = value; }
+            get { return Quantite; }
+            set { Quantite = value; }
         }
-
         #endregion
     }
 }

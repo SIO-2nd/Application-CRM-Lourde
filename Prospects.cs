@@ -6,84 +6,91 @@ using System.Threading.Tasks;
 
 namespace Application_Lourde_CRM
 {
-    class Prospects
+    public class Prospects
     {
 
         #region Champs
-        private int _numProspect;
-        private string _nomProspect;
-        private string _prenomProspect;
-        private string _mailProspect;
-        private int _telProspect;
-        private string _adresseProspect;
-        private string _villeProspect;
-        private int _cpProspect;
+
+        private int Id;
+        private string Nom;
+        private string Prenom;
+        private string Email;
+        private int Telephone;
+        private string Adresse;
+        private string Ville;
+        private int Code_Postal;
+
         #endregion
 
         #region Constructeurs
-        public Prospects(int num, string nom, string prenom, string mail, int tel, string adresse, string ville, int cp)
+
+        public Prospects(int id, string nom, string prenom, string email, int telephone, string adresse, string ville, int code_postal)
         {
-            _numProspect = num;
-            _nomProspect = nom;
-            _prenomProspect = prenom;
-            _mailProspect = mail;
-            _telProspect = tel;
-            _adresseProspect = adresse;
-            _villeProspect = ville;
-            _cpProspect = cp;
+            Id = id;
+            Nom = nom;
+            Prenom = prenom;
+            Email = email;
+            Telephone = telephone;
+            Adresse = adresse;
+            Ville = ville;
+            Code_Postal = code_postal;
         }
+
         #endregion
 
         #region Accesseurs/Mutateurs
-        public int NumProspect
+
+        public int ID
         {
-            get { return _numProspect; }
-            set { _numProspect = value; }
+            get { return Id; }
+            set { Id = value; }
         }
 
-        public string NomProspect
+        public string NOM
         {
-            get { return _nomProspect; }
-            set { _nomProspect = value; }
+            get { return Nom; }
+            set { Nom = value; }
         }
         public string PrenomProspect
         {
-            get { return _prenomProspect; }
-            set { _prenomProspect = value; }
+            get { return Prenom; }
+            set { Prenom = value; }
         }
 
         public string MailProspect
         {
-            get { return _mailProspect; }
-            set { _mailProspect = value; }
+            get { return Email; }
+            set { Email = value; }
         }
 
         public int TelProspect
         {
-            get { return _telProspect; }
-            set { _telProspect = value; }
+            get { return Telephone; }
+            set { Telephone = value; }
         }
         public string AdresseProspect
         {
-            get { return _adresseProspect; }
-            set { _adresseProspect = value; }
+            get { return Adresse; }
+            set { Adresse = value; }
         }
         public string VilleProspect
         {
-            get { return _villeProspect; }
-            set { _villeProspect = value; }
+            get { return Ville; }
+            set { Ville = value; }
         }
 
         public int CpProspect
         {
-            get { return _cpProspect; }
-            set { _cpProspect = value; }
+            get { return Code_Postal; }
+            set { Code_Postal = value; }
         }
+
         #endregion
 
         #region Methodes
         public override string ToString()
         {
+            // Méthode ToString() surchargée qui écrase la méthode ToString() de base
             return Convert.ToString(_numProspect);
         }
         #endregion

@@ -6,78 +6,78 @@ namespace Application_Lourde_CRM
 	{
 		#region Champs
 
-		private int ID;
+		private int Id;
 		private string Nom;
 		private string Prenom;
 		private string Adresse;
 		private int Code_Postal;
 		private string Ville;
 		private string Email;
-		private int Numero;
+		private int Telephone;
 
 		#endregion
 
 		#region Constructeurs
 
-		public Client(int id, string nom, string prenom, string adresse, int codePostal, string ville, string email, int numero)
+		public Client(int id, string nom, string prenom, string adresse, int codePostal, string ville, string email, int telephone)
 		{
-			ID=id;
+			Id=id;
 			Nom = nom;
 			Prenom = prenom;
 			Adresse = adresse;
 			Code_Postal = codePostal;
 			Ville = ville;
 			Email = email;
-			Numero = numero;
+			Telephone = telephone;
 		}
 
 		#endregion
 
 		#region Accesseurs/Mutateurs
 
-		public int ID_Client
+		public int ID
 		{
-			get { return ID; }
-			set { ID = value; }
+			get { return Id; }
+			set { Id = value; }
 		}
 
-		public string Nom_Client
+		public string NOM
         {
-            get { return Nom; }
-			set { Nom = value; }
+            get { return NOM; }
+			set { NOM = value; }
         }
 
-		public string Prenom_Client
+		public string PRENOM
 		{
 			get { return Prenom; }
 			set { Prenom = value; }
 		}
 
-		public string Adresse_Client
+		public string ADRESSE
 		{
 			get { return Adresse; }
 			set { Adresse = value; }
 		}
 
-		public int Code_Postal_Client
+		public int CODE_POSTAL
 		{
 			get { return Code_Postal; }
 			set { Code_Postal = value; }
 		}
 
-		public string Ville_Client
+		public string VILLE
         {
 			get { return Ville; }
 			set { Ville = value; }
         }
 
-		public string Email_Client
+		public string EMAIL
         {
 			get { return Email; }
             set { Email = value; }
         }
 
-		public int Numero_Client
+		public int TELEPHONE
         {
             get { return Numero; }
             set { Numero = value; }

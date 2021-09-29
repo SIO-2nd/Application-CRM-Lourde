@@ -6,57 +6,69 @@ using System.Threading.Tasks;
 
 namespace Application_Lourde_CRM
 {
-    class Produits
+    public class Produits
     {
 
         #region Champs
-        private int _numProduit;
-        private string _nomProduit;
-        private string _typeProduit;
-        private int _refProduit;
+
+        private int Id;
+        private string Nom;
+        private string Type;
+        private double Prix;
+        private int Reference;
+
         #endregion
 
         #region Constructeurs
-        public Produits(int num, string nom, string type, int reference)
+
+        public Produits(int id, string nom, string type, double prix, int reference)
         {
-            _numProduit = num;
-            _nomProduit = nom;
-            _typeProduit = type;
-            _refProduit = reference;
+            Id = id;
+            Nom = nom;
+            Type = type;
+            Prix = prix;
+            Reference = reference;
 
         }
+
         #endregion
 
         #region Accesseurs/Mutateurs
-        public int NumProduit
+
+        public int ID
         {
-            get { return _numProduit; }
-            set { _numProduit = value; }
+            get { return Id; }
+            set { Id = value; }
         }
 
-        public string NomProduit
+        public string NOM
         {
-            get { return _nomProduit; }
-            set { _nomProduit = value; }
+            get { return Nom; }
+            set { Nom = value; }
         }
 
-        public string TypeProduit
+        public string TYPE
         {
-            get { return _typeProduit; }
-            set { _typeProduit = value; }
+            get { return Type; }
+            set { Type = value; }
         }
-        public int RefProduit
+
+        public double PRIX
         {
-            get { return _refProduit; }
-            set { _refProduit = value; }
+            get { return Prix; }
+            set { Prix = value; }
         }
+
+        public int REFERENCE
+        {
+            get { return Reference; }
+            set { Reference = value; }
+        }
+
         #endregion
 
         #region Methodes
-        public override string ToString()
-        {
-            return Convert.ToString(_numProduit);
-        }
+
         #endregion
     }
 }

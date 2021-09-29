@@ -10,22 +10,22 @@ namespace Application_Lourde_CRM
     {
         #region Champs
 
-        private int ID;
+        private int Id;
         private string Nom;
         private string Prenom;
-        private int Numero;
+        private int Telephone;
         private string Email;
 
         #endregion
 
         #region Constructeurs
 
-        public Commercials(int id, string nom, string prenom, int numero, string email)
+        public Commercials(int id, string nom, string prenom, int telephone, string email)
         {
-            ID = id;
+            Id = id;
             Nom = nom;
             Prenom = prenom;
-            Numero = numero;
+            Telephone = telephone;
             Email = email;
         }
 
@@ -33,31 +33,31 @@ namespace Application_Lourde_CRM
 
         #region Accesseurs/Mutateurs
 
-        public int ID_Commercials
+        public int ID
         {
             get { return ID; }
             set { ID = value; }
         }
 
-        public string Nom_Commercials
+        public string NOM
         {
             get { return Nom; }
             set { Nom = value; }
         }
 
-        public string Prenom_Commercials
+        public string PRENOM
         {
             get { return Prenom; }
             set { Prenom = value; }
         }
 
-        public int Numero_Commercials
+        public int TELEPHONE
         {
-            get { return Numero; }
-            set { Numero = value; }
+            get { return Telephone; }
+            set { Telephone = value; }
         }
 
-        public string Email_Commercials
+        public string EMAIL
         {
             get { return Email; }
             set { Email = value; }
