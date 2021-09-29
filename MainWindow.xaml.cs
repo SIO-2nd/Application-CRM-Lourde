@@ -39,7 +39,7 @@ namespace Application_Lourde_CRM
 
             Produits PD1 = new Produits(1, "Pomme", "Fruit", 1);
 
-            Facture F1 = new Facture(1, C1, PD1, DateTime.Parse("29/09/2021"), 50);
+            Facture F1 = new Facture(1, C1, PD1, DateTime.Parse("29/09/2021"));
 
             // Remplissage des collections avec les objets
             cProspects.Add(P1);
