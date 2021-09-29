@@ -37,9 +37,9 @@ namespace Application_Lourde_CRM
 
             Rendez_vous R1 = new Rendez_vous(1, 1, 1, DateTime.Parse("29/09/2021"));
 
-            Produits Pr1 = new Produits(1, "Pomme", "Fruit", 1);
+            Produits PD1 = new Produits(1, "Pomme", "Fruit", 1);
 
-            Facture F1 = new Facture(1, C1, Pr1, DateTime.Parse("29/09/2021"), 50);
+            Facture F1 = new Facture(1, C1, PD1, DateTime.Parse("29/09/2021"), 50);
 
             // Remplissage des collections avec les objets
             cProspects.Add(P1);
