@@ -60,15 +60,18 @@ namespace Application_Lourde_CRM
 
         private void initialisation_connexion()
         {
+            //Méthode pour initialiser la connexion
+
+            // Création de la chaîne de connexion
             string Connexion_String = "SERVER=" + serveur + ';' + "DATABASE=" + data_base + ';' + "UID=" + uid + ';' + "PASSWORD=" + password + ';';
-            connexion = new MySqlConnection(Connexion_String);
+            this.connexion = new MySqlConnection(Connexion_String);
         }
 
         private bool Ouverture_Connexion()
         {
             try
             {
-                connexion.Open();
+                this.connexion.Open();
                 return true;
             }
             catch (MySqlException erreur)
@@ -90,7 +93,7 @@ namespace Application_Lourde_CRM
         {
             try
             {
-                connexion.Close();
+                this.connexion.Close();
                 return true;
             }
             catch(MySqlException erreur)
