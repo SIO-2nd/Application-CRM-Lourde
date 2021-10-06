@@ -11,8 +11,8 @@ namespace Application_Lourde_CRM
         #region Champs
 
         private int Id;
-        private int Id_Client;
-        private int Id_Produits;
+        private Client Id_Client;
+        private Produits Id_Produits;
         private int Quantite;
 
         #endregion
@@ -22,8 +22,8 @@ namespace Application_Lourde_CRM
         public Achats(int id, Client client, Produits produits, int quantite)
         {
             Id = id;
-            Id_Client = client.ID_Client;
-            Id_Produits = produits.ID;
+            Id_Client = client;
+            Id_Produits = produits;
             Quantite = quantite;
         }
 
@@ -37,13 +37,13 @@ namespace Application_Lourde_CRM
             set { Id = value; }
         }
 
-        public int ID_Client
+        public Client ID_Client
         {
             get { return Id_Client; }
             set { Id_Client = value; }
         }
 
-        public int ID_Produits
+        public Produits ID_Produits
         {
             get { return Id_Produits; }
             set { Id_Produits = value; }

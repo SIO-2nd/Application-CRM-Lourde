@@ -58,7 +58,7 @@ namespace Application_Lourde_CRM
 
         #region Méthode
 
-        private void initialisation_connexion()
+        private void Initialisation_connexion()
         {
             //Méthode pour initialiser la connexion
 
@@ -238,6 +238,41 @@ namespace Application_Lourde_CRM
                 requete.Parameters.AddWithValue("@PrixProd", produits.PRIX);
                 requete.Parameters.AddWithValue("@NomProd", produits.NOM);
                 requete.Parameters.AddWithValue("@LibProd", produits.REFERENCE);
+
+                //Exécution de la commande SQL
+                requete.ExecuteNonQuery();
+
+
+                // Fermeture de la connexion
+                this.Fermeture_Connexion();
+
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Erreur");
+                return false;
+            }
+        }
+
+        public bool Ajouter_Achats(Achats achats)
+        {
+            if (this.Ouverture_Connexion())
+            // Ouverture de la connexion SQL + vérification
+            {
+
+
+                // Création d'une commande SQL en fonction de l'objet connexion
+                MySqlCommand requete = this.connexion.CreateCommand();
+
+                // Requête SQL
+                requete.CommandText = "INSERT INTO achats (IdAchat, IdCli, IdProd, Qte) VALUES(@IdAchat, @IdCli, @IdProd, @Qte)";
+
+                // Utilisation de l'objet Prospects passé en paramètre
+                requete.Parameters.AddWithValue("@IdAchat", achats.ID);
+                requete.Parameters.AddWithValue("@IdCli", achats.ID_Client);
+                requete.Parameters.AddWithValue("@IdProd", achats.ID_Produits);
+                requete.Parameters.AddWithValue("@Qte", achats.QUANTITE);
 
                 //Exécution de la commande SQL
                 requete.ExecuteNonQuery();
@@ -480,6 +515,41 @@ namespace Application_Lourde_CRM
             }
         }
 
+        public bool Modifier_Achats(Achats achats)
+        {
+            if (this.Ouverture_Connexion())
+            // Ouverture de la connexion SQL + vérification
+            {
+
+
+                // Création d'une commande SQL en fonction de l'objet connexion
+                MySqlCommand requete = this.connexion.CreateCommand();
+
+                // Requête SQL
+                requete.CommandText = "UPDATE achats SET IdAchat=@IdAchat, IdCli=@IdCli, IdProd=@IdProd, Qte=@Qte";
+
+                // Utilisation de l'objet Prospects passé en paramètre
+                requete.Parameters.AddWithValue("@IdAchat", achats.ID);
+                requete.Parameters.AddWithValue("@IdCli", achats.ID_Client);
+                requete.Parameters.AddWithValue("@IdProd", achats.ID_Produits);
+                requete.Parameters.AddWithValue("@Qte", achats.QUANTITE);
+
+                //Exécution de la commande SQL
+                requete.ExecuteNonQuery();
+
+
+                // Fermeture de la connexion
+                this.Fermeture_Connexion();
+
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Erreur");
+                return false;
+            }
+        }
+
         public bool Modifier_Rendez_vous(Rendez_vous rendez_vous)
         {
             if (this.Ouverture_Connexion())
@@ -700,6 +770,41 @@ namespace Application_Lourde_CRM
                 return true;
             }
 
+            else
+            {
+                Console.WriteLine("Erreur");
+                return false;
+            }
+        }
+
+        public bool Supprimer_Achats(Achats achats)
+        {
+            if (this.Ouverture_Connexion())
+            // Ouverture de la connexion SQL + vérification
+            {
+
+
+                // Création d'une commande SQL en fonction de l'objet connexion
+                MySqlCommand requete = this.connexion.CreateCommand();
+
+                // Requête SQL
+                requete.CommandText = "DELETE FROM achats WHERE IdAchat=@IdAchat, IdCli=@IdCli, IdProd=@IdProd, Qte=@Qte";
+
+                // Utilisation de l'objet Prospects passé en paramètre
+                requete.Parameters.AddWithValue("@IdAchat", achats.ID);
+                requete.Parameters.AddWithValue("@IdCli", achats.ID_Client);
+                requete.Parameters.AddWithValue("@IdProd", achats.ID_Produits);
+                requete.Parameters.AddWithValue("@Qte", achats.QUANTITE);
+
+                //Exécution de la commande SQL
+                requete.ExecuteNonQuery();
+
+
+                // Fermeture de la connexion
+                this.Fermeture_Connexion();
+
+                return true;
+            }
             else
             {
                 Console.WriteLine("Erreur");
