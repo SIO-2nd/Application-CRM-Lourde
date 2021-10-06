@@ -10,11 +10,12 @@
         <ImageBrush ImageSource="background.png"/>
     </Window.Background>
     <Grid>
-        <Label x:Name="lblTitle" Content="InfoTools connexion" HorizontalAlignment="Left" Margin="190,56,0,0" VerticalAlignment="Top" Foreground="White" Height="52" Width="284" FontSize="28" FontWeight="Bold"/>
-        <Button x:Name="btnLogin" Content="Se connecter" HorizontalAlignment="Left" Margin="262,326,0,0" VerticalAlignment="Top" Width="147" Height="27" FontSize="18"/>
-        <TextBox x:Name="txtLogin" HorizontalAlignment="Left" Height="23" Margin="237,171,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="188" Opacity="0.75"/>
-        <TextBox x:Name="txtMdp" HorizontalAlignment="Left" Height="23" Margin="237,244,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="188" Opacity="0.75"/>
-        <Label x:Name="lblLogin" Content="Login :" HorizontalAlignment="Left" Margin="172,168,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White"/>
-        <Label x:Name="lblMdp" Content="Mot de passe :" HorizontalAlignment="Left" Margin="131,242,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White"/>
+        <Label x:Name="lblTitle" Content="InfoTools connexion" HorizontalAlignment="Left" Margin="186,48,0,0" VerticalAlignment="Top" Foreground="White" Height="52" Width="284" FontSize="28" FontWeight="Bold"/>
+        <Button x:Name="btnLogin" Content="Se connecter" HorizontalAlignment="Left" Margin="256,302,0,0" VerticalAlignment="Top" Width="147" Height="27" FontSize="18"/>
+        <TextBox x:Name="txtLogin" HorizontalAlignment="Left" Height="23" Margin="240,137,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="188" Opacity="0.75"/>
+        <TextBox x:Name="txtMdp" HorizontalAlignment="Left" Height="23" Margin="240,210,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="188" Opacity="0.75"/>
+        <Label x:Name="lblLogin" Content="Login :" HorizontalAlignment="Left" Margin="175,134,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White"/>
+        <Label x:Name="lblMdp" Content="Mot de passe :" HorizontalAlignment="Left" Margin="134,208,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White"/>
+        <Label x:Name="lblLogin_Copy" Content="Application réalisé par Timothé REQUISTON et Philippe PEYRONNET, base de donnée réalisée  par Matéo CARCIU&#x9;" HorizontalAlignment="Left" Margin="10,424,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" Width="613" Height="26"/>
     </Grid>
 </Window>
