@@ -102,9 +102,9 @@ namespace Application_Lourde_CRM
 
         #region Ajouter
 
-        public bool Ajouter_Prospects(Prospects prospects)
+        public bool Ajouter_Client(Client client)
         {
-            if(this.Ouverture_Connexion())
+            if (this.Ouverture_Connexion())
             // Ouverture de la connexion SQL + vérification
             {
 
@@ -113,17 +113,17 @@ namespace Application_Lourde_CRM
                 MySqlCommand requete = this.connexion.CreateCommand();
 
                 // Requête SQL
-                requete.CommandText = "INSERT INTO prospects (IdPro, NomPro, PrePro, AdrPro, CpPro, VillePro, MailPro, TelPro) VALUES(@idPro, @NomPro, @PrePro, @AdrPro, @CpPro, @VillePro, @MailPro, @TelPro)";
+                requete.CommandText = "INSERT INTO clients (IdCli, NomCli, PreCli, AdrCli, CpCli, VilleCli, MailCli, TelCli) VALUES(@IdCli, @NomCli, @PreCli, @AdrCli, @CpCli, @VilleCli, @MailCli, @TelCli)";
 
                 // Utilisation de l'objet Prospects passé en paramètre
-                requete.Parameters.AddWithValue("@IdPro", prospects.NumProspect);
-                requete.Parameters.AddWithValue("@NomPro", prospects.NomProspect);
-                requete.Parameters.AddWithValue("@PrePro", prospects.PrenomProspect);
-                requete.Parameters.AddWithValue("@AdrPro", prospects.AdresseProspect);
-                requete.Parameters.AddWithValue("@CpPro", prospects.CpProspect);
-                requete.Parameters.AddWithValue("@VillePro", prospects.VilleProspect);
-                requete.Parameters.AddWithValue("@MailPro", prospects.MailProspect);
-                requete.Parameters.AddWithValue("@TelPro", prospects.TelProspect);
+                requete.Parameters.AddWithValue("@IdCli", client.ID);
+                requete.Parameters.AddWithValue("@NomCli", client.NOM);
+                requete.Parameters.AddWithValue("@PreCli", client.PRENOM);
+                requete.Parameters.AddWithValue("@AdrCli", client.ADRESSE);
+                requete.Parameters.AddWithValue("@CpCli", client.CODE_POSTAL);
+                requete.Parameters.AddWithValue("@VilleCli", client.VILLE);
+                requete.Parameters.AddWithValue("@MailCli", client.EMAIL);
+                requete.Parameters.AddWithValue("@TelCli", client.TELEPHONE);
 
                 //Exécution de la commande SQL
                 requete.ExecuteNonQuery();
@@ -141,7 +141,7 @@ namespace Application_Lourde_CRM
             }
         }
 
-        public bool Ajouter_Client(Client client)
+        public bool Ajouter_Prospects(Prospects prospects)
         {
             if (this.Ouverture_Connexion())
             // Ouverture de la connexion SQL + vérification
@@ -152,17 +152,17 @@ namespace Application_Lourde_CRM
                 MySqlCommand requete = this.connexion.CreateCommand();
 
                 // Requête SQL
-                requete.CommandText = "INSERT INTO clients (IdCli, NomCli, PreCli, AdrCli, CpCli, VilleCli, MailCli, TelCli) VALUES(@IdCli, @NomCli, @PreCli, @AdrCli, @CpCli, @VilleCli, @MailCli, @TelCli)";
+                requete.CommandText = "INSERT INTO prospects (IdPro, NomPro, PrePro, AdrPro, CpPro, VillePro, MailPro, TelPro) VALUES(@IdPro, @NomPro, @PrePro, @AdrPro, @CpPro, @VillePro, @MailPro, @TelPro)";
 
                 // Utilisation de l'objet Prospects passé en paramètre
-                requete.Parameters.AddWithValue("@IdCli", client.ID_Client);
-                requete.Parameters.AddWithValue("@NomCli", client.Nom_Client);
-                requete.Parameters.AddWithValue("@PreCli", client.Prenom_Client);
-                requete.Parameters.AddWithValue("@AdrCli", client.Adresse_Client);
-                requete.Parameters.AddWithValue("@CpCli", client.Code_Postal_Client);
-                requete.Parameters.AddWithValue("@VilleCli", client.Ville_Client);
-                requete.Parameters.AddWithValue("@MailCli", client.Email_Client);
-                requete.Parameters.AddWithValue("@TelCli", client.Numero_Client);
+                requete.Parameters.AddWithValue("@IdPro", prospects.ID);
+                requete.Parameters.AddWithValue("@NomPro", prospects.NOM);
+                requete.Parameters.AddWithValue("@PrePro", prospects.PRENOM);
+                requete.Parameters.AddWithValue("@AdrPro", prospects.ADRESSE);
+                requete.Parameters.AddWithValue("@CpPro", prospects.CODE_POSTAL);
+                requete.Parameters.AddWithValue("@VillePro", prospects.VILLE);
+                requete.Parameters.AddWithValue("@MailPro", prospects.MAIL);
+                requete.Parameters.AddWithValue("@TelPro", prospects.TEL);
 
                 //Exécution de la commande SQL
                 requete.ExecuteNonQuery();
@@ -191,14 +191,14 @@ namespace Application_Lourde_CRM
                 MySqlCommand requete = this.connexion.CreateCommand();
 
                 // Requête SQL
-                requete.CommandText = "INSERT INTO commercials (idCommercial, NomCommercial, PreCommercial, TelCommercial, MailCommercial) VALUES(@idCommercial, @NomCommercial, @PreCommercial, @TelCommercial, @MailCommercial)";
+                requete.CommandText = "INSERT INTO commercials (IdCommercial, NomCommercial, PreCommercial, TelCommercial, MailCommercial) VALUES(@IdCommercial, @NomCommercial, @PreCommercial, @TelCommercial, @MailCommercial)";
 
                 // Utilisation de l'objet Prospects passé en paramètre
-                requete.Parameters.AddWithValue("@IdCommercial", commercials.ID_Commercials);
-                requete.Parameters.AddWithValue("@NomCommercial", commercials.Nom_Commercials);
-                requete.Parameters.AddWithValue("@PreCommercial", commercials.Prenom_Commercials);
-                requete.Parameters.AddWithValue("@TelCommercial", commercials.Numero_Commercials);
-                requete.Parameters.AddWithValue("@MailCommercial", commercials.Email_Commercials);
+                requete.Parameters.AddWithValue("@IdCommercial", commercials.ID);
+                requete.Parameters.AddWithValue("@NomCommercial", commercials.NOM);
+                requete.Parameters.AddWithValue("@PreCommercial", commercials.PRENOM);
+                requete.Parameters.AddWithValue("@TelCommercial", commercials.TELEPHONE);
+                requete.Parameters.AddWithValue("@MailCommercial", commercials.EMAIL);
 
                 //Exécution de la commande SQL
                 requete.ExecuteNonQuery();
@@ -231,10 +231,10 @@ namespace Application_Lourde_CRM
 
                 // Utilisation de l'objet Prospects passé en paramètre
                 requete.Parameters.AddWithValue("@IdProd", produits.ID);
-                requete.Parameters.AddWithValue("@TypeProd", produits.TypeProduit);
-                requete.Parameters.AddWithValue("@PrixProd", produits.PrixProduit);
-                requete.Parameters.AddWithValue("@NomProd", produits.NomProduit);
-                requete.Parameters.AddWithValue("@LibProd", produits.RefProduit);
+                requete.Parameters.AddWithValue("@TypeProd", produits.TYPE);
+                requete.Parameters.AddWithValue("@PrixProd", produits.PRIX);
+                requete.Parameters.AddWithValue("@NomProd", produits.NOM);
+                requete.Parameters.AddWithValue("@LibProd", produits.REFERENCE);
 
                 //Exécution de la commande SQL
                 requete.ExecuteNonQuery();
@@ -252,7 +252,7 @@ namespace Application_Lourde_CRM
             }
         }
 
-        public bool Facture(Facture facture)
+        public bool Ajouter_Rendez_vous(Rendez_vous rendez_vous)
         {
             if (this.Ouverture_Connexion())
             // Ouverture de la connexion SQL + vérification
@@ -263,12 +263,48 @@ namespace Application_Lourde_CRM
                 MySqlCommand requete = this.connexion.CreateCommand();
 
                 // Requête SQL
-                requete.CommandText = "INSERT INTO produit (IdProd, TypeProd, PrixProd, NomProd, LibProd) VALUES(@IdProd, @TypeProd, @PrixProd, @NomProd, @LibProd)";
+                requete.CommandText = "INSERT INTO produit (IdRdv, DateRdv, IdCommercial, IdPro) VALUES(@IdRdv, @DateRdv, @IdCommercial, @IdPro)";
 
                 // Utilisation de l'objet Prospects passé en paramètre
-                requete.Parameters.AddWithValue("@IdProd", facture.ID_Facture);
-                requete.Parameters.AddWithValue("@TypeProd", facture.Date_Facture);
-                requete.Parameters.AddWithValue("@PrixProd", facture.I);
+                requete.Parameters.AddWithValue("@IdRdv", rendez_vous.ID);
+                requete.Parameters.AddWithValue("@DateRdv", rendez_vous.DATE);
+                requete.Parameters.AddWithValue("@IdCommercial", rendez_vous.ID_COMMERCIALS);
+                requete.Parameters.AddWithValue("@IdPro", rendez_vous.ID_PROSPECTS);
+
+                //Exécution de la commande SQL
+                requete.ExecuteNonQuery();
+
+
+                // Fermeture de la connexion
+                this.Fermeture_Connexion();
+
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Erreur");
+                return false;
+            }
+        }
+
+        public bool Ajouter_Facture(Facture facture)
+        {
+            if (this.Ouverture_Connexion())
+            // Ouverture de la connexion SQL + vérification
+            {
+
+
+                // Création d'une commande SQL en fonction de l'objet connexion
+                MySqlCommand requete = this.connexion.CreateCommand();
+
+                // Requête SQL
+                requete.CommandText = "INSERT INTO factures (IdFact, DateFact, IdAchat, IdCli) VALUES(@IdFact, @TypeProd, @DateFact, @IdAchat, @IdCli)";
+
+                // Utilisation de l'objet Prospects passé en paramètre
+                requete.Parameters.AddWithValue("@IdFact", facture.ID);
+                requete.Parameters.AddWithValue("@DateFact", facture.DATE);
+                requete.Parameters.AddWithValue("@IdCli", facture.ID_CLIENT);
+                requete.Parameters.AddWithValue("@IdAchat", facture.ID_PRODUITS);
 
 
                 //Exécution de la commande SQL
@@ -291,9 +327,458 @@ namespace Application_Lourde_CRM
 
         #region Modifier
 
-  
+        public bool Modifier_Client(Client client)
+        {
+            if (this.Ouverture_Connexion())
+            // Ouverture de la connexion SQL + vérification
+            {
+
+
+                // Création d'une commande SQL en fonction de l'objet connexion
+                MySqlCommand requete = this.connexion.CreateCommand();
+
+                // Requête SQL
+                requete.CommandText = "UPDATE clients SET IdCli=@IdCli, NomCli=@NomCli, PreCli=@PreCli, AdrCli=@AdrCli, CpCli=@CpCli, VilleCli=@VilleCli, MailCli=@MailCli, TelCli=@TelCli";
+
+                // Utilisation de l'objet Prospects passé en paramètre
+                requete.Parameters.AddWithValue("@IdCli", client.ID);
+                requete.Parameters.AddWithValue("@NomCli", client.NOM);
+                requete.Parameters.AddWithValue("@PreCli", client.PRENOM);
+                requete.Parameters.AddWithValue("@AdrCli", client.ADRESSE);
+                requete.Parameters.AddWithValue("@CpCli", client.CODE_POSTAL);
+                requete.Parameters.AddWithValue("@VilleCli", client.VILLE);
+                requete.Parameters.AddWithValue("@MailCli", client.EMAIL);
+                requete.Parameters.AddWithValue("@TelCli", client.TELEPHONE);
+
+                //Exécution de la commande SQL
+                requete.ExecuteNonQuery();
+
+
+                // Fermeture de la connexion
+                this.Fermeture_Connexion();
+
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Erreur");
+                return false;
+            }
+        }
+
+        public bool Modifier_Prospects(Prospects prospects)
+        {
+            if (this.Ouverture_Connexion())
+            // Ouverture de la connexion SQL + vérification
+            {
+
+
+                // Création d'une commande SQL en fonction de l'objet connexion
+                MySqlCommand requete = this.connexion.CreateCommand();
+
+                // Requête SQL
+                requete.CommandText = "UPDATE prospects SET IdPro=@IdPro, NomPro=@NomPro, PrePro=@PrePro, AdrPro=@AdrPro, CpPro=@CpPro, VillePro=@VillePro, MailPro=@MailPro, TelPro=@TelPro";
+
+                // Utilisation de l'objet Prospects passé en paramètre
+                requete.Parameters.AddWithValue("@IdPro", prospects.ID);
+                requete.Parameters.AddWithValue("@NomPro", prospects.NOM);
+                requete.Parameters.AddWithValue("@PrePro", prospects.PRENOM);
+                requete.Parameters.AddWithValue("@AdrPro", prospects.ADRESSE);
+                requete.Parameters.AddWithValue("@CpPro", prospects.CODE_POSTAL);
+                requete.Parameters.AddWithValue("@VillePro", prospects.VILLE);
+                requete.Parameters.AddWithValue("@MailPro", prospects.MAIL);
+                requete.Parameters.AddWithValue("@TelPro", prospects.TEL);
+
+                //Exécution de la commande SQL
+                requete.ExecuteNonQuery();
+
+
+                // Fermeture de la connexion
+                this.Fermeture_Connexion();
+
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Erreur");
+                return false;
+            }
+        }
+
+        public bool Modifier_Commercials(Commercials commercials)
+        {
+            if (this.Ouverture_Connexion())
+            // Ouverture de la connexion SQL + vérification
+            {
+
+
+                // Création d'une commande SQL en fonction de l'objet connexion
+                MySqlCommand requete = this.connexion.CreateCommand();
+
+                // Requête SQL
+                requete.CommandText = "UPDATE commercials SET IdCommercial=@IdCommercial, NomCommercial=@NomCommercial, PreCommercial=@PreCommercial, TelCommercial=@TelCommercial, MailCommercial=@MailCommercial";
+
+                // Utilisation de l'objet Prospects passé en paramètre
+                requete.Parameters.AddWithValue("@IdCommercial", commercials.ID);
+                requete.Parameters.AddWithValue("@NomCommercial", commercials.NOM);
+                requete.Parameters.AddWithValue("@PreCommercial", commercials.PRENOM);
+                requete.Parameters.AddWithValue("@TelCommercial", commercials.TELEPHONE);
+                requete.Parameters.AddWithValue("@MailCommercial", commercials.EMAIL);
+
+                //Exécution de la commande SQL
+                requete.ExecuteNonQuery();
+
+
+                // Fermeture de la connexion
+                this.Fermeture_Connexion();
+
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Erreur");
+                return false;
+            }
+        }
+
+        public bool Modifier_Produits(Produits produits)
+        {
+            if (this.Ouverture_Connexion())
+            // Ouverture de la connexion SQL + vérification
+            {
+
+
+                // Création d'une commande SQL en fonction de l'objet connexion
+                MySqlCommand requete = this.connexion.CreateCommand();
+
+                // Requête SQL
+                requete.CommandText = "UPDATE produit SET IdProd=@IdProd, TypeProd=@TypeProd, PrixProd=@PrixProd, NomProd=@NomProd, LibProd=@LibProd";
+
+                // Utilisation de l'objet Prospects passé en paramètre
+                requete.Parameters.AddWithValue("@IdProd", produits.ID);
+                requete.Parameters.AddWithValue("@TypeProd", produits.TYPE);
+                requete.Parameters.AddWithValue("@PrixProd", produits.PRIX);
+                requete.Parameters.AddWithValue("@NomProd", produits.NOM);
+                requete.Parameters.AddWithValue("@LibProd", produits.REFERENCE);
+
+                //Exécution de la commande SQL
+                requete.ExecuteNonQuery();
+
+
+                // Fermeture de la connexion
+                this.Fermeture_Connexion();
+
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Erreur");
+                return false;
+            }
+        }
+
+        public bool Modifier_Rendez_vous(Rendez_vous rendez_vous)
+        {
+            if (this.Ouverture_Connexion())
+            // Ouverture de la connexion SQL + vérification
+            {
+
+
+                // Création d'une commande SQL en fonction de l'objet connexion
+                MySqlCommand requete = this.connexion.CreateCommand();
+
+                // Requête SQL
+                requete.CommandText = "UPDATE produit SET IdRdv=@IdRdv, DateRdv=@DateRdv, IdCommercial=@IdCommercial, IdPro=@IdPro";
+
+                // Utilisation de l'objet Prospects passé en paramètre
+                requete.Parameters.AddWithValue("@IdRdv", rendez_vous.ID);
+                requete.Parameters.AddWithValue("@DateRdv", rendez_vous.DATE);
+                requete.Parameters.AddWithValue("@IdCommercial", rendez_vous.ID_COMMERCIALS);
+                requete.Parameters.AddWithValue("@IdPro", rendez_vous.ID_PROSPECTS);
+
+                //Exécution de la commande SQL
+                requete.ExecuteNonQuery();
+
+
+                // Fermeture de la connexion
+                this.Fermeture_Connexion();
+
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Erreur");
+                return false;
+            }
+        }
+
+        public bool Modifier_Facture(Facture facture)
+        {
+            if (this.Ouverture_Connexion())
+            // Ouverture de la connexion SQL + vérification
+            {
+
+
+                // Création d'une commande SQL en fonction de l'objet connexion
+                MySqlCommand requete = this.connexion.CreateCommand();
+
+                // Requête SQL
+                requete.CommandText = "UPDATE factures SET IdFact=@IdFact, DateFact=@DateFact, IdAchat=@IdAchat, IdCli=@IdCli";
+
+                // Utilisation de l'objet Prospects passé en paramètre
+                requete.Parameters.AddWithValue("@IdFact", facture.ID);
+                requete.Parameters.AddWithValue("@DateFact", facture.DATE);
+                requete.Parameters.AddWithValue("@IdCli", facture.ID_CLIENT);
+                requete.Parameters.AddWithValue("@IdAchat", facture.ID_PRODUITS);
+
+
+                //Exécution de la commande SQL
+                requete.ExecuteNonQuery();
+
+
+                // Fermeture de la connexion
+                this.Fermeture_Connexion();
+
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Erreur");
+                return false;
+            }
+        }
+
+        #endregion
+
+        #region Supprimer
+
+        public bool Supprimer_Client(Client client)
+        {
+            if (this.Ouverture_Connexion())
+            // Ouverture de la connexion SQL + vérification
+            {
+
+
+                // Création d'une commande SQL en fonction de l'objet connexion
+                MySqlCommand requete = this.connexion.CreateCommand();
+
+                // Requête SQL
+                requete.CommandText = "DELETE FROM clients WHERE IdCli=@IdCli, NomCli=@NomCli, PreCli=@PreCli, AdrCli=@AdrCli, CpCli=@CpCli, VilleCli=@VilleCli, MailCli=@MailCli, TelCli=@TelCli";
+
+                // Utilisation de l'objet Prospects passé en paramètre
+                requete.Parameters.AddWithValue("@IdCli", client.ID);
+                requete.Parameters.AddWithValue("@NomCli", client.NOM);
+                requete.Parameters.AddWithValue("@PreCli", client.PRENOM);
+                requete.Parameters.AddWithValue("@AdrCli", client.ADRESSE);
+                requete.Parameters.AddWithValue("@CpCli", client.CODE_POSTAL);
+                requete.Parameters.AddWithValue("@VilleCli", client.VILLE);
+                requete.Parameters.AddWithValue("@MailCli", client.EMAIL);
+                requete.Parameters.AddWithValue("@TelCli", client.TELEPHONE);
+
+                //Exécution de la commande SQL
+                requete.ExecuteNonQuery();
+
+
+                // Fermeture de la connexion
+                this.Fermeture_Connexion();
+
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Erreur");
+                return false;
+            }
+        }
+
+        public bool Supprimer_Prospects(Prospects prospects)
+        {
+            if (this.Ouverture_Connexion())
+            // Ouverture de la connexion SQL + vérification
+            {
+
+
+                // Création d'une commande SQL en fonction de l'objet connexion
+                MySqlCommand requete = this.connexion.CreateCommand();
+
+                // Requête SQL
+                requete.CommandText = "DELETE FROM prospects WHERE IdPro=@IdPro, NomPro=@NomPro, PrePro=@PrePro, AdrPro=@AdrPro, CpPro=@CpPro, VillePro=@VillePro, MailPro=@MailPro, TelPro=@TelPro";
+
+                // Utilisation de l'objet Prospects passé en paramètre
+                requete.Parameters.AddWithValue("@IdPro", prospects.ID);
+                requete.Parameters.AddWithValue("@NomPro", prospects.NOM);
+                requete.Parameters.AddWithValue("@PrePro", prospects.PRENOM);
+                requete.Parameters.AddWithValue("@AdrPro", prospects.ADRESSE);
+                requete.Parameters.AddWithValue("@CpPro", prospects.CODE_POSTAL);
+                requete.Parameters.AddWithValue("@VillePro", prospects.VILLE);
+                requete.Parameters.AddWithValue("@MailPro", prospects.MAIL);
+                requete.Parameters.AddWithValue("@TelPro", prospects.TEL);
+
+                //Exécution de la commande SQL
+                requete.ExecuteNonQuery();
+
+
+                // Fermeture de la connexion
+                this.Fermeture_Connexion();
+
+                return true;
+            }
+
+            else
+            {
+                Console.WriteLine("Erreur");
+                return false;
+            }
+        }
+
+        public bool Supprimer_Commercials(Commercials commercials)
+        {
+            if (this.Ouverture_Connexion())
+            // Ouverture de la connexion SQL + vérification
+            {
+
+
+                // Création d'une commande SQL en fonction de l'objet connexion
+                MySqlCommand requete = this.connexion.CreateCommand();
+
+                // Requête SQL
+                requete.CommandText = "DELETE FROM commercials WHERE IdCommercial=@IdCommercial, NomCommercial=@NomCommercial, PreCommercial=@PreCommercial, TelCommercial=@TelCommercial, MailCommercial=@MailCommercial";
+
+                // Utilisation de l'objet Prospects passé en paramètre
+                requete.Parameters.AddWithValue("@IdCommercial", commercials.ID);
+                requete.Parameters.AddWithValue("@NomCommercial", commercials.NOM);
+                requete.Parameters.AddWithValue("@PreCommercial", commercials.PRENOM);
+                requete.Parameters.AddWithValue("@TelCommercial", commercials.TELEPHONE);
+                requete.Parameters.AddWithValue("@MailCommercial", commercials.EMAIL);
+
+                //Exécution de la commande SQL
+                requete.ExecuteNonQuery();
+
+
+                // Fermeture de la connexion
+                this.Fermeture_Connexion();
+
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Erreur");
+                return false;
+            }
+        }
+
+        public bool Supprimer_Produits(Produits produits)
+        {
+            if (this.Ouverture_Connexion())
+            // Ouverture de la connexion SQL + vérification
+            {
+
+
+                // Création d'une commande SQL en fonction de l'objet connexion
+                MySqlCommand requete = this.connexion.CreateCommand();
+
+                // Requête SQL
+                requete.CommandText = "DELETE FROM produit WHERE IdProd=@IdProd, TypeProd=@TypeProd, PrixProd=@PrixProd, NomProd=@NomProd, LibProd=@LibProd";
+
+                // Utilisation de l'objet Prospects passé en paramètre
+                requete.Parameters.AddWithValue("@IdProd", produits.ID);
+                requete.Parameters.AddWithValue("@TypeProd", produits.TYPE);
+                requete.Parameters.AddWithValue("@PrixProd", produits.PRIX);
+                requete.Parameters.AddWithValue("@NomProd", produits.NOM);
+                requete.Parameters.AddWithValue("@LibProd", produits.REFERENCE);
+
+                //Exécution de la commande SQL
+                requete.ExecuteNonQuery();
+
+
+                // Fermeture de la connexion
+                this.Fermeture_Connexion();
+
+                return true;
+            }
+
+            else
+            {
+                Console.WriteLine("Erreur");
+                return false;
+            }
+        }
+
+        public bool Supprimer_Rendez_vous(Rendez_vous rendez_vous)
+        {
+            if (this.Ouverture_Connexion())
+            // Ouverture de la connexion SQL + vérification
+            {
+
+
+                // Création d'une commande SQL en fonction de l'objet connexion
+                MySqlCommand requete = this.connexion.CreateCommand();
+
+                // Requête SQL
+                requete.CommandText = "DELETE WHERE produit WHERE IdRdv=@IdRdv, DateRdv=@DateRdv, IdCommercial=@IdCommercial, IdPro=@IdPro";
+
+                // Utilisation de l'objet Prospects passé en paramètre
+                requete.Parameters.AddWithValue("@IdRdv", rendez_vous.ID);
+                requete.Parameters.AddWithValue("@DateRdv", rendez_vous.DATE);
+                requete.Parameters.AddWithValue("@IdCommercial", rendez_vous.ID_COMMERCIALS);
+                requete.Parameters.AddWithValue("@IdPro", rendez_vous.ID_PROSPECTS);
+
+                //Exécution de la commande SQL
+                requete.ExecuteNonQuery();
+
+
+                // Fermeture de la connexion
+                this.Fermeture_Connexion();
+
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Erreur");
+                return false;
+            }
+        }
+
+        public bool Supprimer_Facture(Facture facture)
+        {
+            if (this.Ouverture_Connexion())
+            // Ouverture de la connexion SQL + vérification
+            {
+
+
+                // Création d'une commande SQL en fonction de l'objet connexion
+                MySqlCommand requete = this.connexion.CreateCommand();
+
+                // Requête SQL
+                requete.CommandText = "DELETE FROM factures WHERE IdFact=@IdFact, DateFact=@DateFact, IdAchat=@IdAchat, IdCli=@IdCli";
+
+                // Utilisation de l'objet Prospects passé en paramètre
+                requete.Parameters.AddWithValue("@IdFact", facture.ID);
+                requete.Parameters.AddWithValue("@DateFact", facture.DATE);
+                requete.Parameters.AddWithValue("@IdCli", facture.ID_CLIENT);
+                requete.Parameters.AddWithValue("@IdAchat", facture.ID_PRODUITS);
+
+
+                //Exécution de la commande SQL
+                requete.ExecuteNonQuery();
+
+
+                // Fermeture de la connexion
+                this.Fermeture_Connexion();
+
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Erreur");
+                return false;
+            }
+        }
+
         #endregion
 
         #endregion
+
+
     }
 }

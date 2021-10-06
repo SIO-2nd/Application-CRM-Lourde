@@ -79,8 +79,8 @@ namespace Application_Lourde_CRM
 
 		public int TELEPHONE
         {
-            get { return Numero; }
-            set { Numero = value; }
+            get { return Telephone; }
+            set { Telephone = value; }
         }
 		#endregion
 

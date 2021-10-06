@@ -51,35 +51,35 @@ namespace Application_Lourde_CRM
             get { return Nom; }
             set { Nom = value; }
         }
-        public string PrenomProspect
+        public string PRENOM
         {
             get { return Prenom; }
             set { Prenom = value; }
         }
 
-        public string MailProspect
+        public string MAIL
         {
             get { return Email; }
             set { Email = value; }
         }
 
-        public int TelProspect
+        public int TEL
         {
             get { return Telephone; }
             set { Telephone = value; }
         }
-        public string AdresseProspect
+        public string ADRESSE
         {
             get { return Adresse; }
             set { Adresse = value; }
         }
-        public string VilleProspect
+        public string VILLE
         {
             get { return Ville; }
             set { Ville = value; }
         }
 
-        public int CpProspect
+        public int CODE_POSTAL
         {
             get { return Code_Postal; }
             set { Code_Postal = value; }
@@ -91,7 +91,7 @@ namespace Application_Lourde_CRM
         public override string ToString()
         {
             // Méthode ToString() surchargée qui écrase la méthode ToString() de base
-            return Convert.ToString(_numProspect);
+            return Convert.ToString(Id);
         }
         #endregion
     }
