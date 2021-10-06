@@ -23,7 +23,7 @@ namespace Application_Lourde_CRM
 
         public BDD()
         {
-            this.initialisation_connexion();
+            this.Initialisation_connexion();
         }
 
         #endregion
