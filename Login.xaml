@@ -16,7 +16,7 @@
         <TextBox x:Name="txtMdp" HorizontalAlignment="Left" Height="23" Margin="246,253,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="188" Opacity="0.75"/>
         <Label x:Name="lblLogin" Content="Login :" HorizontalAlignment="Left" Margin="178,186,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" FontSize="18"/>
         <Label x:Name="lblMdp" Content="Mot de passe :" HorizontalAlignment="Left" Margin="115,244,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" FontSize="18"/>
-        <Label x:Name="lblFooter" Content="Application réalisé par Timothé REQUISTON et Philippe PEYRONNET&#xD;&#xA;&#x9;    Base de donnée réalisée  par Matéo CARCIU&#x9;" HorizontalAlignment="Left" Margin="119,399,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" Width="440" Height="48" FontSize="14"/>
+        <Label x:Name="lblFooter" Content="Application réalisé par Timothé REQUISTON et Philippe PEYRONNET&#xD;&#xA;&#x9;    Base de donnée réalisée par Matéo CARCIU&#x9;" HorizontalAlignment="Left" Margin="119,399,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" Width="440" Height="48" FontSize="14"/>
         <Label x:Name="lblTitle2" Content="Connexion" HorizontalAlignment="Left" Margin="282,135,0,0" VerticalAlignment="Top" Foreground="White" Height="35" Width="113" FontSize="20" FontWeight="Bold" RenderTransformOrigin="0.5,0.5"/>
     </Grid>
 </Window>
