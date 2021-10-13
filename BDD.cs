@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using MySql.Data.MySqlClient;
 
 namespace Application_Lourde_CRM
@@ -102,6 +103,74 @@ namespace Application_Lourde_CRM
                 return false;
             }
         }
+
+        #region Afficher
+
+        public bool Afficher_Client()
+        {
+            if (this.Ouverture_Connexion())
+            // Ouverture de la connexion SQL + vérification
+            {
+
+                // Création d'une commande SQL en fonction de l'objet connexion
+                MySqlCommand requete = this.connexion.CreateCommand();
+
+                // Requête SQL
+                requete.CommandText = "SELECT * FROM clients";
+
+                //Exécution de la commande SQL
+                MySqlDataReader requete_aff = requete.ExecuteReader();
+
+                while(requete_aff.Read())
+                {
+                    DataGrid.Rows.Add(requette_aff[0], requette_aff[1], requette_aff[2]);
+                }
+
+
+                // Fermeture de la connexion
+                this.Fermeture_Connexion();
+
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Erreur");
+                return false;
+            }
+        }
+
+        public bool Afficher_Prospects()
+        {
+            if(this.Ouverture_Connexion())
+            // Ouverture de la connexion SQL + vérification
+            {
+
+
+                // Création d'une commande SQL en fonction de l'objet connexion
+                MySqlCommand requete = this.connexion.CreateCommand();
+
+                // Requête SQL
+                requete.CommandText = "SELECT * FROM ";
+
+                //Exécution de la commande SQL
+                requete.ExecuteNonQuery();
+
+
+                // Fermeture de la connexion
+                this.Fermeture_Connexion();
+
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Erreur");
+                return false;
+            }
+        }
+
+
+
+        #endregion
 
         #region Ajouter
 
