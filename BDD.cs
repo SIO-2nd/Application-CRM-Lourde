@@ -104,13 +104,175 @@ namespace Application_Lourde_CRM
             }
         }
 
-        #region Afficher
+        #region Recherche ID
 
-        public bool Afficher_Client()
+        Client Recherche_ID_Clients(int Id_Client)
         {
             if (this.Ouverture_Connexion())
             // Ouverture de la connexion SQL + vérification
             {
+
+                List<Client> tempTableauClients = new List<Client>();
+
+                // Création d'une commande SQL en fonction de l'objet connexion
+                MySqlCommand requete = this.connexion.CreateCommand();
+
+                // Requête SQL
+                requete.CommandText = "SELECT * FROM clients WHERE IdCli = " + Id_Client;
+
+                //Exécution de la commande SQL
+                MySqlDataReader requete_aff = requete.ExecuteReader();
+
+                //Création d'un objet stocker dans un tableau à partir de la requête reçus (but afficher sur l'écran le résultat de la requête)
+                while (requete_aff.Read())
+                {
+                    Client ClientAff = new Client(Convert.ToInt32(requete_aff["IdCli"]), Convert.ToString(requete_aff["NomCli"]), Convert.ToString(requete_aff["PreCli"]), Convert.ToString(requete_aff["AdrCli"]), Convert.ToInt32(requete_aff["CpCli"]), Convert.ToString(requete_aff["VilleCli"]), Convert.ToString(requete_aff["MailCli"]), Convert.ToInt32(requete_aff["TelCli"]));
+                    tempTableauClients.Add(ClientAff);
+                }
+
+                //fermeture du Data Reader
+                requete_aff.Close();
+
+                // Fermeture de la connexion
+                this.Fermeture_Connexion();
+
+                return tempTableauClients[0];
+            }
+            else
+            {
+                Console.WriteLine("Erreur");
+                return null;
+            }
+        }
+
+        Produits Recherche_ID_Produits(int Id_Produits)
+        {
+            if (this.Ouverture_Connexion())
+            // Ouverture de la connexion SQL + vérification
+            {
+
+                List<Produits> TempTableauProduits = new List<Produits>();
+
+                // Création d'une commande SQL en fonction de l'objet connexion
+                MySqlCommand requete = this.connexion.CreateCommand();
+
+                // Requête SQL
+                requete.CommandText = "SELECT * FROM produits WHERE IdProd = " + Id_Produits;
+
+                //Exécution de la commande SQL
+                MySqlDataReader requete_aff = requete.ExecuteReader();
+
+                //Création d'un objet stocker dans un tableau à partir de la requête reçus (but afficher sur l'écran le résultat de la requête)
+                while (requete_aff.Read())
+                {
+                    Produits ProduitsAff = new Produits(Convert.ToInt32(requete_aff["IdProd"]), Convert.ToString(requete_aff["NomProd"]), Convert.ToString(requete_aff["TypeProd"]), Convert.ToDouble(requete_aff["PrixProd"]), Convert.ToInt32(requete_aff["LibProd"]));
+                    TempTableauProduits.Add(ProduitsAff);
+                }
+
+                //fermeture du Data Reader
+                requete_aff.Close();
+
+                // Fermeture de la connexion
+                this.Fermeture_Connexion();
+
+                return TempTableauProduits[0];
+            }
+            else
+            {
+                Console.WriteLine("Erreur");
+                return null;
+            }
+        }
+
+        Commercials Recherche_ID_Commercials(int Id_Commercials)
+        {
+            if (this.Ouverture_Connexion())
+            // Ouverture de la connexion SQL + vérification
+            {
+
+                List<Commercials> TempTableauCommercials = new List<Commercials>();
+
+                // Création d'une commande SQL en fonction de l'objet connexion
+                MySqlCommand requete = this.connexion.CreateCommand();
+
+                // Requête SQL
+                requete.CommandText = "SELECT * FROM commercials WHERE IdCommercial = " + Id_Commercials;
+
+                //Exécution de la commande SQL
+                MySqlDataReader requete_aff = requete.ExecuteReader();
+
+                //Création d'un objet stocker dans un tableau à partir de la requête reçus (but afficher sur l'écran le résultat de la requête)
+                while (requete_aff.Read())
+                {
+                    Commercials CommercialsAff = new Commercials(Convert.ToInt32(requete_aff["IdCommercial"]), Convert.ToString(requete_aff["NomCommercial"]), Convert.ToString(requete_aff["PreCommercial"]), Convert.ToInt32(requete_aff["TelCommercial"]), Convert.ToString(requete_aff["MailCommercial"]));
+                    TempTableauCommercials.Add(CommercialsAff);
+                }
+
+                //fermeture du Data Reader
+                requete_aff.Close();
+
+                // Fermeture de la connexion
+                this.Fermeture_Connexion();
+
+                return TempTableauCommercials[0];
+            }
+            else
+            {
+                Console.WriteLine("Erreur");
+                return null;
+            }
+        }
+
+        Prospects Recherche_ID_Prospects(int Id_Prospects)
+        {
+            if (this.Ouverture_Connexion())
+            // Ouverture de la connexion SQL + vérification
+            {
+
+                List<Prospects> TempTableauProspects = new List<Prospects>();
+
+                // Création d'une commande SQL en fonction de l'objet connexion
+                MySqlCommand requete = this.connexion.CreateCommand();
+
+                // Requête SQL
+                requete.CommandText = "SELECT * FROM prospects WHERE IdPro = " + Id_Prospects;
+
+                //Exécution de la commande SQL
+                MySqlDataReader requete_aff = requete.ExecuteReader();
+
+                //Création d'un objet stocker dans un tableau à partir de la requête reçus (but afficher sur l'écran le résultat de la requête)
+                while (requete_aff.Read())
+                {
+                    Prospects ProspectsAff = new Prospects(Convert.ToInt32(requete_aff["IdPro"]), Convert.ToString(requete_aff["NomPro"]), Convert.ToString(requete_aff["PrePro"]), Convert.ToString(requete_aff["MailPro"]), Convert.ToInt32(requete_aff["TelPro"]), Convert.ToString(requete_aff["AdrPro"]), Convert.ToString(requete_aff["VillePro"]), Convert.ToInt32(requete_aff["CpPro"]));
+                    TempTableauProspects.Add(ProspectsAff);
+                }
+
+                //fermeture du Data Reader
+                requete_aff.Close();
+
+                // Fermeture de la connexion
+                this.Fermeture_Connexion();
+
+                return TempTableauProspects[0];
+            }
+            else
+            {
+                Console.WriteLine("Erreur");
+                return null;
+            }
+        }
+
+        #endregion
+
+        #region Afficher
+
+        List<Client> Afficher_Client()
+        {
+            if (this.Ouverture_Connexion())
+            // Ouverture de la connexion SQL + vérification
+            {
+
+                List<Client> TableauClient = new List<Client>();
 
                 // Création d'une commande SQL en fonction de l'objet connexion
                 MySqlCommand requete = this.connexion.CreateCommand();
@@ -121,54 +283,262 @@ namespace Application_Lourde_CRM
                 //Exécution de la commande SQL
                 MySqlDataReader requete_aff = requete.ExecuteReader();
 
+                //Création d'un objet stocker dans un tableau à partir de la requête reçus (but afficher sur l'écran le résultat de la requête)
                 while(requete_aff.Read())
                 {
-                    DataGrid.Rows.Add(requette_aff[0], requette_aff[1], requette_aff[2]);
+                    Client ClientAff = new Client(Convert.ToInt32(requete_aff["IdCli"]), Convert.ToString(requete_aff["NomCli"]), Convert.ToString(requete_aff["PreCli"]), Convert.ToString(requete_aff["AdrCli"]), Convert.ToInt32(requete_aff["CpCli"]), Convert.ToString(requete_aff["VilleCli"]), Convert.ToString(requete_aff["MailCli"]), Convert.ToInt32(requete_aff["TelCli"]));
+                    TableauClient.Add(ClientAff);
                 }
 
+                //fermeture du Data Reader
+                requete_aff.Close();
 
                 // Fermeture de la connexion
                 this.Fermeture_Connexion();
 
-                return true;
+                return TableauClient;
             }
             else
             {
                 Console.WriteLine("Erreur");
-                return false;
+                return null;
             }
         }
 
-        public bool Afficher_Prospects()
+        List<Prospects> Afficher_Prospects()
         {
-            if(this.Ouverture_Connexion())
+            if (this.Ouverture_Connexion())
             // Ouverture de la connexion SQL + vérification
             {
 
+                List<Prospects> TableauProspects = new List<Prospects>();
 
                 // Création d'une commande SQL en fonction de l'objet connexion
                 MySqlCommand requete = this.connexion.CreateCommand();
 
                 // Requête SQL
-                requete.CommandText = "SELECT * FROM ";
+                requete.CommandText = "SELECT * FROM prospects";
 
                 //Exécution de la commande SQL
-                requete.ExecuteNonQuery();
+                MySqlDataReader requete_aff = requete.ExecuteReader();
 
+                //Création d'un objet stocker dans un tableau à partir de la requête reçus (but afficher sur l'écran le résultat de la requête)
+                while (requete_aff.Read())
+                {
+                    Prospects ProspectsAff = new Prospects(Convert.ToInt32(requete_aff["IdPro"]), Convert.ToString(requete_aff["NomPro"]), Convert.ToString(requete_aff["PrePro"]), Convert.ToString(requete_aff["MailPro"]), Convert.ToInt32(requete_aff["TelPro"]), Convert.ToString(requete_aff["AdrPro"]), Convert.ToString(requete_aff["VillePro"]), Convert.ToInt32(requete_aff["CpPro"]));
+                    TableauProspects.Add(ProspectsAff);
+                }
+
+                //fermeture du Data Reader
+                requete_aff.Close();
 
                 // Fermeture de la connexion
                 this.Fermeture_Connexion();
 
-                return true;
+                return TableauProspects;
             }
             else
             {
                 Console.WriteLine("Erreur");
-                return false;
+                return null;
             }
         }
 
+        List<Commercials> Afficher_Commercials()
+        {
+            if (this.Ouverture_Connexion())
+            // Ouverture de la connexion SQL + vérification
+            {
 
+                List<Commercials> TableauCommercials = new List<Commercials>();
+
+                // Création d'une commande SQL en fonction de l'objet connexion
+                MySqlCommand requete = this.connexion.CreateCommand();
+
+                // Requête SQL
+                requete.CommandText = "SELECT * FROM commercials";
+
+                //Exécution de la commande SQL
+                MySqlDataReader requete_aff = requete.ExecuteReader();
+
+                //Création d'un objet stocker dans un tableau à partir de la requête reçus (but afficher sur l'écran le résultat de la requête)
+                while (requete_aff.Read())
+                {
+                    Commercials CommercialsAff = new Commercials(Convert.ToInt32(requete_aff["IdCommercial"]), Convert.ToString(requete_aff["NomCommercial"]), Convert.ToString(requete_aff["PreCommercial"]), Convert.ToInt32(requete_aff["TelCommercial"]), Convert.ToString(requete_aff["MailCommercial"]));                   
+                    TableauCommercials.Add(CommercialsAff);
+                }
+
+                //fermeture du Data Reader
+                requete_aff.Close();
+
+                // Fermeture de la connexion
+                this.Fermeture_Connexion();
+
+                return TableauCommercials;
+            }
+            else
+            {
+                Console.WriteLine("Erreur");
+                return null;
+            }
+        }
+
+        List<Produits> Afficher_Produits()
+        {
+            if (this.Ouverture_Connexion())
+            // Ouverture de la connexion SQL + vérification
+            {
+
+                List<Produits> TableauProduits = new List<Produits>();
+
+                // Création d'une commande SQL en fonction de l'objet connexion
+                MySqlCommand requete = this.connexion.CreateCommand();
+
+                // Requête SQL
+                requete.CommandText = "SELECT * FROM produits";
+
+                //Exécution de la commande SQL
+                MySqlDataReader requete_aff = requete.ExecuteReader();
+
+                //Création d'un objet stocker dans un tableau à partir de la requête reçus (but afficher sur l'écran le résultat de la requête)
+                while (requete_aff.Read())
+                {
+                    Produits ProduitsAff = new Produits(Convert.ToInt32(requete_aff["IdProd"]), Convert.ToString(requete_aff["NomProd"]), Convert.ToString(requete_aff["TypeProd"]), Convert.ToDouble(requete_aff["PrixProd"]), Convert.ToInt32(requete_aff["LibProd"]));
+                    TableauProduits.Add(ProduitsAff);
+                }
+
+                //fermeture du Data Reader
+                requete_aff.Close();
+
+                // Fermeture de la connexion
+                this.Fermeture_Connexion();
+
+                return TableauProduits;
+            }
+            else
+            {
+                Console.WriteLine("Erreur");
+                return null;
+            }
+        }
+
+        List<Achats> Afficher_Achats()
+        {
+            if (this.Ouverture_Connexion())
+            // Ouverture de la connexion SQL + vérification
+            {
+
+                List<Achats> TableauAchats = new List<Achats>();
+
+                // Création d'une commande SQL en fonction de l'objet connexion
+                MySqlCommand requete = this.connexion.CreateCommand();
+
+                // Requête SQL
+                requete.CommandText = "SELECT * FROM achats";
+
+                //Exécution de la commande SQL
+                MySqlDataReader requete_aff = requete.ExecuteReader();
+
+                //Création d'un objet stocker dans un tableau à partir de la requête reçus (but afficher sur l'écran le résultat de la requête)
+                while (requete_aff.Read())
+                {
+                    Achats AchatsAff = new Achats(Convert.ToInt32(requete_aff["IdAchat"]), /* Client , Produits */ Convert.ToInt32(requete_aff["Qte"]));
+                    TableauAchats.Add(AchatsAff);
+                }
+
+                //fermeture du Data Reader
+                requete_aff.Close();
+
+                // Fermeture de la connexion
+                this.Fermeture_Connexion();
+
+                return TableauAchats;
+            }
+            else
+            {
+                Console.WriteLine("Erreur");
+                return null;
+            }
+        }
+
+        List<Rendez_vous> Afficher_Rendez_vous()
+        {
+            if (this.Ouverture_Connexion())
+            // Ouverture de la connexion SQL + vérification
+            {
+
+                List<Rendez_vous> TableauRendez_vous = new List<Rendez_vous>();
+
+                // Création d'une commande SQL en fonction de l'objet connexion
+                MySqlCommand requete = this.connexion.CreateCommand();
+
+                // Requête SQL
+                requete.CommandText = "SELECT * FROM rendez-vous";
+
+                //Exécution de la commande SQL
+                MySqlDataReader requete_aff = requete.ExecuteReader();
+
+                //Création d'un objet stocker dans un tableau à partir de la requête reçus (but afficher sur l'écran le résultat de la requête)
+                while (requete_aff.Read())
+                {
+                    Rendez_vous Rendez_vousAff = new Rendez_vous(Convert.ToInt32(requete_aff["IdRdv"]), /*Propects Commercials*/ Convert.ToDateTime(requete_aff["DateRdv"]);
+                    TableauRendez_vous.Add(Rendez_vousAff);
+                }
+
+                //fermeture du Data Reader
+                requete_aff.Close();
+
+                // Fermeture de la connexion
+                this.Fermeture_Connexion();
+
+                return TableauRendez_vous;
+            }
+            else
+            {
+                Console.WriteLine("Erreur");
+                return null;
+            }
+        }
+
+        List<Facture> Afficher_Facture()
+        {
+            if (this.Ouverture_Connexion())
+            // Ouverture de la connexion SQL + vérification
+            {
+
+                List<Facture> TableauFacture = new List<Facture>();
+
+                // Création d'une commande SQL en fonction de l'objet connexion
+                MySqlCommand requete = this.connexion.CreateCommand();
+
+                // Requête SQL
+                requete.CommandText = "SELECT * FROM factures";
+
+                //Exécution de la commande SQL
+                MySqlDataReader requete_aff = requete.ExecuteReader();
+
+                //Création d'un objet stocker dans un tableau à partir de la requête reçus (but afficher sur l'écran le résultat de la requête)
+                while (requete_aff.Read())
+                {
+                    Client TempClient = Recherche_ID_Clients(requete_aff["IdCli"]);
+                    Facture FactureAff = new Facture(Convert.ToInt32(requete_aff["IdFact"]), Recherche_ID_Clients(), Recherche_ID_Produits() ,Convert.ToDateTime(requete_aff["DateFact"]);
+                    TableauFacture.Add(FactureAff);
+                }
+
+                //fermeture du Data Reader
+                requete_aff.Close();
+
+                // Fermeture de la connexion
+                this.Fermeture_Connexion();
+
+                return TableauFacture;
+            }
+            else
+            {
+                Console.WriteLine("Erreur");
+                return null;
+            }
+        }
 
         #endregion
 
