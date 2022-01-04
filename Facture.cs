@@ -9,18 +9,23 @@ namespace Application_Lourde_CRM
 
         private int Id;
         private Client Id_Client;
-        private Produits Id_Produits;
-        private string Date;
+        private Achats Id_Achats;
+        private DateTime Date;
 
         #endregion
 
         #region Constructeurs
 
-        public Facture(int id, Client id_client, Produits id_produit, string date)
+        public Facture(int id)
+        {
+            Id = id;
+        }
+
+        public Facture(int id, Client id_client, Achats id_Achats, DateTime date)
         {
             Id = id;
             Id_Client = id_client;
-            Id_Produits = id_produit;
+            Id_Achats = id_Achats;
             Date = date;
         }
 
@@ -40,13 +45,13 @@ namespace Application_Lourde_CRM
             set { Id_Client = value; }
         }
 
-        public Produits ID_PRODUITS
+        public Achats ID_ACHATS
         {
-            get { return Id_Produits; }
-            set { Id_Produits = value; }
+            get { return Id_Achats; }
+            set { Id_Achats = value; }
         }
 
-        public string DATE
+        public DateTime DATE
         {
             get { return Date; }
             set { Date = value; }

@@ -22,10 +22,16 @@ namespace Application_Lourde_CRM
 
         #region Constructeurs
 
-        public BDD()
+        public BDD(string Serveur, string Data_Base, string UID, string Password)
         {
+            serveur = Serveur;
+            data_base = Data_Base;
+            uid = UID;
+            password = Password;
+            
             this.Initialisation_connexion();
         }
+
 
         #endregion
 
@@ -64,8 +70,10 @@ namespace Application_Lourde_CRM
             //Méthode pour initialiser la connexion
 
             // Création de la chaîne de connexion
+            Console.WriteLine("SERVER=" + serveur + ';' + "DATABASE=" + data_base + ';' + "UID=" + uid + ';' + "PASSWORD=" + password + ';');
             string Connexion_String = "SERVER=" + serveur + ';' + "DATABASE=" + data_base + ';' + "UID=" + uid + ';' + "PASSWORD=" + password + ';';
             this.connexion = new MySqlConnection(Connexion_String);
+            
         }
 
         private bool Ouverture_Connexion()
@@ -73,6 +81,7 @@ namespace Application_Lourde_CRM
             try
             {
                 this.connexion.Open();
+                Console.WriteLine("Ok");
                 return true;
             }
             catch (MySqlException erreur)
@@ -243,7 +252,7 @@ namespace Application_Lourde_CRM
                 //Création d'un objet stocker dans un tableau à partir de la requête reçus (but afficher sur l'écran le résultat de la requête)
                 while (requete_aff.Read())
                 {
-                    Prospects ProspectsAff = new Prospects(Convert.ToInt32(requete_aff["IdPro"]), Convert.ToString(requete_aff["NomPro"]), Convert.ToString(requete_aff["PrePro"]), Convert.ToString(requete_aff["MailPro"]), Convert.ToInt32(requete_aff["TelPro"]), Convert.ToString(requete_aff["AdrPro"]), Convert.ToString(requete_aff["VillePro"]), Convert.ToInt32(requete_aff["CpPro"]));
+                    Prospects ProspectsAff = new Prospects(Convert.ToInt32(requete_aff["IdPro"]), Convert.ToString(requete_aff["NomPro"]), Convert.ToString(requete_aff["PrePro"]), Convert.ToString(requete_aff["MailPro"]), Convert.ToString(requete_aff["TelPro"]), Convert.ToString(requete_aff["AdrPro"]), Convert.ToString(requete_aff["VillePro"]), Convert.ToInt32(requete_aff["CpPro"]));
                     TempTableauProspects.Add(ProspectsAff);
                 }
 
@@ -305,7 +314,7 @@ namespace Application_Lourde_CRM
             }
         }
 
-        List<Prospects> Afficher_Prospects()
+        public List<Prospects> Afficher_Prospects()
         {
             if (this.Ouverture_Connexion())
             // Ouverture de la connexion SQL + vérification
@@ -325,7 +334,7 @@ namespace Application_Lourde_CRM
                 //Création d'un objet stocker dans un tableau à partir de la requête reçus (but afficher sur l'écran le résultat de la requête)
                 while (requete_aff.Read())
                 {
-                    Prospects ProspectsAff = new Prospects(Convert.ToInt32(requete_aff["IdPro"]), Convert.ToString(requete_aff["NomPro"]), Convert.ToString(requete_aff["PrePro"]), Convert.ToString(requete_aff["MailPro"]), Convert.ToInt32(requete_aff["TelPro"]), Convert.ToString(requete_aff["AdrPro"]), Convert.ToString(requete_aff["VillePro"]), Convert.ToInt32(requete_aff["CpPro"]));
+                    Prospects ProspectsAff = new Prospects(Convert.ToInt32(requete_aff["IdPro"]), Convert.ToString(requete_aff["NomPro"]), Convert.ToString(requete_aff["PrePro"]), Convert.ToString(requete_aff["MailPro"]), Convert.ToString(requete_aff["TelPro"]), Convert.ToString(requete_aff["AdrPro"]), Convert.ToString(requete_aff["VillePro"]), Convert.ToInt32(requete_aff["CpPro"]));
                     TableauProspects.Add(ProspectsAff);
                 }
 
@@ -383,7 +392,7 @@ namespace Application_Lourde_CRM
             }
         }
 
-        List<Produits> Afficher_Produits()
+        public List<Produits> Afficher_Produits()
         {
             if (this.Ouverture_Connexion())
             // Ouverture de la connexion SQL + vérification
@@ -442,7 +451,9 @@ namespace Application_Lourde_CRM
                 //Création d'un objet stocker dans un tableau à partir de la requête reçus (but afficher sur l'écran le résultat de la requête)
                 while (requete_aff.Read())
                 {
-                    Achats AchatsAff = new Achats(Convert.ToInt32(requete_aff["IdAchat"]), /* Client , Produits */ Convert.ToInt32(requete_aff["Qte"]));
+                    Client clientTemp = new Client(Convert.ToInt32(requete_aff["IdCli"]));
+                    Produits produitsTemp = new Produits(Convert.ToInt32(requete_aff["IdProd"]));
+                    Achats AchatsAff = new Achats(Convert.ToInt32(requete_aff["IdAchat"]), clientTemp , produitsTemp, Convert.ToInt32(requete_aff["Qte"]));
                     TableauAchats.Add(AchatsAff);
                 }
 
@@ -481,7 +492,9 @@ namespace Application_Lourde_CRM
                 //Création d'un objet stocker dans un tableau à partir de la requête reçus (but afficher sur l'écran le résultat de la requête)
                 while (requete_aff.Read())
                 {
-                    Rendez_vous Rendez_vousAff = new Rendez_vous(Convert.ToInt32(requete_aff["IdRdv"]), /*Propects Commercials*/ Convert.ToDateTime(requete_aff["DateRdv"]);
+                    Prospects prospectsTemp = new Prospects(Convert.ToInt32(requete_aff["IdPro"]));
+                    Commercials commercialsTemp = new Commercials(Convert.ToInt32(requete_aff["IdCommercial"]));
+                    Rendez_vous Rendez_vousAff = new Rendez_vous(Convert.ToInt32(requete_aff["IdRdv"]), prospectsTemp, commercialsTemp, Convert.ToDateTime(requete_aff["DateRdv"]));
                     TableauRendez_vous.Add(Rendez_vousAff);
                 }
 
@@ -520,8 +533,9 @@ namespace Application_Lourde_CRM
                 //Création d'un objet stocker dans un tableau à partir de la requête reçus (but afficher sur l'écran le résultat de la requête)
                 while (requete_aff.Read())
                 {
-                    Client TempClient = Recherche_ID_Clients(requete_aff["IdCli"]);
-                    Facture FactureAff = new Facture(Convert.ToInt32(requete_aff["IdFact"]), Recherche_ID_Clients(), Recherche_ID_Produits() ,Convert.ToDateTime(requete_aff["DateFact"]);
+                    Client clientTemp = new Client(Convert.ToInt32(requete_aff["IdCli"]));
+                    Achats AchatsTemp = new Achats(Convert.ToInt32(requete_aff["IdAchat"]));
+                    Facture FactureAff = new Facture(Convert.ToInt32(requete_aff["IdFact"]), clientTemp , AchatsTemp, Convert.ToDateTime(requete_aff["DateFact"]));
                     TableauFacture.Add(FactureAff);
                 }
 
@@ -781,7 +795,7 @@ namespace Application_Lourde_CRM
                 requete.Parameters.AddWithValue("@IdFact", facture.ID);
                 requete.Parameters.AddWithValue("@DateFact", facture.DATE);
                 requete.Parameters.AddWithValue("@IdCli", facture.ID_CLIENT);
-                requete.Parameters.AddWithValue("@IdAchat", facture.ID_PRODUITS);
+                requete.Parameters.AddWithValue("@IdAchat", facture.ID_ACHATS);
 
 
                 //Exécution de la commande SQL
@@ -1041,7 +1055,7 @@ namespace Application_Lourde_CRM
                 requete.Parameters.AddWithValue("@IdFact", facture.ID);
                 requete.Parameters.AddWithValue("@DateFact", facture.DATE);
                 requete.Parameters.AddWithValue("@IdCli", facture.ID_CLIENT);
-                requete.Parameters.AddWithValue("@IdAchat", facture.ID_PRODUITS);
+                requete.Parameters.AddWithValue("@IdAchat", facture.ID_ACHATS);
 
 
                 //Exécution de la commande SQL
@@ -1303,7 +1317,7 @@ namespace Application_Lourde_CRM
                 requete.Parameters.AddWithValue("@IdFact", facture.ID);
                 requete.Parameters.AddWithValue("@DateFact", facture.DATE);
                 requete.Parameters.AddWithValue("@IdCli", facture.ID_CLIENT);
-                requete.Parameters.AddWithValue("@IdAchat", facture.ID_PRODUITS);
+                requete.Parameters.AddWithValue("@IdAchat", facture.ID_ACHATS);
 
 
                 //Exécution de la commande SQL

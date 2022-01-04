@@ -20,6 +20,11 @@ namespace Application_Lourde_CRM
 
         #region Constructeurs
 
+        public Commercials(int id)
+        {
+            Id = id;
+        }
+
         public Commercials(int id, string nom, string prenom, int telephone, string email)
         {
             Id = id;

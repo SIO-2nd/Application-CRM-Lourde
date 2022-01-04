@@ -15,53 +15,157 @@ using System.Windows.Shapes;
 
 namespace Application_Lourde_CRM
 {
-    /// <summary>
-    /// Logique d'interaction pour MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow : Window
-    {
-        public MainWindow()
+        public partial class MainWindow : Window
         {
-            // Création de 3 collections pour stocker les objets
-            List<Prospects> cProspects = new List<Prospects>();
-            List<Client> cClients = new List<Client>();
-            List<Rendez_vous> cRDV = new List<Rendez_vous>();
+            //Création de l'objet BDD (permet de communiquer avec une base de donnée) prenant en paramètre le serveur + le nom de la base + user + password
+            BDD Base_de_donnee_SQL = new BDD("localhost", "infotools", "root", "root");
+            List<Prospects> cProspect = new List<Prospects>();
+            List<Client> cClient = new List<Client>();
+            List<Rendez_vous> cRendez_vous = new List<Rendez_vous>();
             List<Facture> cFacture = new List<Facture>();
 
-            InitializeComponent();
+        public MainWindow()
+            {
+                InitializeComponent();
+            //Console.WriteLine(Base_de_donnee_SQL.Afficher_Prospects());
+                DataGrid_Prospects.ItemsSource = cProspect;
+                DataGrid_Clients.ItemsSource = cClient;
+                DataGrid_RendezVous.ItemsSource = cRendez_vous;
+                DataGrid_Factures.ItemsSource = cFacture;
 
-            // Ajout d'objets temporaires pour tester l'application
-            Prospects P1 = new Prospects(1, "REQUISTON", "Timothé", "tim-req.pro@outlook.fr", 0123456789, "16 avenue lambourg", "Chalon sur Saône", 71100);
 
-            Client C1 = new Client(1, "PEYRONNET", "Philippe", "philippe@gmail.com", 789456123, "18 rue de la république", "Dijon", 21000);
-
-            Rendez_vous R1 = new Rendez_vous(1, 1, 1, DateTime.Parse("29/09/2021"));
-
-            Produits PD1 = new Produits(1, "Pomme", "Fruit", 1);
-
-            Facture F1 = new Facture(1, C1, PD1, DateTime.Parse("29/09/2021"));
-
-            // Remplissage des collections avec les objets
-            cProspects.Add(P1);
-
-            cClients.Add(C1);
-
-            cRDV.Add(R1);
-
-            cFacture.Add(F1);
-
-            // Binding des datagrids avec les collections
-            datagrid1.ItemsSource = cProspects;
-            datagrid2.ItemsSource = cClients;
-            datagrid3.ItemsSource = cRDV;
-            datagrid4.ItemsSource = cFacture;
         }
 
-        private void btnAjouter1_Click(object sender, RoutedEventArgs e)
+        private void DataGrid_Prospects_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //Prospects tmpProspect = new Prospects(Convert.ToInt16(txtID1.Text), txtNom1.Text, txtPrenom1.Text, txtMail1.Text, Convert.ToInt16(txtTel1.Text), txtAdresse1.Text, txtVille1.Text, Convert.ToInt16(txtCP1.Text));
-            //cProspects.Add(tmpProspect);//
-            //datagrid1.Items.Refresh();//
+            Prospects ProspectSelected = (Prospects)DataGrid_Prospects.SelectedItem;
+
+            txtNom1.Text = Convert.ToString(ProspectSelected.NOM);
+            txtPrenom1.Text = Convert.ToString(ProspectSelected.PRENOM);
+            txtMail1.Text = Convert.ToString(ProspectSelected.MAIL);
+            txtTel1.Text = Convert.ToString(ProspectSelected.TEL);
+            txtAdresse1.Text = Convert.ToString(ProspectSelected.ADRESSE);
+            txtVille1.Text = Convert.ToString(ProspectSelected.VILLE);
+            txtCP1.Text = Convert.ToString(ProspectSelected.CODE_POSTAL);
+
+            DataGrid_Prospects.Items.Refresh();
         }
+
+        private void DataGrid_Clients_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void DataGrid_RendezVous_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void DataGrid_Factures_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void btnAjouterPro_Click(object sender, RoutedEventArgs e)
+            {
+                Prospects ProspectsClient = new Prospects(Convert.ToInt32(txtID1.Text), Convert.ToString(txtNom1.Text), Convert.ToString(txtPrenom1.Text), Convert.ToString(txtMail1.Text), txtTel1.Text, Convert.ToString(txtAdresse1.Text), Convert.ToString(txtVille1.Text), Convert.ToInt32(txtCP1.Text));
+                cProspect.Add(ProspectsClient);
+                //Base_de_donnee_SQL.Ajouter_Prospects(ProspectsClient);
+                DataGrid_Prospects.Items.Refresh();
+        }
+
+        private void btnModifierPro_Click(object sender, RoutedEventArgs e)
+            {
+                Prospects ProspectsClient = new Prospects(Convert.ToInt32(txtID1.Text), Convert.ToString(txtNom1.Text), Convert.ToString(txtPrenom1.Text), Convert.ToString(txtMail1.Text), Convert.ToString(txtTel1.Text), Convert.ToString(txtAdresse1.Text), Convert.ToString(txtVille1.Text), Convert.ToInt32(txtCP1.Text));
+
+                //Base_de_donnee_SQL.Modifier_Prospects(ProspectsClient);
+            }
+
+        private void btnSupprimerPro_Click(object sender, RoutedEventArgs e)
+            {
+                Prospects ProspectsClient = new Prospects(Convert.ToInt32(txtID1.Text), Convert.ToString(txtNom1.Text), Convert.ToString(txtPrenom1.Text), Convert.ToString(txtMail1.Text), Convert.ToString(txtTel1.Text), Convert.ToString(txtAdresse1.Text), Convert.ToString(txtVille1.Text), Convert.ToInt32(txtCP1.Text));
+
+                //Base_de_donnee_SQL.Supprimer_Prospects(ProspectsClient);
+            }
+
+
+
+        private void btnAjouterCli_Click(object sender, RoutedEventArgs e)
+        {
+            Client PersonneClient = new Client(Convert.ToInt32(txtID2.Text), Convert.ToString(txtNom2.Text), Convert.ToString(txtPrenom2.Text), Convert.ToString(txtAdresse2.Text), Convert.ToInt32(txtCP2.Text), Convert.ToString(txtVille2.Text), Convert.ToString(txtMail2.Text), Convert.ToInt32(txtTel2.Text));
+
+            //Base_de_donnee_SQL.Ajouter_Client(PersonneClient);
+        }
+
+        private void btnModifierCli_Click(object sender, RoutedEventArgs e)
+        {
+            Client PersonneClient = new Client(Convert.ToInt32(txtID2.Text), Convert.ToString(txtNom2.Text), Convert.ToString(txtPrenom2.Text), Convert.ToString(txtAdresse2.Text), Convert.ToInt32(txtCP2.Text), Convert.ToString(txtVille2.Text), Convert.ToString(txtMail2.Text), Convert.ToInt32(txtTel2.Text));
+
+            //Base_de_donnee_SQL.Modifier_Client(PersonneClient);
+        }
+
+        private void btnSupprimerCli_Click(object sender, RoutedEventArgs e)
+        {
+            Client PersonneClient = new Client(Convert.ToInt32(txtID2.Text), Convert.ToString(txtNom2.Text), Convert.ToString(txtPrenom2.Text), Convert.ToString(txtAdresse2.Text), Convert.ToInt32(txtCP2.Text), Convert.ToString(txtVille2.Text), Convert.ToString(txtMail2.Text), Convert.ToInt32(txtTel2.Text));
+
+            //Base_de_donnee_SQL.Supprimer_Client(PersonneClient);
+        }
+
+        private void ButtonAjouterRdv_Click(object sender, RoutedEventArgs e)
+        {
+            Prospects prospectsTemp = new Prospects(Convert.ToInt32(txtProspect.Text));
+            Commercials commercialsTemp = new Commercials(Convert.ToInt32(txtProspect.Text));
+            Rendez_vous RdvClients = new Rendez_vous(Convert.ToInt32(txtID3.Text), prospectsTemp, commercialsTemp, Convert.ToDateTime(txtDate.Text));
+
+            //Base_de_donnee_SQL.Ajouter_Rendez_vous(RdvClients);
+        }
+
+        private void ButtonModifierRdv_Click(object sender, RoutedEventArgs e)
+        {
+            Prospects prospectsTemp = new Prospects(Convert.ToInt32(txtProspect.Text));
+            Commercials commercialsTemp = new Commercials(Convert.ToInt32(txtProspect.Text));
+            Rendez_vous RdvClients = new Rendez_vous(Convert.ToInt32(txtID3.Text), prospectsTemp, commercialsTemp, Convert.ToDateTime(txtDate.Text));
+
+            //Base_de_donnee_SQL.Modifier_Rendez_vous(RdvClients);
+        }
+
+        private void ButtonSupprimerRdv_Click(object sender, RoutedEventArgs e)
+        {
+            Prospects prospectsTemp = new Prospects(Convert.ToInt32(txtProspect.Text));
+            Commercials commercialsTemp = new Commercials(Convert.ToInt32(txtProspect.Text));
+            Rendez_vous RdvClients = new Rendez_vous(Convert.ToInt32(txtID3.Text), prospectsTemp, commercialsTemp, Convert.ToDateTime(txtDate.Text));
+
+           // Base_de_donnee_SQL.Supprimer_Rendez_vous(RdvClients);
+        }
+
+
+        private void ButtonAjouterFact_Click(object sender, RoutedEventArgs e)
+        {
+            Client ClientId = new Client(Convert.ToInt32(txtIdCli.Text));
+            Achats AchatsId = new Achats(Convert.ToInt32(txtIdAchat.Text));
+            Facture FactureCli = new Facture(Convert.ToInt32(txtID4.Text), ClientId, AchatsId, Convert.ToDateTime(txtDtFact.Text));
+
+            //Base_de_donnee_SQL.Ajouter_Facture(FactureCli);
+        }
+
+        private void ButtonModifierFact_Click(object sender, RoutedEventArgs e)
+        {
+            Client ClientId = new Client(Convert.ToInt32(txtIdCli.Text));
+            Achats AchatsId = new Achats(Convert.ToInt32(txtIdAchat.Text));
+            Facture FactureCli = new Facture(Convert.ToInt32(txtID4.Text), ClientId, AchatsId, Convert.ToDateTime(txtDtFact.Text));
+
+            //Base_de_donnee_SQL.Modifier_Facture(FactureCli);
+        }
+
+        private void ButtonSupprimerFact_Click(object sender, RoutedEventArgs e)
+        {
+            Client ClientId = new Client(Convert.ToInt32(txtIdCli.Text));
+            Achats AchatsId = new Achats(Convert.ToInt32(txtIdAchat.Text));
+            Facture FactureCli = new Facture(Convert.ToInt32(txtID4.Text), ClientId, AchatsId, Convert.ToDateTime(txtDtFact.Text));
+
+            //Base_de_donnee_SQL.Supprimer_Facture(FactureCli);
+        }
+
+
     }
 }

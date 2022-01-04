@@ -15,7 +15,7 @@ namespace Application_Lourde_CRM
         private string Nom;
         private string Prenom;
         private string Email;
-        private int Telephone;
+        private string Telephone;
         private string Adresse;
         private string Ville;
         private int Code_Postal;
@@ -24,7 +24,12 @@ namespace Application_Lourde_CRM
 
         #region Constructeurs
 
-        public Prospects(int id, string nom, string prenom, string email, int telephone, string adresse, string ville, int code_postal)
+        public Prospects(int id)
+        {
+            Id = id;
+        }
+
+        public Prospects(int id, string nom, string prenom, string email, string telephone, string adresse, string ville, int code_postal)
         {
             Id = id;
             Nom = nom;
@@ -63,7 +68,7 @@ namespace Application_Lourde_CRM
             set { Email = value; }
         }
 
-        public int TEL
+        public string TEL
         {
             get { return Telephone; }
             set { Telephone = value; }

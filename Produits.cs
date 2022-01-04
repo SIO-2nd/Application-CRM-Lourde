@@ -21,6 +21,11 @@ namespace Application_Lourde_CRM
 
         #region Constructeurs
 
+        public Produits(int id)
+        {
+            Id = id;
+        }
+
         public Produits(int id, string nom, string type, double prix, int reference)
         {
             Id = id;

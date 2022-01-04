@@ -19,6 +19,11 @@ namespace Application_Lourde_CRM
 
 		#region Constructeurs
 
+		public Client(int id)
+		{
+			Id = id;
+		}
+
 		public Client(int id, string nom, string prenom, string adresse, int codePostal, string ville, string email, int telephone)
 		{
 			Id=id;
