@@ -3,7 +3,7 @@
 <h3>Sommaire :</h3>
 <li><a href="#presentation">Présentation de l'application</a></li>
 <li><a href="#docs">Documentation développeur</a></li>
-<li><a href="#copirights">Copyrights</a></li>
+<li><a href="#credits">Crédits</a></li>
 
 <h2 id="presentation">Présentation de l'application</h2>
 
@@ -155,6 +155,6 @@ et la Suppression des clients, des prospects, des rendez-vous et la visualisatio
         }
 ```
 
-<h2 id="copirights">Copyrights</h2>
+<h2 id="credits">Crédits</h2>
 
 <p>L'application CRM Lourde a été développée par <a href="https://github.com/Str4ky">REQUISTON Timothé</a>, <a href="https://github.com/Goupil117">PEYRONNET Philippe</a> et <a href="https://github.com/mateocarciu">CARCIU Mateo</a> dans le cadre du BTS.</p>
