@@ -12,3 +12,15 @@ Suppression des clients, des prospects, des rendez-vous et la visualisation des 
 Voici son interface principale
 
 <img src="img\Interface.png"/>
+
+Elle a plusieurs onglets
+
+<img src="img\Tabs.png"/>
+
+Une zone d'affichage des différentes données
+
+<img src="img\Datagrid.png"/>
+
+Ainsi qu'une partie pour modifier ces données
+
+<img src="img\Form.png"/>
