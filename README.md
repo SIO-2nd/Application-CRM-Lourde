@@ -11,4 +11,4 @@ Suppression des clients, des prospects, des rendez-vous et la visualisation des 
 
 Voici son interface principale
 
-<img src="img\interface.png"/>
+<img src="img\Interface.png"/>
