@@ -157,4 +157,4 @@ et la Suppression des clients, des prospects, des rendez-vous et la visualisatio
 
 <h2 id="copirights">Copyrights</h2>
 
-<p>L'application CRM Lourde a été développée par REQUISTON Timothé, PEYRONNET Philippe et CARCIU Mateo dans le cadre du BTS.</p>
+<p>L'application CRM Lourde a été développée par <a href="https://github.com/Str4ky">REQUISTON Timothé</a>, <a href="https://github.com/Goupil117">PEYRONNET Philippe</a> et <a href="https://github.com/mateocarciu">CARCIU Mateo</a> dans le cadre du BTS.</p>
