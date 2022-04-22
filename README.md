@@ -28,7 +28,7 @@ Suppression des clients, des prospects, des rendez-vous et la visualisation des 
 
 <h2 id="docs">Documentation développeur</h2>
 
-<p>L'application a été développée en langage C# utilisant la méthode WPF à l'aide du logiciel Visual Studio 2019 développé par Microsoft.</p>
+<p>L'application a été développée en langage C# utilisant le mode WPF à l'aide du logiciel Visual Studio 2019 développé par Microsoft.</p>
 <p>Elle possède plusieurs classes construites comme ceci.</p>
 
 ```
