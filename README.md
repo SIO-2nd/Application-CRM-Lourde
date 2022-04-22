@@ -1,6 +1,6 @@
 # Application CRM Lourde
 
-<h3><u>Sommaire</u> :</h3>
+<h3>Sommaire :</h3>
 <li><a href="#presentation">Présentation de l'application</a></li>
 <li><a href="#docs">Documentation développeur</a></li>
 <li><a href="#copirights">Copyrights</a></li>
