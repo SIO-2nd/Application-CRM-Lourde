@@ -30,10 +30,12 @@ namespace Application_Lourde_CRM
             _Id = Id;
         }
 
-        public Commercials(string Nom, string Prenom)
+        public Commercials(string Nom, string Prenom, string Email, int Telephone)
         {
             _Nom = Nom;
             _Prenom = Prenom;
+            _Email = Email;
+            _Telephone = Telephone;
         }
 
         public Commercials(int Id, string Nom, string Prenom, string Email, int Telephone)

@@ -40,6 +40,17 @@ namespace Application_Lourde_CRM
             _Prenom = Prenom;
         }
 
+        public Prospects(string Nom, string Prenom, string Email, int Telephone, string Adresse, string Ville, int Code_Postal)
+        {
+            _Nom = Nom;
+            _Prenom = Prenom;
+            _Email = Email;
+            _Telephone = Telephone;
+            _Adresse = Adresse;
+            _Ville = Ville;
+            _Code_Postal = Code_Postal;
+        }
+
         public Prospects(int Id, string Nom, string Prenom, string Email, int Telephone, string Adresse, string Ville, int Code_Postal)
         {
             _Id = Id;

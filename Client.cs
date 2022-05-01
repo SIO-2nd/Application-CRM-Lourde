@@ -28,6 +28,18 @@ namespace Application_Lourde_CRM
         {
 			_Id = Id;
         }
+
+		public Client(string Nom, string Prenom, string Adresse, int Telephone, string Ville, string Email, int Code_Postal)
+        {
+			_Nom = Nom;
+			_Prenom = Prenom;
+			_Adresse = Adresse;
+			_Telephone = Telephone;
+			_Ville = Ville;
+			_Email = Email;
+			_Code_Postal = Code_Postal;
+		}
+
 		public Client(int Id, string Nom, string Prenom, string Adresse, int Telephone, string Ville, string Email, int Code_Postal)
 		{
 			_Id = Id;

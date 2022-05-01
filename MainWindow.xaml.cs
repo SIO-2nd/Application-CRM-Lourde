@@ -17,294 +17,314 @@ namespace Application_Lourde_CRM
 {
         public partial class MainWindow : Window
         {
-            List<Rendez_vous> cRendez_vous = new List<Rendez_vous>();
+            Database database = new Database();
 
-        public MainWindow()
+            List<Prospects> list_prospects = null;
+            List<Client> list_client = null;
+            List<Commercials> list_commercials = null;
+            List<Rendez_vous> list_rendez_vous = null;
+            List<Facture> list_factures = null;
+
+            Prospects prospect = null;
+            Client client = null;
+            Commercials commercials = null;
+            Rendez_vous rendez_vous = null;
+            Facture facture = null;
+
+            public MainWindow()
             {
                 InitializeComponent();
-                Database.Initialize();
-                List<Prospects> cProspect = Database.GetProspect();
-                List<Client> cClient = Database.GetClient();
-                List<Commercials> cCommercial = Database.GetCommercial();
-                List<Facture> cFacture = Database.GetFacture();
-                DataGrid_Prospects.ItemsSource = cProspect;
-                DataGrid_Clients.ItemsSource = cClient;
-                DataGrid_Commercials.ItemsSource = cCommercial;
-                DataGrid_RendezVous.ItemsSource = cRendez_vous;
-                DataGrid_Factures.ItemsSource = cFacture;
+                list_prospects = database.GetProspect();
+                list_client = database.GetClient();
+                list_commercials = database.GetCommercial();
+                list_rendez_vous = database.GetRdv();
+                list_factures = database.GetFacture();
 
 
-        }
-
-        #region Prospects
-        private void refreshProspect()
-        {
-            List<Prospects> cProspect = Database.GetProspect();
-            DataGrid_Prospects.ItemsSource = cProspect;
-        }
-
-        private void DataGrid_Prospects_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (DataGrid_Prospects.SelectedItem != null)
-            {
-                Prospects prospectSelected = (Prospects)DataGrid_Prospects.SelectedItem;
-
-                txtIdPro.Text = Convert.ToString(prospectSelected.Id);
-                txtNomPro.Text = Convert.ToString(prospectSelected.Nom);
-                txtPrenomPro.Text = Convert.ToString(prospectSelected.Prenom);
-                txtMailPro.Text = Convert.ToString(prospectSelected.Email);
-                txtTelPro.Text = Convert.ToString(prospectSelected.Telephone);
-                txtAdressePro.Text = Convert.ToString(prospectSelected.Adresse);
-                txtVillePro.Text = Convert.ToString(prospectSelected.Ville);
-                txtCpPro.Text = Convert.ToString(prospectSelected.Code_Postal);
+                DataGrid_Prospects.ItemsSource = list_prospects;
+                DataGrid_Clients.ItemsSource = list_client;
+                DataGrid_Commercials.ItemsSource = list_commercials;
+                DataGrid_RendezVous.ItemsSource = list_rendez_vous;
+                DataGrid_Factures.ItemsSource = list_factures;
             }
-            else
+
+            #region Prospects
+
+            #region Actualiser
+            private void refreshProspect()
             {
-                txtIdPro.Text = "";
-                txtNomPro.Text = "";
-                txtPrenomPro.Text = "";
-                txtMailPro.Text = "";
-                txtTelPro.Text = "";
-                txtAdressePro.Text = "";
-                txtVillePro.Text = "";
-                txtCpPro.Text = "";
+                list_prospects = database.GetProspect();
+                DataGrid_Prospects.ItemsSource = list_prospects;
             }
-        }
+            #endregion
 
-        private void btnAjouterPro_Click(object sender, RoutedEventArgs e)
-        {
-            Prospects tmpProspect = new Prospects
+            #region Sélection
+            private void DataGrid_Prospects_SelectionChanged(object sender, SelectionChangedEventArgs e)
             {
-                Nom = txtNomPro.Text,
-                Prenom = txtPrenomPro.Text,
-                Email = txtMailPro.Text,
-                Telephone = Convert.ToInt32(txtTelPro.Text),
-                Adresse = txtAdressePro.Text,
-                Ville = txtVillePro.Text,
-                Code_Postal = Convert.ToInt32(txtCpPro.Text)
-            };
-            Database.PostProspect(tmpProspect);
-            refreshProspect();
-        }
+                if (DataGrid_Prospects.SelectedItem != null)
+                {
+                    prospect = (Prospects)DataGrid_Prospects.SelectedItem;
 
-        private void btnModifierPro_Click(object sender, RoutedEventArgs e)
-        {
-            Prospects tmpProspect = new Prospects
-            {
-                Id = Convert.ToInt32(txtIdPro.Text),
-                Nom = txtNomPro.Text,
-                Prenom = txtPrenomPro.Text,
-                Email = txtMailPro.Text,
-                Telephone = Convert.ToInt32(txtTelPro.Text),
-                Adresse = txtAdressePro.Text,
-                Ville = txtVillePro.Text,
-                Code_Postal = Convert.ToInt32(txtCpPro.Text)
-            };
-            Database.PutProspect(tmpProspect);
-            refreshProspect();
-        }
-
-        private void btnSupprimerPro_Click(object sender, RoutedEventArgs e)
-        {
-            Database.DeleteProspect(txtIdPro.Text);
-            refreshProspect();
-        }
-        #endregion
-
-        #region Clients
-        private void refreshClients()
-        {
-            List<Client> cClient = Database.GetClient();
-            DataGrid_Clients.ItemsSource = cClient;
-        }
-
-        private void DataGrid_Clients_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (DataGrid_Clients.SelectedItem != null)
-            {
-                Client clientSelected = (Client)DataGrid_Clients.SelectedItem;
-
-                txtIdCli.Text = Convert.ToString(clientSelected.Id);
-                txtNomCli.Text = Convert.ToString(clientSelected.Nom);
-                txtPrenomCli.Text = Convert.ToString(clientSelected.Prenom);
-                txtMailCli.Text = Convert.ToString(clientSelected.Email);
-                txtTelCli.Text = Convert.ToString(clientSelected.Telephone);
-                txtAdresseCli.Text = Convert.ToString(clientSelected.Adresse);
-                txtVilleCli.Text = Convert.ToString(clientSelected.Ville);
-                txtCpCli.Text = Convert.ToString(clientSelected.Code_Postal);
+                    txtIdPro.Text = Convert.ToString(prospect.Id);
+                    txtNomPro.Text = Convert.ToString(prospect.Nom);
+                    txtPrenomPro.Text = Convert.ToString(prospect.Prenom);
+                    txtMailPro.Text = Convert.ToString(prospect.Email);
+                    txtTelPro.Text = Convert.ToString(prospect.Telephone);
+                    txtAdressePro.Text = Convert.ToString(prospect.Adresse);
+                    txtVillePro.Text = Convert.ToString(prospect.Ville);
+                    txtCpPro.Text = Convert.ToString(prospect.Code_Postal);
+                }
+                else
+                {
+                    txtIdPro.Text = "";
+                    txtNomPro.Text = "";
+                    txtPrenomPro.Text = "";
+                    txtMailPro.Text = "";
+                    txtTelPro.Text = "";
+                    txtAdressePro.Text = "";
+                    txtVillePro.Text = "";
+                    txtCpPro.Text = "";
+                }
             }
-            else
-            {
-                txtIdCli.Text = "";
-                txtNomCli.Text = "";
-                txtPrenomCli.Text = "";
-                txtMailCli.Text = "";
-                txtTelCli.Text = "";
-                txtAdresseCli.Text = "";
-                txtVilleCli.Text = "";
-                txtCpCli.Text = "";
-            }
-        }
+            #endregion
 
-        private void btnAjouterCli_Click(object sender, RoutedEventArgs e)
-        {
-            Client tmpClient = new Client
+            #region Ajout Prospects
+            private void btnAjouterPro_Click(object sender, RoutedEventArgs e)
             {
-                Nom = txtNomCli.Text,
-                Prenom = txtPrenomCli.Text,
-                Email = txtMailCli.Text,
-                Telephone = Convert.ToInt32(txtTelCli.Text),
-                Adresse = txtAdresseCli.Text,
-                Ville = txtVilleCli.Text,
-                Code_Postal = Convert.ToInt32(txtCpCli.Text)
-        };
-                Database.PostClient(tmpClient);
+                prospect = new Prospects(txtNomPro.Text, txtPrenomPro.Text, txtMailPro.Text, Convert.ToInt32(txtTelPro.Text), txtAdressePro.Text, txtVillePro.Text, Convert.ToInt32(txtCpPro.Text));
+
+                database.PostProspect(prospect);
+                refreshProspect();
+            }
+            #endregion
+
+            #region Modifier
+            private void btnModifierPro_Click(object sender, RoutedEventArgs e)
+            {
+                prospect = new Prospects(txtNomPro.Text, txtPrenomPro.Text, txtMailPro.Text, Convert.ToInt32(txtTelPro.Text), txtAdressePro.Text, txtVillePro.Text, Convert.ToInt32(txtCpPro.Text));
+
+                database.PutProspect(prospect);
+                refreshProspect();
+            }
+            #endregion
+
+            #region Supprimer
+            private void btnSupprimerPro_Click(object sender, RoutedEventArgs e)
+            {
+                database.DeleteProspect(Convert.ToInt32(txtIdPro.Text));
+                refreshProspect();
+            }
+            #endregion
+
+            #endregion
+
+            #region Clients
+
+            #region Actualiser
+            private void refreshClients()
+            {
+                list_client = database.GetClient();
+                DataGrid_Clients.ItemsSource = list_client;
+            }
+            #endregion
+
+            #region Sélection
+            private void DataGrid_Clients_SelectionChanged(object sender, SelectionChangedEventArgs e)
+            {
+                if (DataGrid_Clients.SelectedItem != null)
+                {
+                    client = (Client)DataGrid_Clients.SelectedItem;
+
+                    txtIdCli.Text = Convert.ToString(client.Id);
+                    txtNomCli.Text = Convert.ToString(client.Nom);
+                    txtPrenomCli.Text = Convert.ToString(client.Prenom);
+                    txtMailCli.Text = Convert.ToString(client.Email);
+                    txtTelCli.Text = Convert.ToString(client.Telephone);
+                    txtAdresseCli.Text = Convert.ToString(client.Adresse);
+                    txtVilleCli.Text = Convert.ToString(client.Ville);
+                    txtCpCli.Text = Convert.ToString(client.Code_Postal);
+                }
+                else
+                {
+                    txtIdCli.Text = "";
+                    txtNomCli.Text = "";
+                    txtPrenomCli.Text = "";
+                    txtMailCli.Text = "";
+                    txtTelCli.Text = "";
+                    txtAdresseCli.Text = "";
+                    txtVilleCli.Text = "";
+                    txtCpCli.Text = "";
+                }
+            }
+            #endregion
+
+            #region Ajouter
+            private void btnAjouterCli_Click(object sender, RoutedEventArgs e)
+            {
+                client = new Client(txtNomCli.Text, txtPrenomCli.Text, txtMailCli.Text, Convert.ToInt32(txtTelCli.Text), txtAdresseCli.Text, txtVilleCli.Text, Convert.ToInt32(txtCpCli.Text));
+
+                database.PostClient(client);
                 refreshClients();
-        }
-
-        private void btnModifierCli_Click(object sender, RoutedEventArgs e)
-        {
-            Client tmpClient = new Client
-            {
-                Id = Convert.ToInt32(txtIdCli.Text),
-                Nom = txtNomCli.Text,
-                Prenom = txtPrenomCli.Text,
-                Email = txtMailCli.Text,
-                Telephone = Convert.ToInt32(txtTelCli.Text),
-                Adresse = txtAdresseCli.Text,
-                Ville = txtVilleCli.Text,
-                Code_Postal = Convert.ToInt32(txtCpCli.Text)
-            };
-
-            Database.PutClient(tmpClient);
-            refreshClients();
-        }
-
-        private void btnSupprimerCli_Click(object sender, RoutedEventArgs e)
-        {
-            Database.DeleteClient(txtIdCli.Text);
-            refreshClients();
-        }
-        #endregion
-
-        #region Commercials
-        private void refreshCommercials()
-        {
-            List<Commercials> cCommercial = Database.GetCommercial();
-            DataGrid_Commercials.ItemsSource = cCommercial;
-        }
-
-        private void DataGrid_Commercials_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (DataGrid_Commercials.SelectedItem != null)
-            {
-                Commercials commercialSelected = (Commercials)DataGrid_Commercials.SelectedItem;
-
-                txtIdCom.Text = Convert.ToString(commercialSelected.Id);
-                txtNomCom.Text = Convert.ToString(commercialSelected.Nom);
-                txtPrenomCom.Text = Convert.ToString(commercialSelected.Prenom);
-                txtMailCom.Text = Convert.ToString(commercialSelected.Email);
-                txtTelCom.Text = Convert.ToString(commercialSelected.Telephone);
             }
-            else
+            #endregion
+
+            #region Modifier
+            private void btnModifierCli_Click(object sender, RoutedEventArgs e)
             {
-                txtIdCom.Text = "";
-                txtNomCom.Text = "";
-                txtPrenomCom.Text = "";
-                txtMailCom.Text = "";
-                txtTelCom.Text = "";
+                client = new Client(Convert.ToInt32(txtIdCli.Text), txtNomCli.Text, txtPrenomCli.Text, txtMailCli.Text, Convert.ToInt32(txtTelCli.Text), txtAdresseCli.Text, txtVilleCli.Text, Convert.ToInt32(txtCpCli.Text));
+
+                database.PutClient(client);
+                refreshClients();
             }
-        }
+            #endregion
 
-        private void btnAjouterCom_Click(object sender, RoutedEventArgs e)
-        {
-            Commercials tmpCommercial = new Commercials
+            #region Supprimer
+            private void btnSupprimerCli_Click(object sender, RoutedEventArgs e)
             {
-                Nom = txtNomCom.Text,
-                Prenom = txtPrenomCom.Text,
-                Email = txtMailCom.Text,
-                Telephone = Convert.ToInt32(txtTelCom.Text)
-            };
-            Database.PostCommercial(tmpCommercial);
-            refreshCommercials();
-        }
-
-        private void btnModifierCom_Click(object sender, RoutedEventArgs e)
-        {
-            Commercials tmpCommercial = new Commercials
-            {
-                Id = Convert.ToInt32(txtIdCom.Text),
-                Nom = txtNomCom.Text,
-                Prenom = txtPrenomCom.Text,
-                Email = txtMailCom.Text,
-                Telephone = Convert.ToInt32(txtTelCom.Text)
-            };
-
-            Database.PutCommercial(tmpCommercial);
-            refreshCommercials();
-        }
-
-        private void btnSupprimerCom_Click(object sender, RoutedEventArgs e)
-        {
-            Database.DeleteCommercial(txtIdCom.Text);
-            refreshCommercials();
-        }
-        #endregion
-
-        #region Rendez_Vous
-        private void refreshRendez_Vous()
-        {
-            //List<Rendez_vous> cRendez_vous = Database.GetRendezVous();
-            DataGrid_RendezVous.ItemsSource = cRendez_vous;
-        }
-
-        private void DataGrid_RendezVous_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void ButtonAjouterRdv_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ButtonModifierRdv_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void ButtonSupprimerRdv_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-        #endregion
-
-        #region Facture
-        private void refreshFacture()
-        {
-            List<Facture> cFacture = Database.GetFacture();
-            DataGrid_Factures.ItemsSource = cFacture;
-        }
-
-        private void DataGrid_Factures_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (DataGrid_Factures.SelectedItem != null)
-            {
-                Facture factureSelected = (Facture)DataGrid_Factures.SelectedItem;
-
-                txtIdFact.Text = Convert.ToString(factureSelected.Id);
-                txtIdAchat.Text = Convert.ToString(factureSelected.Achats.ID);
-                txtIdClient.Text = Convert.ToString(factureSelected.Client.Id);
-                txtDtFact.Text = Convert.ToString(factureSelected.Date);
+                database.DeleteClient(Convert.ToInt32(txtIdCli.Text));
+                refreshClients();
             }
-            else
+            #endregion
+
+            #endregion
+
+            #region Commercials
+
+            #region Actualiser
+            private void refreshCommercials()
             {
-                txtIdFact.Text = "";
-                txtIdAchat.Text = "";
-                txtIdClient.Text = "";
-                txtDtFact.Text = "";
+                list_commercials = database.GetCommercial();
+                DataGrid_Commercials.ItemsSource = list_commercials;
             }
-        }
-        #endregion
+            #endregion
+
+            #region Sélection
+            private void DataGrid_Commercials_SelectionChanged(object sender, SelectionChangedEventArgs e)
+            {
+                if (DataGrid_Commercials.SelectedItem != null)
+                {
+                    commercials = (Commercials)DataGrid_Commercials.SelectedItem;
+
+                    txtIdCom.Text = Convert.ToString(commercials.Id);
+                    txtNomCom.Text = Convert.ToString(commercials.Nom);
+                    txtPrenomCom.Text = Convert.ToString(commercials.Prenom);
+                    txtMailCom.Text = Convert.ToString(commercials.Email);
+                    txtTelCom.Text = Convert.ToString(commercials.Telephone);
+                }
+                else
+                {
+                    txtIdCom.Text = "";
+                    txtNomCom.Text = "";
+                    txtPrenomCom.Text = "";
+                    txtMailCom.Text = "";
+                    txtTelCom.Text = "";
+                }
+            }
+            #endregion
+
+            #region Ajouter
+            private void btnAjouterCom_Click(object sender, RoutedEventArgs e)
+            {
+                commercials = new Commercials(txtNomCom.Text, txtPrenomCom.Text, txtMailCom.Text, Convert.ToInt32(txtTelCom.Text));
+                
+                database.PostCommercial(commercials);
+
+                refreshCommercials();
+            }
+            #endregion
+
+            #region Modifier
+            private void btnModifierCom_Click(object sender, RoutedEventArgs e)
+            {
+                commercials = new Commercials(Convert.ToInt32(txtIdCom.Text), txtNomCom.Text, txtPrenomCom.Text, txtMailCom.Text, Convert.ToInt32(txtTelCom.Text));
+
+                database.PutCommercial(commercials);
+                refreshCommercials();
+            }
+            #endregion
+
+            #region Supprimer
+            private void btnSupprimerCom_Click(object sender, RoutedEventArgs e)
+            {
+                database.DeleteCommercial(Convert.ToInt32(txtIdCom.Text));
+                refreshCommercials();
+            }
+            #endregion
+
+            #endregion
+
+            #region Rendez_Vous
+
+            #region Actualiser
+            private void refreshRendez_Vous()
+            {
+                list_rendez_vous = database.GetRdv();
+                DataGrid_RendezVous.ItemsSource = list_rendez_vous;
+            }
+            #endregion
+
+            #region Sélection
+            private void DataGrid_RendezVous_SelectionChanged(object sender, SelectionChangedEventArgs e)
+            {
+
+            }
+            #endregion
+
+            #region Ajouter
+            private void ButtonAjouterRdv_Click(object sender, RoutedEventArgs e)
+            {
+
+            }
+            #endregion
+
+            #region Modifier
+            private void ButtonModifierRdv_Click(object sender, RoutedEventArgs e)
+            {
+
+            }
+            #endregion
+
+            #region Supprimer
+            private void ButtonSupprimerRdv_Click(object sender, RoutedEventArgs e)
+            {
+
+            }
+            #endregion
+
+            #endregion
+
+            #region Facture
+
+            #region Actualiser
+            private void refreshFacture()
+            {
+                list_factures = database.GetFacture();
+                DataGrid_Factures.ItemsSource = list_factures;
+            }
+            #endregion
+
+            #region Sélection
+            private void DataGrid_Factures_SelectionChanged(object sender, SelectionChangedEventArgs e)
+            {
+                if (DataGrid_Factures.SelectedItem != null)
+                {
+                    Facture factureSelected = (Facture)DataGrid_Factures.SelectedItem;
+
+                    txtIdFact.Text = Convert.ToString(factureSelected.Id);
+                    txtIdAchat.Text = Convert.ToString(factureSelected.Achats.ID);
+                    txtIdClient.Text = Convert.ToString(factureSelected.Client.Id);
+                    txtDtFact.Text = Convert.ToString(factureSelected.Date);
+                }
+                else
+                {
+                    txtIdFact.Text = "";
+                    txtIdAchat.Text = "";
+                    txtIdClient.Text = "";
+                    txtDtFact.Text = "";
+                }
+            }
+            #endregion
+
+            #endregion
     }
 }

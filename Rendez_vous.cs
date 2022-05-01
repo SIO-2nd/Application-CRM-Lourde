@@ -17,13 +17,12 @@ namespace Application_Lourde_CRM
         #endregion
 
         #region Constructeurs
-        public Rendez_vous(int Id, Prospects Prospects, Commercials Commercials, DateTime Date)
+        public Rendez_vous(int Id, DateTime Date, Commercials Commercials, Prospects Prospects)
         {
             _Id = Id;
+            _Date = Date;
             _Prospects = Prospects;
             _Commercials = Commercials;
-            _Date = Date;
-
         }
         #endregion
 

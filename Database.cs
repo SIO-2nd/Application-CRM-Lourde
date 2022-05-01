@@ -1,135 +1,234 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.SqlClient;
+using System.Windows;
 
 namespace Application_Lourde_CRM
 {
     class Database
     {
-        private static SqlConnection connection;
-        public static void Initialize()
+        #region Champs
+
+        private string serveur = "localhost";
+        private string user = "root";
+        private string password = "root";
+        private string database = "infotools";
+        private MySqlConnection connexion = null;
+        private string requete = null;
+
+        #endregion
+
+        #region Constructeurs
+
+        public Database()
         {
-            // Connexion à la base de donnée.
-            connection = new SqlConnection("Server=srvSQL-ubuntu; Database=Infotools; Integrated Security=True;");
+            Connexion_BD();
+        }
+
+        public Database(string Serveur, string User, string Password, string DataBase)
+        {
+            serveur = Serveur;
+            user = User;
+            password = Password;
+            database = DataBase;
+
+            Connexion_BD();
+        }
+
+        #endregion
+
+        #region Accesseurs/Mutateurs
+
+        public string Serveur
+        {
+            get { return Serveur; }
+            set { Serveur = value; }
+        }
+
+        public string User
+        {
+            get { return user; }
+            set { user = value; }
+        }
+
+        public string Password
+        {
+            get { return password; }
+            set { password = value; }
+        }
+
+        public string DataBase
+        {
+            get { return database; }
+            set { database = value; }
+        }
+
+        #endregion
+
+        #region Connexion
+
+        private void Connexion_BD()
+        {
+            // Chaîne de connexion
+            string chaine_connexion = "server=" + serveur + ";userid=" + user + ";password=" + password + ";database=" + database;
+
+            // Instancie un objet MySqlConnection pour gère les connexions à la base de donnée
+
             try
             {
-                connection.Open();
+                connexion = new MySqlConnection(chaine_connexion);
+
+                connexion.Open();
+
+                MessageBox.Show("Connexion réussit", "succès MySql", MessageBoxButton.OK);
+
+                connexion.Close();
             }
-            catch (Exception error)
+            catch (MySqlException ex)
             {
-                Console.WriteLine(error);
-                return;
+                switch (ex.Number)
+                {
+                    case 0:
+                        MessageBox.Show("Ne peut pas se connecter au serveur.", "Erreur MySql", MessageBoxButton.OK);
+                        break;
+
+                    case 1045:
+                        MessageBox.Show("Mot de passe ou nom d'utilisateur non valide, veuillez réessayer.", "Erreur MySql", MessageBoxButton.OK);
+                        break;
+
+                    default:
+                        MessageBox.Show(ex.Message, "Erreur MySql", MessageBoxButton.OK);
+                        break;
+                }
+
+                connexion.Close();
             }
         }
+
+        #endregion
+
+        #region Commande
 
         #region Prospect
 
         #region Lire
-        public static List<Prospects> GetProspect()
+        public List<Prospects> GetProspect()
         {
             try
             {
-                // Création de la requète SQL.
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText = "select * from prospect";
+                requete = "select * from prospects";
 
-                //Lecture de la requète et ajout à une liste.
-                SqlDataReader dataReader = command.ExecuteReader();
+                connexion.Open();
+
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
+                MySqlDataReader resultat = commande.ExecuteReader();
+
                 List<Prospects> cProspect = new List<Prospects>();
-                while (dataReader.Read())
+
+                while (resultat.Read())
                 {
-                    Prospects tmpProspect = new Prospects(
-                        Convert.ToInt32(dataReader["Id"]),
-                        Convert.ToString(dataReader["NomPro"]),
-                        Convert.ToString(dataReader["PrePro"]),
-                        Convert.ToString(dataReader["MailPro"]),
-                        Convert.ToInt32(dataReader["TelPro"]),
-                        Convert.ToString(dataReader["AdrPro"]),
-                        Convert.ToString(dataReader["VillePro"]),
-                        Convert.ToInt32(dataReader["CPPro"])
-                    );
+                    Prospects tmpProspect = new Prospects(Convert.ToInt32(resultat["IdPro"]), Convert.ToString(resultat["NomPro"]), Convert.ToString(resultat["PrePro"]), Convert.ToString(resultat["MailPro"]), Convert.ToInt32(resultat["TelPro"]), Convert.ToString(resultat["AdrPro"]), Convert.ToString(resultat["VillePro"]), Convert.ToInt32(resultat["CPPro"]));
                     cProspect.Add(tmpProspect);
                 }
-                dataReader.Close();
+
+                connexion.Close();
                 return cProspect;
             }
-            catch
+            catch (MySqlException error)
             {
-                Console.WriteLine("Erreur GetProspects");
+                connexion.Close();
+                Console.WriteLine("Erreur GetProspects : " + error.Message);
                 return new List<Prospects>();
             }
+
         }
         #endregion
 
         #region Créer
-        public static void PostProspect(Prospects pro)
+        public void PostProspect(Prospects prospect)
         {
             try
             {
-                String requete = "INSERT INTO prospect(NomPro, PrePro, MailPro, TelPro, AdrPro, VillePro, CpPro) VALUES (@Nom, @Prenom, @Email, @Telephone, @Adresse, @Ville, @Code_Postal)";
+                requete = "INSERT INTO prospects(NomPro, PrePro, AdrPro, CpPro, VillePro, MailPro, TelPro) VALUES (@Nom, @Prenom, @Adresse, @Code_Postal, @Ville, @Email, @Telephone)";
 
-                SqlCommand command = new SqlCommand(requete, connection);
+                connexion.Open();
 
-                command.Parameters.AddWithValue("@Id", Convert.ToString(pro.Id));
-                command.Parameters.AddWithValue("@Nom", pro.Nom);
-                command.Parameters.AddWithValue("@Prenom", pro.Prenom);
-                command.Parameters.AddWithValue("@Email", pro.Email);
-                command.Parameters.AddWithValue("@Telephone", Convert.ToString(pro.Telephone));
-                command.Parameters.AddWithValue("@Adresse", pro.Adresse);
-                command.Parameters.AddWithValue("@Ville", pro.Ville);
-                command.Parameters.AddWithValue("@Code_Postal", Convert.ToString(pro.Code_Postal));
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
 
-                command.ExecuteNonQuery();
+                commande.Parameters.AddWithValue("@Id", Convert.ToString(prospect.Id));
+                commande.Parameters.AddWithValue("@Nom", prospect.Nom);
+                commande.Parameters.AddWithValue("@Prenom", prospect.Prenom);
+                commande.Parameters.AddWithValue("@Email", prospect.Email);
+                commande.Parameters.AddWithValue("@Telephone", Convert.ToString(prospect.Telephone));
+                commande.Parameters.AddWithValue("@Adresse", prospect.Adresse);
+                commande.Parameters.AddWithValue("@Ville", prospect.Ville);
+                commande.Parameters.AddWithValue("@Code_Postal", Convert.ToString(prospect.Code_Postal));
+
+                commande.ExecuteNonQuery();
+
+                connexion.Close();
             }
-            catch
+            catch (MySqlException ex)
             {
-                Console.WriteLine("Erreur PostProspect");
+                connexion.Close();
+                Console.WriteLine("Erreur PostProspect : " + ex.Message);
             }
         }
         #endregion
 
         #region Modifier
-        public static void PutProspect(Prospects pro)
+        public void PutProspect(Prospects prospect)
         {
             try
             {
-                String requete = "update prospect set NomPro = @Nom, PrePro = @Prenom, MailPro = @Email, TelPro = @Telephone, AdrPro = @Adresse, VillePro = @Ville, CpPro = @Code_Postal where Id = @Id";
+                requete = "update prospects set NomPro = @Nom, PrePro = @Prenom, MailPro = @Email, TelPro = @Telephone, AdrPro = @Adresse, VillePro = @Ville, CpPro = @Code_Postal where Id = @Id";
 
-                SqlCommand command = new SqlCommand(requete, connection);
+                connexion.Open();
 
-                command.Parameters.AddWithValue("@Id", Convert.ToString(pro.Id));
-                command.Parameters.AddWithValue("@Nom", Convert.ToString(pro.Nom));
-                command.Parameters.AddWithValue("@Prenom", Convert.ToString(pro.Prenom));
-                command.Parameters.AddWithValue("@Email", Convert.ToString(pro.Email));
-                command.Parameters.AddWithValue("@Telephone", Convert.ToInt32(pro.Telephone));
-                command.Parameters.AddWithValue("@Adresse", Convert.ToString(pro.Adresse));
-                command.Parameters.AddWithValue("@Ville", Convert.ToString(pro.Ville));
-                command.Parameters.AddWithValue("@Code_Postal", Convert.ToInt32(pro.Code_Postal));
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
 
-                command.ExecuteNonQuery();
+                commande.Parameters.AddWithValue("@Id", Convert.ToString(prospect.Id));
+                commande.Parameters.AddWithValue("@Nom", Convert.ToString(prospect.Nom));
+                commande.Parameters.AddWithValue("@Prenom", Convert.ToString(prospect.Prenom));
+                commande.Parameters.AddWithValue("@Email", Convert.ToString(prospect.Email));
+                commande.Parameters.AddWithValue("@Telephone", Convert.ToInt32(prospect.Telephone));
+                commande.Parameters.AddWithValue("@Adresse", Convert.ToString(prospect.Adresse));
+                commande.Parameters.AddWithValue("@Ville", Convert.ToString(prospect.Ville));
+                commande.Parameters.AddWithValue("@Code_Postal", Convert.ToInt32(prospect.Code_Postal));
+
+                commande.ExecuteNonQuery();
+
+                connexion.Close();
             }
-            catch
+            catch (MySqlException ex)
             {
-                Console.WriteLine("Erreur PutProspect");
+                connexion.Close();
+                Console.WriteLine("Erreur PutProspect : " + ex.Message);
             }
         }
         #endregion
 
         #region Supprimer
-        public static void DeleteProspect(string id)
+        public void DeleteProspect(int id)
         {
             try
             {
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText = "delete from prospect where id = " + id;
-                command.ExecuteNonQuery();
+                requete = "delete from prospects where IdPro = @ID";
+
+                connexion.Open();
+
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
+
+                commande.Parameters.AddWithValue("@ID", Convert.ToString(id));
+
+                commande.ExecuteNonQuery();
+
+                connexion.Close();
             }
-            catch
+            catch (MySqlException ex)
             {
-                Console.WriteLine("Erreur DeleteProspect");
+                connexion.Close();
+                Console.WriteLine("Erreur DeleteProspect " + ex.Message);
             }
         }
         #endregion
@@ -139,108 +238,133 @@ namespace Application_Lourde_CRM
         #region Client
 
         #region Lire
-        public static List<Client> GetClient()
+        public List<Client> GetClient()
         {
             try
             {
-                // Création de la requète SQL.
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText = "select * from client";
+                requete = "select * from clients";
 
-                //Lecture de la requète et ajout à une liste.
-                SqlDataReader dataReader = command.ExecuteReader();
-                List<Client> cClient = new List<Client>();
-                while (dataReader.Read())
+                connexion.Open();
+
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
+                MySqlDataReader resultat = commande.ExecuteReader();
+
+                List<Client> cclients = new List<Client>();
+
+                while (resultat.Read())
                 {
-                    Client tmpClient = new Client(
-                        Convert.ToInt32(dataReader["Id"]),
-                        Convert.ToString(dataReader["NomCli"]),
-                        Convert.ToString(dataReader["PreCli"]),
-                        Convert.ToString(dataReader["MailCli"]),
-                        Convert.ToInt32(dataReader["TelCli"]),
-                        Convert.ToString(dataReader["AdrCli"]),
-                        Convert.ToString(dataReader["VilleCli"]),
-                        Convert.ToInt32(dataReader["CPCli"])
-                    );
-                    cClient.Add(tmpClient);
+                    Client client = new Client
+                        (
+                            Convert.ToInt32(resultat["IdCli"]),
+                            Convert.ToString(resultat["NomCli"]),
+                            Convert.ToString(resultat["PreCli"]),
+                            Convert.ToString(resultat["MailCli"]),
+                            Convert.ToInt32(resultat["TelCli"]),
+                            Convert.ToString(resultat["AdrCli"]),
+                            Convert.ToString(resultat["VilleCli"]),
+                            Convert.ToInt32(resultat["CPCli"])
+                        );
+
+                    cclients.Add(client);
                 }
-                dataReader.Close();
-                return cClient;
+
+                connexion.Close();
+
+                return cclients;
             }
-            catch
+            catch (Exception ex)
             {
-                Console.WriteLine("Erreur GetClient");
+                connexion.Close();
+                Console.WriteLine("Erreur GetClient " + ex.Message);
                 return new List<Client>();
             }
         }
         #endregion
 
         #region Créer
-        public static void PostClient(Client cli)
+        public void PostClient(Client client)
         {
             try
             {
-                String requete = "INSERT INTO client(NomCli, PreCli, MailCli, TelCli, AdrCli, VilleCli, CpCli) VALUES (@Nom, @Prenom, @Email, @Telephone, @Adresse, @Ville, @Code_Postal)";
+                requete = "INSERT INTO clients(NomCli, PreCli, MailCli, TelCli, AdrCli, VilleCli, CpCli) VALUES (@Nom, @Prenom, @Email, @Telephone, @Adresse, @Ville, @Code_Postal)";
 
-                SqlCommand command = new SqlCommand(requete, connection);
+                connexion.Open();
 
-                command.Parameters.AddWithValue("@Id", Convert.ToString(cli.Id));
-                command.Parameters.AddWithValue("@Nom", cli.Nom);
-                command.Parameters.AddWithValue("@Prenom", cli.Prenom);
-                command.Parameters.AddWithValue("@Email", cli.Email);
-                command.Parameters.AddWithValue("@Telephone", Convert.ToString(cli.Telephone));
-                command.Parameters.AddWithValue("@Adresse", cli.Adresse);
-                command.Parameters.AddWithValue("@Ville", cli.Ville);
-                command.Parameters.AddWithValue("@Code_Postal", Convert.ToString(cli.Code_Postal));
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
 
-                command.ExecuteNonQuery();
+                commande.Parameters.AddWithValue("@Nom", client.Nom);
+                commande.Parameters.AddWithValue("@Prenom", client.Prenom);
+                commande.Parameters.AddWithValue("@Email", client.Email);
+                commande.Parameters.AddWithValue("@Telephone", Convert.ToString(client.Telephone));
+                commande.Parameters.AddWithValue("@Adresse", client.Adresse);
+                commande.Parameters.AddWithValue("@Ville", client.Ville);
+                commande.Parameters.AddWithValue("@Code_Postal", Convert.ToString(client.Code_Postal));
+
+                commande.ExecuteNonQuery();
+
+                connexion.Close();
             }
-            catch
+            catch (MySqlException ex)
             {
-                Console.WriteLine("Erreur PostClient");
+                connexion.Close();
+                Console.WriteLine("Erreur PostClient " + ex.Message);
             }
         }
         #endregion
 
         #region Modifier
-        public static void PutClient(Client cli)
+        public void PutClient(Client client)
         {
             try
             {
-                String requete = "update client set NomCli = @Nom, PreCli = @Prenom, MailCli = @Email, TelCli = @Telephone, AdrCli = @Adresse, VilleCli = @Ville, CpCli = @Code_Postal where Id = @Id";
+                requete = "update clients set NomCli = @Nom, PreCli = @Prenom, MailCli = @Email, TelCli = @Telephone, AdrCli = @Adresse, VilleCli = @Ville, CpCli = @Code_Postal where IdCli = @Id";
 
-                SqlCommand command = new SqlCommand(requete, connection);
+                connexion.Open();
 
-                command.Parameters.AddWithValue("@Id", Convert.ToString(cli.Id));
-                command.Parameters.AddWithValue("@Nom", Convert.ToString(cli.Nom));
-                command.Parameters.AddWithValue("@Prenom", Convert.ToString(cli.Prenom));
-                command.Parameters.AddWithValue("@Email", Convert.ToString(cli.Email));
-                command.Parameters.AddWithValue("@Telephone", Convert.ToInt32(cli.Telephone));
-                command.Parameters.AddWithValue("@Adresse", Convert.ToString(cli.Adresse));
-                command.Parameters.AddWithValue("@Ville", Convert.ToString(cli.Ville));
-                command.Parameters.AddWithValue("@Code_Postal", Convert.ToInt32(cli.Code_Postal));
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
 
-                command.ExecuteNonQuery();
+                commande.Parameters.AddWithValue("@Id", Convert.ToString(client.Id));
+                commande.Parameters.AddWithValue("@Nom", Convert.ToString(client.Nom));
+                commande.Parameters.AddWithValue("@Prenom", Convert.ToString(client.Prenom));
+                commande.Parameters.AddWithValue("@Email", Convert.ToString(client.Email));
+                commande.Parameters.AddWithValue("@Telephone", Convert.ToInt32(client.Telephone));
+                commande.Parameters.AddWithValue("@Adresse", Convert.ToString(client.Adresse));
+                commande.Parameters.AddWithValue("@Ville", Convert.ToString(client.Ville));
+                commande.Parameters.AddWithValue("@Code_Postal", Convert.ToInt32(client.Code_Postal));
+
+                commande.ExecuteNonQuery();
+
+                connexion.Close();
             }
-            catch
+            catch (MySqlException ex)
             {
-                Console.WriteLine("Erreur PutClient");
+                connexion.Close();
+                Console.WriteLine("Erreur PutClient" + ex.Message);
             }
         }
         #endregion
 
         #region Supprimer
-        public static void DeleteClient(string id)
+        public void DeleteClient(int id)
         {
             try
             {
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText = "delete from client where id = " + id;
-                command.ExecuteNonQuery();
+                requete = "delete from clients where IdCli = @ID";
+
+                connexion.Open();
+
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
+
+                commande.Parameters.AddWithValue("@ID", Convert.ToString(id));
+
+                commande.ExecuteNonQuery();
+
+                connexion.Close();
             }
-            catch
+            catch (MySqlException ex)
             {
-                Console.WriteLine("Erreur DeleteClient");
+                connexion.Close();
+                Console.WriteLine("Erreur DeleteClient " + ex.Message);
             }
         }
         #endregion
@@ -250,99 +374,125 @@ namespace Application_Lourde_CRM
         #region Commercial
 
         #region Lire
-        public static List<Commercials> GetCommercial()
+        public List<Commercials> GetCommercial()
         {
             try
             {
-                // Création de la requète SQL.
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText = "select * from commercial";
+                requete = "select * from commercials";
 
-                //Lecture de la requète et ajout à une liste.
-                SqlDataReader dataReader = command.ExecuteReader();
-                List<Commercials> cCommercial = new List<Commercials>();
-                while (dataReader.Read())
+                connexion.Open();
+
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
+                MySqlDataReader resultat = commande.ExecuteReader();
+
+                List<Commercials> cCommercials = new List<Commercials>();
+
+                while (resultat.Read())
                 {
-                    Commercials tmpCommercial = new Commercials(
-                        Convert.ToInt32(dataReader["Id"]),
-                        Convert.ToString(dataReader["NomCom"]),
-                        Convert.ToString(dataReader["PreCom"]),
-                        Convert.ToString(dataReader["MailCom"]),
-                        Convert.ToInt32(dataReader["TelCom"])
-                    );
-                    cCommercial.Add(tmpCommercial);
+                    Commercials tmpCommercials = new Commercials
+                        (
+                            Convert.ToInt32(resultat["IdCommercial"]),
+                            Convert.ToString(resultat["NomCommercial"]),
+                            Convert.ToString(resultat["PreCommercial"]),
+                            Convert.ToString(resultat["MailCommercial"]),
+                            Convert.ToInt32(resultat["TelCommercial"])
+                        );
+
+                    cCommercials.Add(tmpCommercials);
                 }
-                dataReader.Close();
-                return cCommercial;
+
+                connexion.Close();
+
+                return cCommercials;
             }
-            catch
+            catch (Exception ex)
             {
-                Console.WriteLine("Erreur GetCommercial");
+                connexion.Close();
+                Console.WriteLine("Erreur GetCommercial " + ex.Message);
                 return new List<Commercials>();
             }
         }
         #endregion
 
         #region Créer
-        public static void PostCommercial(Commercials com)
+        public void PostCommercial(Commercials commercials)
         {
             try
             {
-                String requete = "INSERT INTO commercial(NomCom, PreCom, MailCom, TelCom) VALUES (@Nom, @Prenom, @Email, @Telephone)";
+                requete = "INSERT INTO commercials(NomCommercial, PreCommercial, MailCommercial, TelCommercial) VALUES (@Nom, @Prenom, @Email, @Telephone)";
 
-                SqlCommand command = new SqlCommand(requete, connection);
+                connexion.Open();
 
-                command.Parameters.AddWithValue("@Id", Convert.ToString(com.Id));
-                command.Parameters.AddWithValue("@Nom", com.Nom);
-                command.Parameters.AddWithValue("@Prenom", com.Prenom);
-                command.Parameters.AddWithValue("@Email", com.Email);
-                command.Parameters.AddWithValue("@Telephone", Convert.ToString(com.Telephone));
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
 
-                command.ExecuteNonQuery();
+                commande.Parameters.AddWithValue("@Id", Convert.ToString(commercials.Id));
+                commande.Parameters.AddWithValue("@Nom", commercials.Nom);
+                commande.Parameters.AddWithValue("@Prenom", commercials.Prenom);
+                commande.Parameters.AddWithValue("@Email", commercials.Email);
+                commande.Parameters.AddWithValue("@Telephone", Convert.ToString(commercials.Telephone));
+
+                commande.ExecuteNonQuery();
+
+                connexion.Close();
             }
-            catch
+            catch (MySqlException ex)
             {
-                Console.WriteLine("Erreur PostCommercial");
+                connexion.Close();
+                Console.WriteLine("Erreur PostCommercial " + ex.Message);
             }
         }
         #endregion
 
         #region Modifier
-        public static void PutCommercial(Commercials com)
+        public void PutCommercial(Commercials commercials)
         {
             try
             {
-                String requete = "update commercial set NomCom = @Nom, PreCom = @Prenom, MailCom = @Email, TelCom = @Telephone where Id = @Id";
+                requete = "update commercials set NomCommercial = @Nom, PreCommercial = @Prenom, MailCommercial = @Email, TelCommercial = @Telephone where IdCommercial = @Id";
 
-                SqlCommand command = new SqlCommand(requete, connection);
+                connexion.Open();
 
-                command.Parameters.AddWithValue("@Id", Convert.ToString(com.Id));
-                command.Parameters.AddWithValue("@Nom", Convert.ToString(com.Nom));
-                command.Parameters.AddWithValue("@Prenom", Convert.ToString(com.Prenom));
-                command.Parameters.AddWithValue("@Email", Convert.ToString(com.Email));
-                command.Parameters.AddWithValue("@Telephone", Convert.ToInt32(com.Telephone));
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
 
-                command.ExecuteNonQuery();
+                commande.Parameters.AddWithValue("@Id", Convert.ToString(commercials.Id));
+                commande.Parameters.AddWithValue("@Nom", Convert.ToString(commercials.Nom));
+                commande.Parameters.AddWithValue("@Prenom", Convert.ToString(commercials.Prenom));
+                commande.Parameters.AddWithValue("@Email", Convert.ToString(commercials.Email));
+                commande.Parameters.AddWithValue("@Telephone", Convert.ToInt32(commercials.Telephone));
+
+                commande.ExecuteNonQuery();
+
+                connexion.Close();
             }
-            catch
+            catch(MySqlException ex)
             {
-                Console.WriteLine("Erreur PutCommercial");
+                connexion.Close();
+                Console.WriteLine("Erreur PutCommercial" + ex.Message);
             }
         }
         #endregion
 
         #region Supprimer
-        public static void DeleteCommercial(string id)
+        public void DeleteCommercial(int id)
         {
             try
             {
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText = "delete from commercial where id = " + id;
-                command.ExecuteNonQuery();
+                requete = "delete from commercials where IdCommercial = @ID";
+
+                connexion.Open();
+
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
+
+                commande.Parameters.AddWithValue("@ID", Convert.ToString(id));
+
+                commande.ExecuteNonQuery();
+
+                connexion.Close();
             }
-            catch
+            catch (MySqlException ex)
             {
-                Console.WriteLine("Erreur DeleteCommercial");
+                connexion.Close();
+                Console.WriteLine("Erreur DeleteCommercial " + ex.Message);
             }
         }
         #endregion
@@ -352,162 +502,181 @@ namespace Application_Lourde_CRM
         #region Rendez-vous
 
         #region Lire
-        public static List<Rendez_vous> GetRdv()
+        public List<Rendez_vous> GetRdv()
         {
             try
             {
-                // Création de la requète SQL.
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText = "select * from rendez_vous";
+                requete = "select * from rendez-vous";
 
-                //Lecture de la requète et ajout à une liste.
-                SqlDataReader dataReader = command.ExecuteReader();
-                List<Rendez_vous> cRendez_vous = new List<Rendez_vous>();
+                connexion.Open();
 
-                while (dataReader.Read())
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
+                MySqlDataReader resultat = commande.ExecuteReader();
+
+                List<Rendez_vous> cRendez_Vous = new List<Rendez_vous>();
+
+                while (resultat.Read())
                 {
-                    string NomPrenom = Convert.ToString(dataReader["Prospect"]);
-                    string Nom;
-                    string Prenom;
-                    bool confirm = false;
-                    int compteur = 0;
+                    Commercials commercials = new Commercials(Convert.ToInt32(resultat["IdCommercial"]));
+                    Prospects prospects = new Prospects(Convert.ToInt32(resultat["IdPro"]));
+                    Rendez_vous tmpRendez_Vous = new Rendez_vous
+                        (
+                            Convert.ToInt32(resultat["IdRdv"]),
+                            Convert.ToDateTime(resultat["DateRdv"]),
+                            commercials,
+                            prospects
+                        );
 
-                    // Si possible mettre une colonne nom et prénom sur SQL afin d'éviter ce genre de calcul
-                    for(int i = 0; i<NomPrenom.Length; i++)
-                    {
-                        if(NomPrenom[i] != ' ' && confirm == false)
-                        {
-                            Prenom[compteur] = NomPrenom[i];
-                            compteur++;
-                        }
-                        else
-                        {
-                            if(confirm == false)
-                            {
-                                confirm = true;
-                            }
-                        }
-                    }
-                    Prospects prospects = new Prospects();
-                    Commercials commercials = new Commercials();
-                    Rendez_vous tmpRdv = new Rendez_vous();
-                        Convert.ToInt32(dataReader["Id"]),
-                        Convert.ToString(dataReader["Date"]),
-                        
-                        Convert.ToString(dataReader["Commercial"])
-                    );
-                    cRendez_vous.Add(tmpRdv);
+                    cRendez_Vous.Add(tmpRendez_Vous);
                 }
-                dataReader.Close();
-                return cRendez_vous;
+
+                connexion.Clone();
+
+                return cRendez_Vous;
             }
-            catch
+            catch (MySqlException ex)
             {
-                Console.WriteLine("Erreur GetRdv");
+                connexion.Close();
+                Console.WriteLine("Erreur GetRdv " + ex.Message);
                 return new List<Rendez_vous>();
             }
         }
         #endregion
 
         #region Créer
-        public static void PostCommercial(Commercials com)
+        public void PostRdv(Rendez_vous rendez_vous)
         {
             try
             {
-                String requete = "INSERT INTO commercial(NomCom, PreCom, MailCom, TelCom) VALUES (@Nom, @Prenom, @Email, @Telephone)";
+                requete = "INSERT INTO rendez-vous(IdRdv, DateRdv, IdCommercial, IdPro) VALUES (@IDRDV, @DATERDV, @IDCOMMERCIALS, @IDPROSPECTS)";
 
-                SqlCommand command = new SqlCommand(requete, connection);
+                connexion.Open();
 
-                command.Parameters.AddWithValue("@Id", Convert.ToString(com.Id));
-                command.Parameters.AddWithValue("@Nom", com.Nom);
-                command.Parameters.AddWithValue("@Prenom", com.Prenom);
-                command.Parameters.AddWithValue("@Email", com.Email);
-                command.Parameters.AddWithValue("@Telephone", Convert.ToString(com.Telephone));
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
 
-                command.ExecuteNonQuery();
+                commande.Parameters.AddWithValue("@IDRDV", Convert.ToString(rendez_vous.Id));
+                commande.Parameters.AddWithValue("@DATERDV", rendez_vous.Date);
+                commande.Parameters.AddWithValue("@IDCOMMERCIALS", rendez_vous.Commercials.Id);
+                commande.Parameters.AddWithValue("@IDPROSPECTS", rendez_vous.Prospects.Id);
+
+                commande.ExecuteNonQuery();
+
+                connexion.Close();
             }
-            catch
+            catch (MySqlException ex)
             {
-                Console.WriteLine("Erreur PostCommercial");
+                connexion.Close();
+                Console.WriteLine("Erreur PostCommercial " + ex.Message);
             }
         }
         #endregion
 
         #region Modifier
-        public static void PutCommercial(Commercials com)
+        public void PutRdv(Rendez_vous rendez_Vous)
         {
             try
             {
-                String requete = "update commercial set NomCom = @Nom, PreCom = @Prenom, MailCom = @Email, TelCom = @Telephone where Id = @Id";
+                requete = "update rendez-vous set DateRdv = @DATERDV, IdCommercial = @IDCOMMERCIAL, IdPro = @IDPROSPECT where IdRdv = @IDRDV";
 
-                SqlCommand command = new SqlCommand(requete, connection);
+                connexion.Open();
 
-                command.Parameters.AddWithValue("@Id", Convert.ToString(com.Id));
-                command.Parameters.AddWithValue("@Nom", Convert.ToString(com.Nom));
-                command.Parameters.AddWithValue("@Prenom", Convert.ToString(com.Prenom));
-                command.Parameters.AddWithValue("@Email", Convert.ToString(com.Email));
-                command.Parameters.AddWithValue("@Telephone", Convert.ToInt32(com.Telephone));
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
 
-                command.ExecuteNonQuery();
+                commande.Parameters.AddWithValue("@DATERDV", rendez_Vous.Date);
+                commande.Parameters.AddWithValue("@IDCOMMERCIAL", rendez_Vous.Commercials.Id);
+                commande.Parameters.AddWithValue("@IDPROSPECT", rendez_Vous.Prospects.Id);
+                commande.Parameters.AddWithValue("@IDRDV", rendez_Vous.Id);
+
+                commande.ExecuteNonQuery();
+
+                connexion.Close();
             }
-            catch
+            catch (MySqlException ex)
             {
-                Console.WriteLine("Erreur PutCommercial");
+                connexion.Close();
+                Console.WriteLine("Erreur PutCommercial " + ex.Message);
             }
         }
         #endregion
 
         #region Supprimer
-        public static void DeleteCommercial(string id)
+        public void DeleteRdv(int id)
         {
             try
             {
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText = "delete from commercial where id = " + id;
-                command.ExecuteNonQuery();
+                requete = "delete from rendez-vous where id = @ID";
+
+                connexion.Open();
+
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
+
+                commande.Parameters.AddWithValue("@ID", id);
+
+                commande.ExecuteNonQuery();
+
+                connexion.Close();
             }
-            catch
+            catch (MySqlException ex)
             {
-                Console.WriteLine("Erreur DeleteCommercial");
+                connexion.Close();
+                Console.WriteLine("Erreur DeleteCommercial " + ex.Message);
             }
         }
+        #endregion
+
         #endregion
 
         #region Facture
 
         #region Lire
-        public static List<Facture> GetFacture()
+        public List<Facture> GetFacture()
         {
+            connexion.Open();
+
             try
             {
-                // Création de la requète SQL.
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText = "select * from facture";
+                requete = "select * from facture";
 
-                //Lecture de la requète et ajout à une liste.
-                SqlDataReader dataReader = command.ExecuteReader();
+
+
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
+                MySqlDataReader resultat = commande.ExecuteReader();
+
                 List<Facture> cFacture = new List<Facture>();
 
-                while (dataReader.Read())
+                while (resultat.Read())
                 {
-                    Client client = new Client(Convert.ToInt32(dataReader["IdCli"]));
-                    Achats achats = new Achats(Convert.ToInt32(dataReader["IdAchat"]));
+                    Client client = new Client(Convert.ToInt32(resultat["IdCli"]));
+                    Achats achats = new Achats(Convert.ToInt32(resultat["IdAchat"]));
 
-                    Facture facture = new Facture(Convert.ToInt32(dataReader["Id"]), client, achats, Convert.ToDateTime(dataReader["Date"]));
+                    Facture tmpFacture = new Facture
+                        (
+                            Convert.ToInt32(resultat["Id"]),
+                            client,
+                            achats,
+                            Convert.ToDateTime(resultat["Date"])
+                        );
 
-                    cFacture.Add(facture);
+                    cFacture.Add(tmpFacture);
                 }
-                dataReader.Close();
+
+                connexion.Close();
+
                 return cFacture;
             }
-            catch
+            catch (MySqlException ex)
             {
-                Console.WriteLine("Erreur GetFacture");
+                connexion.Close();
+                Console.WriteLine("Erreur GetFacture " + ex.Message);
                 return new List<Facture>();
             }
         }
         #endregion
 
         #endregion
+
+        #endregion
+
+
     }
 }

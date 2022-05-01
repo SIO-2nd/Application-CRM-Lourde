@@ -20,6 +20,11 @@ namespace Application_Lourde_CRM
 
         }
 
+        public Facture(int Id)
+        {
+            _Id = Id;
+        }
+
         public Facture(int Id, Client Client, Achats Achats, DateTime Date)
         {
             _Id = Id;
