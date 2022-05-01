@@ -10,76 +10,64 @@ namespace Application_Lourde_CRM
     {
         #region Champs
 
-        private int _Id;
-        private string _Nom;
-        private string _Prenom;
-        private string _Email;
-        private int _Telephone;
+        private int Id;
+        private string Nom;
+        private string Prenom;
+        private int Telephone;
+        private string Email;
 
         #endregion
 
         #region Constructeurs
 
-        public Commercials()
+        public Commercials(int id)
         {
-
+            Id = id;
         }
 
-        public Commercials(int Id)
+        public Commercials(int id, string nom, string prenom, int telephone, string email)
         {
-            _Id = Id;
-        }
-
-        public Commercials(string Nom, string Prenom, string Email, int Telephone)
-        {
-            _Nom = Nom;
-            _Prenom = Prenom;
-            _Email = Email;
-            _Telephone = Telephone;
-        }
-
-        public Commercials(int Id, string Nom, string Prenom, string Email, int Telephone)
-        {
-            _Id = Id;
-            _Nom = Nom;
-            _Prenom = Prenom;
-            _Email = Email;
-            _Telephone = Telephone;
+            Id = id;
+            Nom = nom;
+            Prenom = prenom;
+            Telephone = telephone;
+            Email = email;
         }
 
         #endregion
 
         #region Accesseurs/Mutateurs
 
-        public int Id
+        public int ID
         {
-            get { return _Id; }
-            set { _Id = value; }
+            get { return ID; }
+            set { ID = value; }
         }
 
-        public string Nom
+        public string NOM
         {
-            get { return _Nom; }
-            set { _Nom = value; }
+            get { return Nom; }
+            set { Nom = value; }
         }
 
-        public string Prenom
+        public string PRENOM
         {
-            get { return _Prenom; }
-            set { _Prenom = value; }
+            get { return Prenom; }
+            set { Prenom = value; }
         }
 
-        public string Email
+        public int TELEPHONE
         {
-            get { return _Email; }
-            set { _Email = value; }
+            get { return Telephone; }
+            set { Telephone = value; }
         }
 
-        public int Telephone
+        public string EMAIL
         {
-            get { return _Telephone; }
-            set { _Telephone = value; }
+            get { return Email; }
+            set { Email = value; }
         }
+
         #endregion
     }
 }

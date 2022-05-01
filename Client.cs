@@ -6,103 +6,87 @@ namespace Application_Lourde_CRM
 	{
 		#region Champs
 
-		private int _Id;
-		private string _Nom;
-		private string _Prenom;
-		private string _Adresse;
-		private int _Code_Postal;
-		private string _Ville;
-		private string _Email;
-		private int _Telephone;
+		private int Id;
+		private string Nom;
+		private string Prenom;
+		private string Adresse;
+		private int Code_Postal;
+		private string Ville;
+		private string Email;
+		private int Telephone;
 
 		#endregion
 
 		#region Constructeurs
 
-		public Client()
-        {
-
-        }
-
-		public Client(int Id)
-        {
-			_Id = Id;
-        }
-
-		public Client(string Nom, string Prenom, string Adresse, int Telephone, string Ville, string Email, int Code_Postal)
-        {
-			_Nom = Nom;
-			_Prenom = Prenom;
-			_Adresse = Adresse;
-			_Telephone = Telephone;
-			_Ville = Ville;
-			_Email = Email;
-			_Code_Postal = Code_Postal;
+		public Client(int id)
+		{
+			Id = id;
 		}
 
-		public Client(int Id, string Nom, string Prenom, string Adresse, int Telephone, string Ville, string Email, int Code_Postal)
+		public Client(int id, string nom, string prenom, string adresse, int codePostal, string ville, string email, int telephone)
 		{
-			_Id = Id;
-			_Nom = Nom;
-			_Prenom = Prenom;
-			_Adresse = Adresse;
-			_Telephone = Telephone;
-			_Ville = Ville;
-			_Email = Email;
-			_Code_Postal = Code_Postal;
+			Id=id;
+			Nom = nom;
+			Prenom = prenom;
+			Adresse = adresse;
+			Code_Postal = codePostal;
+			Ville = ville;
+			Email = email;
+			Telephone = telephone;
 		}
 
 		#endregion
 
 		#region Accesseurs/Mutateurs
 
-		public int Id
+		public int ID
 		{
-			get { return _Id; }
-			set { _Id = value; }
+			get { return Id; }
+			set { Id = value; }
 		}
 
-		public string Nom
+		public string NOM
         {
-            get { return _Nom; }
-			set { _Nom = value; }
+            get { return NOM; }
+			set { NOM = value; }
         }
 
-		public string Prenom
+		public string PRENOM
 		{
-			get { return _Prenom; }
-			set { _Prenom = value; }
+			get { return Prenom; }
+			set { Prenom = value; }
 		}
 
-		public string Adresse
+		public string ADRESSE
 		{
-			get { return _Adresse; }
-			set { _Adresse = value; }
+			get { return Adresse; }
+			set { Adresse = value; }
 		}
 
-		public int Telephone
+		public int CODE_POSTAL
 		{
-			get { return _Telephone; }
-			set { _Telephone = value; }
+			get { return Code_Postal; }
+			set { Code_Postal = value; }
 		}
 
-		public string Ville
+		public string VILLE
         {
-			get { return _Ville; }
-			set { _Ville = value; }
+			get { return Ville; }
+			set { Ville = value; }
         }
 
-		public string Email
+		public string EMAIL
         {
-			get { return _Email; }
-            set { _Email = value; }
+			get { return Email; }
+            set { Email = value; }
         }
 
-		public int Code_Postal
-		{
-			get { return _Code_Postal; }
-			set { _Code_Postal = value; }
-		}
+		public int TELEPHONE
+        {
+            get { return Telephone; }
+            set { Telephone = value; }
+        }
 		#endregion
 
 

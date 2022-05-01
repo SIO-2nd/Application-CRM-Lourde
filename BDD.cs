@@ -446,7 +446,9 @@ namespace Application_Lourde_CRM
                 //Création d'un objet stocker dans un tableau à partir de la requête reçus (but afficher sur l'écran le résultat de la requête)
                 while (requete_aff.Read())
                 {
-                    Achats AchatsAff = new Achats(Convert.ToInt32(requete_aff["IdAchat"]), /* Client , Produits */ Convert.ToInt32(requete_aff["Qte"]));
+                    Client clientTemp = new Client(Convert.ToInt32(requete_aff["IdCli"]));
+                    Produits produitsTemp = new Produits(Convert.ToInt32(requete_aff["IdProd"]));
+                    Achats AchatsAff = new Achats(Convert.ToInt32(requete_aff["IdAchat"]), clientTemp , produitsTemp, Convert.ToInt32(requete_aff["Qte"]));
                     TableauAchats.Add(AchatsAff);
                 }
 
@@ -485,7 +487,9 @@ namespace Application_Lourde_CRM
                 //Création d'un objet stocker dans un tableau à partir de la requête reçus (but afficher sur l'écran le résultat de la requête)
                 while (requete_aff.Read())
                 {
-                    Rendez_vous Rendez_vousAff = new Rendez_vous(Convert.ToInt32(requete_aff["IdRdv"]), /*Propects Commercials*/ Convert.ToDateTime(requete_aff["DateRdv"]);
+                    Prospects prospectsTemp = new Prospects(Convert.ToInt32(requete_aff["IdPro"]));
+                    Commercials commercialsTemp = new Commercials(Convert.ToInt32(requete_aff["IdCommercial"]));
+                    Rendez_vous Rendez_vousAff = new Rendez_vous(Convert.ToInt32(requete_aff["IdRdv"]), prospectsTemp, commercialsTemp, Convert.ToDateTime(requete_aff["DateRdv"]));
                     TableauRendez_vous.Add(Rendez_vousAff);
                 }
 
@@ -524,8 +528,9 @@ namespace Application_Lourde_CRM
                 //Création d'un objet stocker dans un tableau à partir de la requête reçus (but afficher sur l'écran le résultat de la requête)
                 while (requete_aff.Read())
                 {
-                    Client TempClient = Recherche_ID_Clients(requete_aff["IdCli"]);
-                    Facture FactureAff = new Facture(Convert.ToInt32(requete_aff["IdFact"]), Recherche_ID_Clients(), Recherche_ID_Produits() ,Convert.ToDateTime(requete_aff["DateFact"]);
+                    Client clientTemp = new Client(Convert.ToInt32(requete_aff["IdCli"]));
+                    Achats AchatsTemp = new Achats(Convert.ToInt32(requete_aff["IdAchat"]));
+                    Facture FactureAff = new Facture(Convert.ToInt32(requete_aff["IdFact"]), clientTemp , AchatsTemp, Convert.ToDateTime(requete_aff["DateFact"]));
                     TableauFacture.Add(FactureAff);
                 }
 
@@ -785,7 +790,7 @@ namespace Application_Lourde_CRM
                 requete.Parameters.AddWithValue("@IdFact", facture.ID);
                 requete.Parameters.AddWithValue("@DateFact", facture.DATE);
                 requete.Parameters.AddWithValue("@IdCli", facture.ID_CLIENT);
-                requete.Parameters.AddWithValue("@IdAchat", facture.ID_PRODUITS);
+                requete.Parameters.AddWithValue("@IdAchat", facture.ID_ACHATS);
 
 
                 //Exécution de la commande SQL
@@ -1045,7 +1050,7 @@ namespace Application_Lourde_CRM
                 requete.Parameters.AddWithValue("@IdFact", facture.ID);
                 requete.Parameters.AddWithValue("@DateFact", facture.DATE);
                 requete.Parameters.AddWithValue("@IdCli", facture.ID_CLIENT);
-                requete.Parameters.AddWithValue("@IdAchat", facture.ID_PRODUITS);
+                requete.Parameters.AddWithValue("@IdAchat", facture.ID_ACHATS);
 
 
                 //Exécution de la commande SQL
@@ -1307,7 +1312,7 @@ namespace Application_Lourde_CRM
                 requete.Parameters.AddWithValue("@IdFact", facture.ID);
                 requete.Parameters.AddWithValue("@DateFact", facture.DATE);
                 requete.Parameters.AddWithValue("@IdCli", facture.ID_CLIENT);
-                requete.Parameters.AddWithValue("@IdAchat", facture.ID_PRODUITS);
+                requete.Parameters.AddWithValue("@IdAchat", facture.ID_ACHATS);
 
 
                 //Exécution de la commande SQL

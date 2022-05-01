@@ -10,41 +10,42 @@ namespace Application_Lourde_CRM
     {
 
         #region Champs
-        private int _Id;
-        private DateTime _Date;
-        private Prospects _Prospects;
-        private Commercials _Commercials;
+        private int Id;
+        private Prospects Id_Prospects;
+        private Commercials Id_Commercials;
+        private DateTime Date;
         #endregion
 
         #region Constructeurs
-        public Rendez_vous(int Id, DateTime Date, Commercials Commercials, Prospects Prospects)
+        public Rendez_vous(int id, Prospects id_prospects, Commercials id_commercials, DateTime date)
         {
-            _Id = Id;
-            _Date = Date;
-            _Prospects = Prospects;
-            _Commercials = Commercials;
+            Id = id;
+            Id_Prospects = id_prospects;
+            Id_Commercials = id_commercials;
+            Date = date;
+
         }
         #endregion
 
         #region Accesseurs/Mutateurs
-        public int Id
+        public int ID
         {
-            get { return _Id; }
-            set { _Id = value; }
+            get { return Id; }
+            set { Id = value; }
         }
 
-        public Prospects Prospects
+        public Prospects ID_PROSPECTS
         {
-            get { return _Prospects; }
-            set { _Prospects = value; }
+            get { return Id_Prospects; }
+            set { Id_Prospects = value; }
         }
 
-        public Commercials Commercials
+        public Commercials ID_COMMERCIALS
         {
-            get { return _Commercials; }
-            set { _Commercials = value; }
+            get { return Id_Commercials; }
+            set { Id_Commercials = value; }
         }
-        public DateTime Date
+        public DateTime DATE
         {
             get { return Date; }
             set { Date = value; }

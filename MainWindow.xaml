@@ -1,18 +1,15 @@
-﻿<Window x:Class="Application_Lourde_CRM.MainWindow"
+﻿<Window x:Name="Main_Windows" x:Class="Application_Lourde_CRM.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Application_Lourde_CRM"
         mc:Ignorable="d"
-        Title="Application lourde" Height="491.76" Width="649.667" ResizeMode="NoResize">
+        Title="Application lourde" Height="484.426" Width="641">
     <Window.Background>
         <ImageBrush ImageSource="background.png"/>
     </Window.Background>
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
         <TabControl HorizontalAlignment="Left" Height="433" Margin="13,10,0,0" VerticalAlignment="Top" Width="610">
             <TabControl.Background>
                 <ImageBrush ImageSource="background_transparent.png"/>
@@ -20,128 +17,114 @@
             <TabItem Header="Prospects" Background="#FFE5E5E5" BorderBrush="#FFACACAC" Opacity="0.9">
                 <Grid Opacity="0.95">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="75*"/>
+                        <ColumnDefinition Width="14*"/>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="32*"/>
+                        <ColumnDefinition Width="473*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="DataGrid_Prospects" HorizontalAlignment="Left" Height="385" Margin="10,10,0,0" VerticalAlignment="Top" Width="375" AutoGenerateColumns="True" ItemsSource="{Binding}" SelectionChanged="DataGrid_Prospects_SelectionChanged" IsReadOnly="True">
+                    <DataGrid x:Name="DataGrid_Prospects" HorizontalAlignment="Left" Height="385" Margin="10,10,0,0" VerticalAlignment="Top" Width="375" Grid.ColumnSpan="5">
                         <DataGrid.Background>
                             <ImageBrush ImageSource="background_transparent_white.png"/>
                         </DataGrid.Background>
                     </DataGrid>
-                    <TextBox x:Name="txtIdPro" HorizontalAlignment="Left" Height="23" Margin="471,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Background="White" Opacity="0.75"/>
-                    <TextBox x:Name="txtNomPro" HorizontalAlignment="Left" Height="23" Margin="471,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75"/>
-                    <TextBox x:Name="txtPrenomPro" HorizontalAlignment="Left" Height="23" Margin="471,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75"/>
-                    <TextBox x:Name="txtMailPro" HorizontalAlignment="Left" Height="23" Margin="471,124,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75"/>
-                    <TextBox x:Name="txtTelPro" HorizontalAlignment="Left" Height="23" Margin="471,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75"/>
-                    <TextBox x:Name="txtAdressePro" HorizontalAlignment="Left" Height="23" Margin="471,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75"/>
-                    <TextBox x:Name="txtVillePro" HorizontalAlignment="Left" Height="23" Margin="471,238,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75"/>
-                    <Label x:Name="lblIdPro" Content="ID :" HorizontalAlignment="Left" Margin="442,6,0,0" VerticalAlignment="Top" Height="26" Foreground="White"/>
-                    <Label x:Name="lblNomPro" Content="Nom :" HorizontalAlignment="Left" Margin="427,45,0,0" VerticalAlignment="Top" Foreground="White"/>
-                    <Label x:Name="lblPrenomPro" Content="Prénom :" HorizontalAlignment="Left" Margin="412,83,0,0" VerticalAlignment="Top" Foreground="White"/>
-                    <Label x:Name="lblMailPro" Content="Mail :" HorizontalAlignment="Left" Margin="430,120,0,0" VerticalAlignment="Top" Foreground="White"/>
-                    <Label x:Name="lblTelPro" Content="Téléphone :" HorizontalAlignment="Left" Margin="398,158,0,0" VerticalAlignment="Top" Foreground="White"/>
-                    <TextBox x:Name="txtCpPro" HorizontalAlignment="Left" Height="23" Margin="471,276,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75"/>
-                    <Label x:Name="lblAdressePro" Content="Adresse :" HorizontalAlignment="Left" Margin="411,196,0,0" VerticalAlignment="Top" Foreground="White"/>
-                    <Label x:Name="lblVillePro" Content="Ville :" HorizontalAlignment="Left" Margin="429,234,0,0" VerticalAlignment="Top" Foreground="White"/>
-                    <Label x:Name="lblCpPro" Content="Code postal :" HorizontalAlignment="Left" Margin="388,272,0,0" VerticalAlignment="Top" Foreground="White"/>
-                    <Button x:Name="btnAjouterPro" Content="Ajouter" HorizontalAlignment="Left" Margin="471,325,0,0" VerticalAlignment="Top" Width="123" Click="btnAjouterPro_Click"/>
-                    <Button x:Name="btnModifierPro" Content="Modifier" HorizontalAlignment="Left" Margin="471,350,0,0" VerticalAlignment="Top" Width="123" Click="btnModifierPro_Click"/>
-                    <Button x:Name="btnSupprimerPro" Content="Supprimer" HorizontalAlignment="Left" Margin="471,375,0,0" VerticalAlignment="Top" Width="123" Click="btnSupprimerPro_Click"/>
+                    <TextBox x:Name="txtID1" HorizontalAlignment="Left" Height="23" Margin="340.445,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Background="White" Opacity="0.75" Grid.Column="4"/>
+                    <TextBox x:Name="txtNom1" HorizontalAlignment="Left" Height="23" Margin="340.445,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75" Grid.Column="4"/>
+                    <TextBox x:Name="txtPrenom1" HorizontalAlignment="Left" Height="23" Margin="340.445,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75" Grid.Column="4"/>
+                    <TextBox x:Name="txtMail1" HorizontalAlignment="Left" Height="23" Margin="340.445,124,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75" Grid.Column="4"/>
+                    <TextBox x:Name="txtTel1" HorizontalAlignment="Left" Height="23" Margin="340.445,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75" Grid.Column="4"/>
+                    <TextBox x:Name="txtAdresse1" HorizontalAlignment="Left" Height="23" Margin="340.445,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75" Grid.Column="4"/>
+                    <TextBox x:Name="txtVille1" HorizontalAlignment="Left" Height="23" Margin="340.445,238,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75" Grid.Column="4"/>
+                    <Button x:Name="btnSupprimerPro" Content="Supprimer" HorizontalAlignment="Left" Margin="340.445,375,0,0" VerticalAlignment="Top" Width="123" Grid.Column="4" Click="btnSupprimerPro_Click"/>
+                    <Button x:Name="btnModifierPro" Content="Modifier" HorizontalAlignment="Left" Margin="340.445,350,0,0" VerticalAlignment="Top" Width="123" Grid.Column="4" Click="btnModifierPro_Click"/>
+                    <Button x:Name="btnAjouterPro" Content="Ajouter" HorizontalAlignment="Left" Margin="340.445,325,0,0" VerticalAlignment="Top" Width="123" Click="btnAjouter1_Click" Grid.Column="4"/>
+                    <Label x:Name="lblID1" Content="ID :" HorizontalAlignment="Left" Margin="311.445,6,0,0" VerticalAlignment="Top" Height="26" Foreground="White" Grid.Column="4"/>
+                    <Label x:Name="lblNom1" Content="Nom :" HorizontalAlignment="Left" Margin="296.445,45,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="4"/>
+                    <Label x:Name="lblPrenom1" Content="Prénom :" HorizontalAlignment="Left" Margin="281.445,83,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="4"/>
+                    <Label x:Name="lblMail" Content="Mail :" HorizontalAlignment="Left" Margin="299.445,120,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="4"/>
+                    <Label x:Name="lblTel1" Content="Téléphone :" HorizontalAlignment="Left" Margin="267.445,158,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="4"/>
+                    <TextBox x:Name="txtCP1" HorizontalAlignment="Left" Height="23" Margin="340.445,276,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75" Grid.Column="4"/>
+                    <Label x:Name="lblAdresse" Content="Adresse :" HorizontalAlignment="Left" Margin="280.445,196,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="4"/>
+                    <Label x:Name="lblVille" Content="Ville :" HorizontalAlignment="Left" Margin="298.445,234,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="4"/>
+                    <Label x:Name="lblCP" Content="Code postal :" HorizontalAlignment="Left" Margin="257.445,272,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="4"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Clients" Opacity="0.9">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="23*"/>
+                        <ColumnDefinition Width="581*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="DataGrid_Clients" HorizontalAlignment="Left" Height="385" Margin="10,10,0,0" VerticalAlignment="Top" Width="375" AutoGenerateColumns="True" ItemsSource="{Binding}" SelectionChanged="DataGrid_Clients_SelectionChanged" IsReadOnly="True">
+                    <DataGrid x:Name="DataGrid_Clients" HorizontalAlignment="Left" Height="385" Margin="10,10,0,0" VerticalAlignment="Top" Width="375" Grid.ColumnSpan="2">
                         <DataGrid.Background>
                             <ImageBrush ImageSource="background_transparent_white.png"/>
                         </DataGrid.Background>
                     </DataGrid>
-                    <TextBox x:Name="txtIdCli" HorizontalAlignment="Left" Height="23" Margin="471,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Background="White" Opacity="0.75"/>
-                    <TextBox x:Name="txtNomCli" HorizontalAlignment="Left" Height="23" Margin="471,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75"/>
-                    <TextBox x:Name="txtPrenomCli" HorizontalAlignment="Left" Height="23" Margin="471,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75"/>
-                    <TextBox x:Name="txtMailCli" HorizontalAlignment="Left" Height="23" Margin="471,124,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75"/>
-                    <TextBox x:Name="txtTelCli" HorizontalAlignment="Left" Height="23" Margin="471,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75"/>
-                    <TextBox x:Name="txtAdresseCli" HorizontalAlignment="Left" Height="23" Margin="471,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75"/>
-                    <TextBox x:Name="txtVilleCli" HorizontalAlignment="Left" Height="23" Margin="471,238,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75"/>
-                    <Label x:Name="lblIdCli" Content="ID :" HorizontalAlignment="Left" Margin="442,6,0,0" VerticalAlignment="Top" Height="26" Foreground="White"/>
-                    <Label x:Name="lblNomCli" Content="Nom :" HorizontalAlignment="Left" Margin="427,45,0,0" VerticalAlignment="Top" Foreground="White"/>
-                    <Label x:Name="lblPrenomCli" Content="Prénom :" HorizontalAlignment="Left" Margin="412,83,0,0" VerticalAlignment="Top" Foreground="White"/>
-                    <Label x:Name="lblMailCli" Content="Mail :" HorizontalAlignment="Left" Margin="430,120,0,0" VerticalAlignment="Top" Foreground="White"/>
-                    <Label x:Name="lblTelCli" Content="Téléphone :" HorizontalAlignment="Left" Margin="398,158,0,0" VerticalAlignment="Top" Foreground="White"/>
-                    <TextBox x:Name="txtCpCli" HorizontalAlignment="Left" Height="23" Margin="471,276,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75"/>
-                    <Label x:Name="lblAdresseCli" Content="Adresse :" HorizontalAlignment="Left" Margin="411,196,0,0" VerticalAlignment="Top" Foreground="White"/>
-                    <Label x:Name="lblVilleCli" Content="Ville :" HorizontalAlignment="Left" Margin="429,234,0,0" VerticalAlignment="Top" Foreground="White"/>
-                    <Label x:Name="lblCpCli" Content="Code postal :" HorizontalAlignment="Left" Margin="388,272,0,0" VerticalAlignment="Top" Foreground="White"/>
-                    <Button x:Name="btnAjouterCli" Content="Ajouter" HorizontalAlignment="Left" Margin="471,325,0,0" VerticalAlignment="Top" Width="123" Click="btnAjouterCli_Click"/>
-                    <Button x:Name="btnModifierCli" Content="Modifier" HorizontalAlignment="Left" Margin="471,350,0,0" VerticalAlignment="Top" Width="123" Click="btnModifierCli_Click"/>
-                    <Button x:Name="btnSupprimerCli" Content="Supprimer" HorizontalAlignment="Left" Margin="471,375,0,0" VerticalAlignment="Top" Width="123" Click="btnSupprimerCli_Click"/>
-                </Grid>
-            </TabItem>
-            <TabItem Header="Commercials" Opacity="0.9">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="DataGrid_Commercials" HorizontalAlignment="Left" Height="385" Margin="10,10,0,0" VerticalAlignment="Top" Width="375" AutoGenerateColumns="True" ItemsSource="{Binding}" SelectionChanged="DataGrid_Commercials_SelectionChanged" IsReadOnly="True">
-                        <DataGrid.Background>
-                            <ImageBrush ImageSource="background_transparent_white.png"/>
-                        </DataGrid.Background>
-                    </DataGrid>
-                    <TextBox x:Name="txtIdCom" HorizontalAlignment="Left" Height="23" Margin="471,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Background="White" Opacity="0.75"/>
-                    <TextBox x:Name="txtNomCom" HorizontalAlignment="Left" Height="23" Margin="471,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75"/>
-                    <TextBox x:Name="txtPrenomCom" HorizontalAlignment="Left" Height="23" Margin="471,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75"/>
-                    <TextBox x:Name="txtMailCom" HorizontalAlignment="Left" Height="23" Margin="471,124,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75"/>
-                    <TextBox x:Name="txtTelCom" HorizontalAlignment="Left" Height="23" Margin="471,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75"/>
-                    <Label x:Name="lblIdCom" Content="ID :" HorizontalAlignment="Left" Margin="442,6,0,0" VerticalAlignment="Top" Height="26" Foreground="White"/>
-                    <Label x:Name="lblNomCom" Content="Nom :" HorizontalAlignment="Left" Margin="427,45,0,0" VerticalAlignment="Top" Foreground="White"/>
-                    <Label x:Name="lblPrenomCom" Content="Prénom :" HorizontalAlignment="Left" Margin="412,83,0,0" VerticalAlignment="Top" Foreground="White"/>
-                    <Label x:Name="lblMailCom" Content="Mail :" HorizontalAlignment="Left" Margin="430,120,0,0" VerticalAlignment="Top" Foreground="White"/>
-                    <Label x:Name="lblTelCom" Content="Téléphone :" HorizontalAlignment="Left" Margin="398,158,0,0" VerticalAlignment="Top" Foreground="White"/>
-                    <Button x:Name="btnAjouterCom" Content="Ajouter" HorizontalAlignment="Left" Margin="471,325,0,0" VerticalAlignment="Top" Width="123" Click="btnAjouterCom_Click"/>
-                    <Button x:Name="btnModifierCom" Content="Modifier" HorizontalAlignment="Left" Margin="471,350,0,0" VerticalAlignment="Top" Width="123" Click="btnModifierCom_Click"/>
-                    <Button x:Name="btnSupprimerCom" Content="Supprimer" HorizontalAlignment="Left" Margin="471,375,0,0" VerticalAlignment="Top" Width="123" Click="btnSupprimerCom_Click"/>
+                    <TextBox x:Name="txtID2" HorizontalAlignment="Left" Height="23" Margin="447.631,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Background="White" Opacity="0.75" Grid.Column="1"/>
+                    <TextBox x:Name="txtNom2" HorizontalAlignment="Left" Height="23" Margin="447.631,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75" Grid.Column="1"/>
+                    <TextBox x:Name="txtPrenom2" HorizontalAlignment="Left" Height="23" Margin="447.631,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75" Grid.Column="1"/>
+                    <TextBox x:Name="txtMail2" HorizontalAlignment="Left" Height="23" Margin="447.631,124,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75" Grid.Column="1"/>
+                    <TextBox x:Name="txtTel2" HorizontalAlignment="Left" Height="23" Margin="447.631,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75" Grid.Column="1"/>
+                    <TextBox x:Name="txtAdresse2" HorizontalAlignment="Left" Height="23" Margin="447.631,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75" Grid.Column="1"/>
+                    <TextBox x:Name="txtVille2" HorizontalAlignment="Left" Height="23" Margin="447.631,238,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75" Grid.Column="1"/>
+                    <Button x:Name="btnSupprimerClient" Content="Supprimer" HorizontalAlignment="Left" Margin="447.631,375,0,0" VerticalAlignment="Top" Width="123" Click="btnSupprimerClient_Click" Grid.Column="1"/>
+                    <Button x:Name="btnModifierClient" Content="Modifier" HorizontalAlignment="Left" Margin="447.631,350,0,0" VerticalAlignment="Top" Width="123" Click="btnModifierClient_Click" Grid.Column="1"/>
+                    <Button x:Name="btnAjouterClient" Content="Ajouter" HorizontalAlignment="Left" Margin="447.631,325,0,0" VerticalAlignment="Top" Width="123" Click="btnAjouter2_Cli-ck" Grid.Column="1"/>
+                    <Label x:Name="lblID2" Content="ID :" HorizontalAlignment="Left" Margin="418.631,6,0,0" VerticalAlignment="Top" Height="26" Foreground="White" Grid.Column="1"/>
+                    <Label x:Name="lblNom2" Content="Nom :" HorizontalAlignment="Left" Margin="403.631,45,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="1"/>
+                    <Label x:Name="lblPrenom2" Content="Prénom :" HorizontalAlignment="Left" Margin="388.631,83,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="1"/>
+                    <Label x:Name="lblMail2" Content="Mail :" HorizontalAlignment="Left" Margin="406.631,120,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="1"/>
+                    <Label x:Name="lblTel2" Content="Téléphone :" HorizontalAlignment="Left" Margin="374.631,158,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="1"/>
+                    <TextBox x:Name="txtCP2" HorizontalAlignment="Left" Height="23" Margin="447.631,276,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75" TextChanged="txtCP2_TextChanged" Grid.Column="1"/>
+                    <Label x:Name="lblAdresse2" Content="Adresse :" HorizontalAlignment="Left" Margin="387.631,196,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="1"/>
+                    <Label x:Name="lblVille2" Content="Ville :" HorizontalAlignment="Left" Margin="405.631,234,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="1"/>
+                    <Label x:Name="lblCP2" Content="Code postal :" HorizontalAlignment="Left" Margin="364.631,272,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="1"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Rendez-vous" Opacity="0.9">
                 <Grid>
-                    <DataGrid x:Name="DataGrid_RendezVous" HorizontalAlignment="Left" Height="385" Margin="10,10,0,0" VerticalAlignment="Top" Width="375" AutoGenerateColumns="True" ItemsSource="{Binding}" SelectionChanged="DataGrid_RendezVous_SelectionChanged" IsReadOnly="True">
+                    <DataGrid x:Name="DataGrid_RendezVous" HorizontalAlignment="Left" Height="385" Margin="10,10,0,0" VerticalAlignment="Top" Width="375" SelectionChanged="DataGrid_RendezVous_SelectionChanged">
                         <DataGrid.Background>
                             <ImageBrush ImageSource="background_transparent_white.png"/>
                         </DataGrid.Background>
                     </DataGrid>
-                    <TextBox x:Name="txtIdRdv" HorizontalAlignment="Left" Height="23" Margin="471,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
-                    <DatePicker x:Name="dtDate" HorizontalAlignment="Left" Margin="471,48,0,0" VerticalAlignment="Top" Width="120" Background="#A5FFFFFF" BorderBrush="#FF818389"/>
+                    <TextBox x:Name="txtID3" HorizontalAlignment="Left" Height="23" Margin="471,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+                    <TextBox x:Name="txtDate" HorizontalAlignment="Left" Height="23" Margin="471,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75"/>
+                    <TextBox x:Name="txtProspect" HorizontalAlignment="Left" Height="23" Margin="471,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75"/>
+                    <TextBox x:Name="txtCommercial" HorizontalAlignment="Left" Height="23" Margin="471,124,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75"/>
+                    <Button Content="SupprimerRdv" HorizontalAlignment="Left" Margin="471,375,0,0" VerticalAlignment="Top" Width="123" Click="Button_Click"/>
+                    <Button Content="ModifierRdv" HorizontalAlignment="Left" Margin="471,350,0,0" VerticalAlignment="Top" Width="123" Click="Button_Click"/>
+                    <Button Content="AjouterRdv" HorizontalAlignment="Left" Margin="471,325,0,0" VerticalAlignment="Top" Width="123" Click="Button_Click"/>
                     <Label x:Name="lblID3" Content="ID :" HorizontalAlignment="Left" Margin="442,6,0,0" VerticalAlignment="Top" Height="26" Foreground="White"/>
                     <Label x:Name="lblDate" Content="Date :" HorizontalAlignment="Left" Margin="429,45,0,0" VerticalAlignment="Top" Foreground="White"/>
                     <Label x:Name="lblProspect" Content="Prospect :" HorizontalAlignment="Left" Margin="409,83,0,0" VerticalAlignment="Top" Foreground="White"/>
-                    <Label x:Name="lblClient" Content="Commercial :" HorizontalAlignment="Left" Margin="390,120,0,0" VerticalAlignment="Top" Foreground="White" Width="110"/>
-                    <Button x:Name="btnAjouterRdv" Content="Ajouter" HorizontalAlignment="Left" Margin="471,325,0,0" VerticalAlignment="Top" Width="123" Click="ButtonAjouterRdv_Click"/>
-                    <Button x:Name="btnModifierRdv" Content="Modifier" HorizontalAlignment="Left" Margin="471,350,0,0" VerticalAlignment="Top" Width="123" Click="ButtonModifierRdv_Click"/>
-                    <Button x:Name="btnSupprimerRdv" Content="Supprimer" HorizontalAlignment="Left" Margin="471,375,0,0" VerticalAlignment="Top" Width="123" Click="ButtonSupprimerRdv_Click"/>
-                    <ComboBox x:Name="cboProspect" HorizontalAlignment="Left" Margin="471,86,0,0" VerticalAlignment="Top" Width="120" Height="23"/>
-                    <ComboBox x:Name="cboCommercial" HorizontalAlignment="Left" Margin="471,124,0,0" VerticalAlignment="Top" Width="120" Height="23"/>
+                    <Label x:Name="lblClient" Content="Commercial:" HorizontalAlignment="Left" Margin="390,120,0,0" VerticalAlignment="Top" Foreground="White" Width="110"/>
+                    <Button Content="AjouterRdv" HorizontalAlignment="Left" Margin="471,325,0,0" VerticalAlignment="Top" Width="123" Click="Button_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Factures" Opacity="0.9">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="157*"/>
+                        <ColumnDefinition Width="8*"/>
+                        <ColumnDefinition Width="439*"/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="DataGrid_Factures" HorizontalAlignment="Left" Height="385" Margin="10,10,0,0" VerticalAlignment="Top" Width="375" AutoGenerateColumns="True" ItemsSource="{Binding}" SelectionChanged="DataGrid_Factures_SelectionChanged" IsReadOnly="True">
+                    <DataGrid x:Name="DataGrid_Factures" HorizontalAlignment="Left" Height="385" Margin="10,10,0,0" VerticalAlignment="Top" Width="375" Grid.ColumnSpan="3" SelectionChanged="DataGrid_Factures_SelectionChanged">
                         <DataGrid.Background>
                             <ImageBrush ImageSource="background_transparent_white.png"/>
                         </DataGrid.Background>
                     </DataGrid>
-                    <TextBox x:Name="txtIdFact" HorizontalAlignment="Left" Height="23" Margin="471,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Opacity="0.75"/>
-                    <TextBox x:Name="txtIdAchat" HorizontalAlignment="Left" Height="23" Margin="471,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Opacity="0.75"/>
-                    <TextBox x:Name="txtIdClient" HorizontalAlignment="Left" Height="23" Margin="471,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Opacity="0.75"/>
-                    <Label x:Name="lblID4" Content="ID :" HorizontalAlignment="Left" Margin="442,6,0,0" VerticalAlignment="Top" Height="26" Foreground="White"/>
-                    <Label x:Name="lblIdAchat" Content="ID d'achat :" HorizontalAlignment="Left" Margin="401,45,0,0" VerticalAlignment="Top" Foreground="White"/>
-                    <Label x:Name="LblIdCli" Content="ID du client :" HorizontalAlignment="Left" Margin="394,83,0,0" VerticalAlignment="Top" Foreground="White"/>
-                    <TextBox x:Name="txtDtFact" HorizontalAlignment="Left" Height="23" Margin="471,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Opacity="0.75"/>
-                    <Label x:Name="LblIdCli_Copy" Content="Date Facture:" HorizontalAlignment="Left" Margin="394,123,0,0" VerticalAlignment="Top" Foreground="White"/>
+                    <TextBox x:Name="txtID4" HorizontalAlignment="Left" Height="23" Margin="306,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Opacity="0.75" Grid.Column="2"/>
+                    <TextBox x:Name="txtIdAchat" HorizontalAlignment="Left" Height="23" Margin="306,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Opacity="0.75" Grid.Column="2"/>
+                    <TextBox x:Name="txtIdCli" HorizontalAlignment="Left" Height="23" Margin="306,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Opacity="0.75" Grid.Column="2"/>
+                    <Label x:Name="lblID4" Content="ID :" HorizontalAlignment="Left" Margin="277,6,0,0" VerticalAlignment="Top" Height="26" Foreground="White" Grid.Column="2"/>
+                    <Label x:Name="lblIdAchat" Content="ID d'achat :" HorizontalAlignment="Left" Margin="236,45,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="2"/>
+                    <Label x:Name="LblIdCli" Content="ID du client :" HorizontalAlignment="Left" Margin="229,83,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="2"/>
+                    <Button Content="AjouterFact " HorizontalAlignment="Left" Margin="317,268,0,0" VerticalAlignment="Top" Width="88" Click="Button_Click" Grid.Column="2"/>
+                    <Button Content="ModifierFact" HorizontalAlignment="Left" Margin="317,293,0,0" VerticalAlignment="Top" Width="88" Click="Button_Click" Grid.Column="2"/>
+                    <Button Content="SupprimerFact" HorizontalAlignment="Left" Margin="317,318,0,0" VerticalAlignment="Top" Width="88" Click="Button_Click" Grid.Column="2"/>
+                    <TextBox x:Name="txtDtFact" HorizontalAlignment="Left" Height="23" Margin="306,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Opacity="0.75" Grid.Column="2"/>
+                    <Label x:Name="LblIdCli_Copy" Content="Date Facture:" HorizontalAlignment="Left" Margin="229,123,0,0" VerticalAlignment="Top" Foreground="White" Grid.Column="2"/>
                 </Grid>
             </TabItem>
         </TabControl>

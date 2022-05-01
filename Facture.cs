@@ -7,58 +7,54 @@ namespace Application_Lourde_CRM
 	{
         #region Champs
 
-        private int _Id;
-        private Client _Client;
-        private Achats _Achats;
-        private DateTime _Date;
+        private int Id;
+        private Client Id_Client;
+        private Achats Id_Achats;
+        private DateTime Date;
 
         #endregion
 
         #region Constructeurs
-        public Facture()
-        {
 
+        public Facture(int id)
+        {
+            Id = id;
         }
 
-        public Facture(int Id)
+        public Facture(int id, Client id_client, Achats id_Achats, DateTime date)
         {
-            _Id = Id;
-        }
-
-        public Facture(int Id, Client Client, Achats Achats, DateTime Date)
-        {
-            _Id = Id;
-            _Client = Client;
-            _Achats = Achats;
-            _Date = Date;
+            Id = id;
+            Id_Client = id_client;
+            Id_Achats = id_Achats;
+            Date = date;
         }
 
         #endregion
 
         #region Accesseurs/Mutateurs
 
-        public int Id
+        public int ID
         {
-            get { return _Id; }
-            set { _Id = value; }
+            get { return Id; }
+            set { Id = value; }
         }
 
-        public Client Client
+        public Client ID_CLIENT
         {
-            get { return _Client; }
-            set { _Client = value; }
+            get { return Id_Client; }
+            set { Id_Client = value; }
         }
 
-        public Achats Achats
+        public Achats ID_ACHATS
         {
-            get { return _Achats; }
-            set { _Achats = value; }
+            get { return Id_Achats; }
+            set { Id_Achats = value; }
         }
 
-        public DateTime Date
+        public DateTime DATE
         {
-            get { return _Date; }
-            set { _Date = value; }
+            get { return Date; }
+            set { Date = value; }
         }
 
         #endregion
