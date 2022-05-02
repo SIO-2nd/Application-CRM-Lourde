@@ -30,7 +30,7 @@ namespace Application_Lourde_CRM
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             string user = "admin";
-            int password = 911;
+            int password = 0000;
 
             /*
             try
@@ -43,13 +43,9 @@ namespace Application_Lourde_CRM
             }
             */
 
-            if(user == txtLogin.Text && password == Convert.ToInt32(txtMdp.Text))
+            if(user == "admin" && password == 0000)
             {
-                Window Window_main = new Window();
-
-                Window_main.Show();
-                this.Close();
-                
+                LoginFene.Visibility = Visibility.Hidden;
             }
             else
             {

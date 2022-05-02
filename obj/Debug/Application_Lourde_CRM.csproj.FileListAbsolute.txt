@@ -8,38 +8,47 @@ C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Applicati
 C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\App.g.cs
 C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\Application_Lourde_CRM_MarkupCompile.cache
 C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\Application_Lourde_CRM_MarkupCompile.lref
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\Application_Lourde_CRM.exe.config
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\Application_Lourde_CRM.exe
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\Application_Lourde_CRM.pdb
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\BouncyCastle.Crypto.dll
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\Google.Protobuf.dll
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\K4os.Compression.LZ4.dll
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\K4os.Compression.LZ4.Streams.dll
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\K4os.Hash.xxHash.dll
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\MySql.Data.dll
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\System.Buffers.dll
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\System.Memory.dll
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\System.Numerics.Vectors.dll
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\Ubiety.Dns.Core.dll
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\Zstandard.Net.dll
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\Google.Protobuf.pdb
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\Google.Protobuf.xml
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\K4os.Compression.LZ4.xml
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\K4os.Compression.LZ4.Streams.xml
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\K4os.Hash.xxHash.xml
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\MySql.Data.xml
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\System.Buffers.xml
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\System.Memory.xml
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\System.Numerics.Vectors.xml
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\Login.g.cs
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\Login.baml
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\MainWindow.baml
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\Application_Lourde_CRM.g.resources
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\Application_Lourde_CRM.Properties.Resources.resources
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\Application_Lourde_CRM.csproj.GenerateResource.cache
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\Application_Lourde_CRM.csproj.CoreCompileInputs.cache
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\Application_Lourde_CRM.csproj.CopyComplete
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\Application_Lourde_CRM.exe
-C:\Users\ppeyronn\Desktop\Code\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\Application_Lourde_CRM.pdb
+E:\Projet\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\Application_Lourde_CRM.csproj.AssemblyReference.cache
+E:\Projet\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\Application_Lourde_CRM.csproj.SuggestedBindingRedirects.cache
+E:\Projet\Projet n°3 InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\Login.g.cs
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\Application_Lourde_CRM.csproj.AssemblyReference.cache
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\Application_Lourde_CRM.csproj.SuggestedBindingRedirects.cache
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\Login.g.cs
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\MainWindow.g.cs
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\App.g.cs
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\Application_Lourde_CRM_MarkupCompile.cache
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\Application_Lourde_CRM_MarkupCompile.lref
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\Application_Lourde_CRM.exe.config
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\Application_Lourde_CRM.exe
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\Application_Lourde_CRM.pdb
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\BouncyCastle.Crypto.dll
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\Google.Protobuf.dll
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\K4os.Compression.LZ4.dll
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\K4os.Compression.LZ4.Streams.dll
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\K4os.Hash.xxHash.dll
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\MySql.Data.dll
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\System.Buffers.dll
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\System.Memory.dll
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\System.Numerics.Vectors.dll
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\Ubiety.Dns.Core.dll
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\ZstdNet.dll
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\Google.Protobuf.pdb
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\Google.Protobuf.xml
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\K4os.Compression.LZ4.xml
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\K4os.Compression.LZ4.Streams.xml
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\K4os.Hash.xxHash.xml
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\MySql.Data.xml
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\System.Buffers.xml
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\System.Memory.xml
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\System.Numerics.Vectors.xml
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\Login.baml
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\MainWindow.baml
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\Application_Lourde_CRM.g.resources
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\Application_Lourde_CRM.Properties.Resources.resources
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\Application_Lourde_CRM.csproj.GenerateResource.cache
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\Application_Lourde_CRM.csproj.CoreCompileInputs.cache
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\Application_Lourde_CRM.csproj.CopyComplete
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\Application_Lourde_CRM.exe
+E:\Projet\Projet_n3_InfoTools\Projet Info-Tools\Application_Lourde_CRM\obj\Debug\Application_Lourde_CRM.pdb

@@ -7,54 +7,68 @@ namespace Application_Lourde_CRM
 	{
         #region Champs
 
-        private int Id;
-        private Client Id_Client;
-        private Achats Id_Achats;
-        private DateTime Date;
+        private int _Id;
+        private Client _Client;
+        private Achats _Achats;
+        private DateTime _Date;
 
         #endregion
 
         #region Constructeurs
-
-        public Facture(int id)
+        public Facture()
         {
-            Id = id;
+
         }
 
-        public Facture(int id, Client id_client, Achats id_Achats, DateTime date)
+        public Facture(int Id)
         {
-            Id = id;
-            Id_Client = id_client;
-            Id_Achats = id_Achats;
-            Date = date;
+            _Id = Id;
+        }
+
+        public Facture(int Id, Client Client, Achats Achats, DateTime Date)
+        {
+            _Id = Id;
+            _Client = Client;
+            _Achats = Achats;
+            _Date = Date;
         }
 
         #endregion
 
         #region Accesseurs/Mutateurs
 
-        public int ID
+        public int Id
         {
-            get { return Id; }
-            set { Id = value; }
+            get { return _Id; }
+            set { _Id = value; }
         }
 
-        public Client ID_CLIENT
+        public Client Client
         {
-            get { return Id_Client; }
-            set { Id_Client = value; }
+            get { return _Client; }
+            set { _Client = value; }
         }
 
-        public Achats ID_ACHATS
+        public Achats Achats
         {
-            get { return Id_Achats; }
-            set { Id_Achats = value; }
+            get { return _Achats; }
+            set { _Achats = value; }
         }
 
-        public DateTime DATE
+        public DateTime Date
         {
-            get { return Date; }
-            set { Date = value; }
+            get { return _Date; }
+            set { _Date = value; }
+        }
+
+        #endregion
+
+        #region Méthode
+
+        public string Client_NomPrenom()
+        {
+            string nom_prenom = _Client.Nom + _Client.Prenom;
+            return nom_prenom;
         }
 
         #endregion

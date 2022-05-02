@@ -19,6 +19,11 @@ namespace Application_Lourde_CRM
 
         #region Constructeurs
 
+        public Achats()
+        {
+
+        }
+
         public Achats(int id)
         {
             Id = id;
