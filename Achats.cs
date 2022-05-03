@@ -12,7 +12,7 @@ namespace Application_Lourde_CRM
 
         private int Id;
         private Client Id_Client;
-        private Produits Id_Produits;
+        private Produit Id_Produits;
         private int Quantite;
 
         #endregion
@@ -29,7 +29,7 @@ namespace Application_Lourde_CRM
             Id = id;
         }
 
-        public Achats(int id, Client client, Produits produits, int quantite)
+        public Achats(int id, Client client, Produit produits, int quantite)
         {
             Id = id;
             Id_Client = client;
@@ -53,7 +53,7 @@ namespace Application_Lourde_CRM
             set { Id_Client = value; }
         }
 
-        public Produits ID_Produits
+        public Produit ID_Produits
         {
             get { return Id_Produits; }
             set { Id_Produits = value; }

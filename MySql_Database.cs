@@ -127,7 +127,15 @@ namespace Application_Lourde_CRM
 
                 while (resultat.Read())
                 {
-                    Prospect tmpProspect = new Prospect(Convert.ToInt32(resultat["IdPro"]), Convert.ToString(resultat["NomPro"]), Convert.ToString(resultat["PrePro"]), Convert.ToString(resultat["MailPro"]), Convert.ToInt32(resultat["TelPro"]), Convert.ToString(resultat["AdrPro"]), Convert.ToString(resultat["VillePro"]), Convert.ToInt32(resultat["CPPro"]));
+                    Prospect tmpProspect = new Prospect(
+                        Convert.ToInt32(resultat["id"]), 
+                        Convert.ToString(resultat["Nom"]), 
+                        Convert.ToString(resultat["Prenom"]), 
+                        Convert.ToString(resultat["telephone"]), 
+                        Convert.ToString(resultat["email"]), 
+                        Convert.ToString(resultat["adresse"]), 
+                        Convert.ToString(resultat["ville"]), 
+                        Convert.ToString(resultat["code_postal"]));
                     cProspect.Add(tmpProspect);
                 }
 
@@ -145,24 +153,23 @@ namespace Application_Lourde_CRM
         #endregion
 
         #region Créer
-        public void PostProspect(Prospects prospect)
+        public void PostProspect(Prospect prospect)
         {
             try
             {
-                requete = "INSERT INTO prospects(NomPro, PrePro, AdrPro, CpPro, VillePro, MailPro, TelPro) VALUES (@Nom, @Prenom, @Adresse, @Code_Postal, @Ville, @Email, @Telephone)";
+                requete = "INSERT INTO prospect(nom, prenom, telephone, email, adresse, ville, code_postal) VALUES (@Nom, @Prenom, @Telephone, @Email, @Adresse, @Ville, @Code_Postal)";
 
                 connexion.Open();
 
                 MySqlCommand commande = new MySqlCommand(requete, connexion);
 
-                commande.Parameters.AddWithValue("@Id", Convert.ToString(prospect.Id));
-                commande.Parameters.AddWithValue("@Nom", prospect.Nom);
-                commande.Parameters.AddWithValue("@Prenom", prospect.Prenom);
-                commande.Parameters.AddWithValue("@Email", prospect.Email);
-                commande.Parameters.AddWithValue("@Telephone", Convert.ToString(prospect.Telephone));
-                commande.Parameters.AddWithValue("@Adresse", prospect.Adresse);
-                commande.Parameters.AddWithValue("@Ville", prospect.Ville);
-                commande.Parameters.AddWithValue("@Code_Postal", Convert.ToString(prospect.Code_Postal));
+                commande.Parameters.AddWithValue("@Nom", prospect.NOM);
+                commande.Parameters.AddWithValue("@Prenom", prospect.PRENOM);
+                commande.Parameters.AddWithValue("@Telephone", prospect.TELEPHONE);
+                commande.Parameters.AddWithValue("@Email", prospect.EMAIL);
+                commande.Parameters.AddWithValue("@Adresse", prospect.ADRESSE);
+                commande.Parameters.AddWithValue("@Ville", prospect.VILLE);
+                commande.Parameters.AddWithValue("@Code_Postal", prospect.CODE_POSTAL);
 
                 commande.ExecuteNonQuery();
 
@@ -177,24 +184,24 @@ namespace Application_Lourde_CRM
         #endregion
 
         #region Modifier
-        public void PutProspect(Prospects prospect)
+        public void PutProspect(Prospect prospect)
         {
             try
             {
-                requete = "update prospects set NomPro = @Nom, PrePro = @Prenom, MailPro = @Email, TelPro = @Telephone, AdrPro = @Adresse, VillePro = @Ville, CpPro = @Code_Postal where Id = @Id";
+                requete = "update prospect set nom = @Nom, prenom = @Prenom, telephone = @Telephone, email = @Email, adresse = @Adresse, ville = @Ville, code_postal = @Code_Postal where id = @Id";
 
                 connexion.Open();
 
                 MySqlCommand commande = new MySqlCommand(requete, connexion);
 
-                commande.Parameters.AddWithValue("@Id", Convert.ToString(prospect.Id));
-                commande.Parameters.AddWithValue("@Nom", Convert.ToString(prospect.Nom));
-                commande.Parameters.AddWithValue("@Prenom", Convert.ToString(prospect.Prenom));
-                commande.Parameters.AddWithValue("@Email", Convert.ToString(prospect.Email));
-                commande.Parameters.AddWithValue("@Telephone", Convert.ToInt32(prospect.Telephone));
-                commande.Parameters.AddWithValue("@Adresse", Convert.ToString(prospect.Adresse));
-                commande.Parameters.AddWithValue("@Ville", Convert.ToString(prospect.Ville));
-                commande.Parameters.AddWithValue("@Code_Postal", Convert.ToInt32(prospect.Code_Postal));
+                commande.Parameters.AddWithValue("@Nom", Convert.ToString(prospect.NOM));
+                commande.Parameters.AddWithValue("@Prenom", Convert.ToString(prospect.PRENOM));
+                commande.Parameters.AddWithValue("@Telephone", Convert.ToString(prospect.TELEPHONE));
+                commande.Parameters.AddWithValue("@Email", Convert.ToString(prospect.EMAIL));
+                commande.Parameters.AddWithValue("@Adresse", Convert.ToString(prospect.ADRESSE));
+                commande.Parameters.AddWithValue("@Ville", Convert.ToString(prospect.VILLE));
+                commande.Parameters.AddWithValue("@Code_Postal", Convert.ToString(prospect.CODE_POSTAL));
+                commande.Parameters.AddWithValue("@Id", Convert.ToString(prospect.ID));
 
                 commande.ExecuteNonQuery();
 
@@ -213,13 +220,13 @@ namespace Application_Lourde_CRM
         {
             try
             {
-                requete = "delete from prospects where IdPro = @ID";
+                requete = "delete from prospect where id = @Id";
 
                 connexion.Open();
 
                 MySqlCommand commande = new MySqlCommand(requete, connexion);
 
-                commande.Parameters.AddWithValue("@ID", Convert.ToString(id));
+                commande.Parameters.AddWithValue("@Id", Convert.ToString(id));
 
                 commande.ExecuteNonQuery();
 
@@ -242,7 +249,7 @@ namespace Application_Lourde_CRM
         {
             try
             {
-                requete = "select * from clients";
+                requete = "select * from client";
 
                 connexion.Open();
 
@@ -253,16 +260,15 @@ namespace Application_Lourde_CRM
 
                 while (resultat.Read())
                 {
-                    Client client = new Client
-                        (
-                            Convert.ToInt32(resultat["IdCli"]),
-                            Convert.ToString(resultat["NomCli"]),
-                            Convert.ToString(resultat["PreCli"]),
-                            Convert.ToString(resultat["MailCli"]),
-                            Convert.ToInt32(resultat["TelCli"]),
-                            Convert.ToString(resultat["AdrCli"]),
-                            Convert.ToString(resultat["VilleCli"]),
-                            Convert.ToInt32(resultat["CPCli"])
+                    Client client = new Client(
+                            Convert.ToInt32(resultat["id"]), 
+                            Convert.ToString(resultat["nom"]), 
+                            Convert.ToString(resultat["prenom"]),
+                            Convert.ToString(resultat["telephone"]),
+                            Convert.ToString(resultat["email"]),
+                            Convert.ToString(resultat["adresse"]),
+                            Convert.ToString(resultat["ville"]),
+                            Convert.ToString(resultat["code_postal"])
                         );
 
                     cclients.Add(client);
@@ -286,19 +292,19 @@ namespace Application_Lourde_CRM
         {
             try
             {
-                requete = "INSERT INTO clients(NomCli, PreCli, MailCli, TelCli, AdrCli, VilleCli, CpCli) VALUES (@Nom, @Prenom, @Email, @Telephone, @Adresse, @Ville, @Code_Postal)";
+                requete = "INSERT INTO client(nom, prenom, telephone, email, adresse, ville, code_postal) VALUES (@Nom, @Prenom, @Telephone, @Email, @Adresse, @Ville, @Code_Postal)";
 
                 connexion.Open();
 
                 MySqlCommand commande = new MySqlCommand(requete, connexion);
 
-                commande.Parameters.AddWithValue("@Nom", client.Nom);
-                commande.Parameters.AddWithValue("@Prenom", client.Prenom);
-                commande.Parameters.AddWithValue("@Email", client.Email);
-                commande.Parameters.AddWithValue("@Telephone", Convert.ToString(client.Telephone));
-                commande.Parameters.AddWithValue("@Adresse", client.Adresse);
-                commande.Parameters.AddWithValue("@Ville", client.Ville);
-                commande.Parameters.AddWithValue("@Code_Postal", Convert.ToString(client.Code_Postal));
+                commande.Parameters.AddWithValue("@Nom", client.NOM);
+                commande.Parameters.AddWithValue("@Prenom", client.PRENOM);
+                commande.Parameters.AddWithValue("@Telephone", client.TELEPHONE);
+                commande.Parameters.AddWithValue("@Email", client.EMAIL);
+                commande.Parameters.AddWithValue("@Adresse", client.ADRESSE);
+                commande.Parameters.AddWithValue("@Ville", client.VILLE);
+                commande.Parameters.AddWithValue("@Code_Postal", client.CODE_POSTAL);
 
                 commande.ExecuteNonQuery();
 
@@ -317,20 +323,20 @@ namespace Application_Lourde_CRM
         {
             try
             {
-                requete = "update clients set NomCli = @Nom, PreCli = @Prenom, MailCli = @Email, TelCli = @Telephone, AdrCli = @Adresse, VilleCli = @Ville, CpCli = @Code_Postal where IdCli = @Id";
+                requete = "update client set nom = @Nom, prenom = @Prenom, telephone = @Telephone, email = @Email, adresse = @Adresse, ville = @Ville, code_postal = @Code_Postal where id = @Id";
 
                 connexion.Open();
 
                 MySqlCommand commande = new MySqlCommand(requete, connexion);
 
-                commande.Parameters.AddWithValue("@Id", Convert.ToString(client.Id));
-                commande.Parameters.AddWithValue("@Nom", Convert.ToString(client.Nom));
-                commande.Parameters.AddWithValue("@Prenom", Convert.ToString(client.Prenom));
-                commande.Parameters.AddWithValue("@Email", Convert.ToString(client.Email));
-                commande.Parameters.AddWithValue("@Telephone", Convert.ToInt32(client.Telephone));
-                commande.Parameters.AddWithValue("@Adresse", Convert.ToString(client.Adresse));
-                commande.Parameters.AddWithValue("@Ville", Convert.ToString(client.Ville));
-                commande.Parameters.AddWithValue("@Code_Postal", Convert.ToInt32(client.Code_Postal));
+                commande.Parameters.AddWithValue("@Nom", client.NOM);
+                commande.Parameters.AddWithValue("@Prenom", client.PRENOM);
+                commande.Parameters.AddWithValue("@Telephone", client.TELEPHONE);
+                commande.Parameters.AddWithValue("@Email", client.EMAIL);
+                commande.Parameters.AddWithValue("@Adresse", client.ADRESSE);
+                commande.Parameters.AddWithValue("@Ville", client.VILLE);
+                commande.Parameters.AddWithValue("@Code_Postal", client.CODE_POSTAL);
+                commande.Parameters.AddWithValue("@Id", Convert.ToInt32(client.ID));
 
                 commande.ExecuteNonQuery();
 
@@ -349,13 +355,13 @@ namespace Application_Lourde_CRM
         {
             try
             {
-                requete = "delete from clients where IdCli = @ID";
+                requete = "delete from client where id = @Id";
 
                 connexion.Open();
 
                 MySqlCommand commande = new MySqlCommand(requete, connexion);
 
-                commande.Parameters.AddWithValue("@ID", Convert.ToString(id));
+                commande.Parameters.AddWithValue("@Id", Convert.ToString(id));
 
                 commande.ExecuteNonQuery();
 
@@ -374,31 +380,31 @@ namespace Application_Lourde_CRM
         #region Commercial
 
         #region Lire
-        public List<Commercials> GetCommercial()
+        public List<Commercial> GetCommercial()
         {
             try
             {
-                requete = "select * from commercials";
+                requete = "select * from commercial";
 
                 connexion.Open();
 
                 MySqlCommand commande = new MySqlCommand(requete, connexion);
                 MySqlDataReader resultat = commande.ExecuteReader();
 
-                List<Commercials> cCommercials = new List<Commercials>();
+                List<Commercial> cCommercials = new List<Commercial>();
 
                 while (resultat.Read())
                 {
-                    Commercials tmpCommercials = new Commercials
+                    Commercial tmpCommercial = new Commercial
                         (
-                            Convert.ToInt32(resultat["IdCommercial"]),
-                            Convert.ToString(resultat["NomCommercial"]),
-                            Convert.ToString(resultat["PreCommercial"]),
-                            Convert.ToString(resultat["MailCommercial"]),
-                            Convert.ToInt32(resultat["TelCommercial"])
+                            Convert.ToInt32(resultat["id"]),
+                            Convert.ToString(resultat["nom"]),
+                            Convert.ToString(resultat["prenom"]),
+                            Convert.ToString(resultat["telephone"]),
+                            Convert.ToString(resultat["email"])
                         );
 
-                    cCommercials.Add(tmpCommercials);
+                    cCommercials.Add(tmpCommercial);
                 }
 
                 connexion.Close();
@@ -409,27 +415,26 @@ namespace Application_Lourde_CRM
             {
                 connexion.Close();
                 Console.WriteLine("Erreur GetCommercial " + ex.Message);
-                return new List<Commercials>();
+                return new List<Commercial>();
             }
         }
         #endregion
 
         #region Créer
-        public void PostCommercial(Commercials commercials)
+        public void PostCommercial(Commercial commercial)
         {
             try
             {
-                requete = "INSERT INTO commercials(NomCommercial, PreCommercial, MailCommercial, TelCommercial) VALUES (@Nom, @Prenom, @Email, @Telephone)";
+                requete = "INSERT INTO commercial(nom, prenom, telephone, email) VALUES (@Nom, @Prenom, @Telephone, @Email)";
 
                 connexion.Open();
 
                 MySqlCommand commande = new MySqlCommand(requete, connexion);
 
-                commande.Parameters.AddWithValue("@Id", Convert.ToString(commercials.Id));
-                commande.Parameters.AddWithValue("@Nom", commercials.Nom);
-                commande.Parameters.AddWithValue("@Prenom", commercials.Prenom);
-                commande.Parameters.AddWithValue("@Email", commercials.Email);
-                commande.Parameters.AddWithValue("@Telephone", Convert.ToString(commercials.Telephone));
+                commande.Parameters.AddWithValue("@Nom", commercial.NOM);
+                commande.Parameters.AddWithValue("@Prenom", commercial.PRENOM);
+                commande.Parameters.AddWithValue("@Telephone", commercial.TELEPHONE);
+                commande.Parameters.AddWithValue("@Email", commercial.EMAIL);
 
                 commande.ExecuteNonQuery();
 
@@ -444,21 +449,21 @@ namespace Application_Lourde_CRM
         #endregion
 
         #region Modifier
-        public void PutCommercial(Commercials commercials)
+        public void PutCommercial(Commercial commercial)
         {
             try
             {
-                requete = "update commercials set NomCommercial = @Nom, PreCommercial = @Prenom, MailCommercial = @Email, TelCommercial = @Telephone where IdCommercial = @Id";
+                requete = "update commercial set nom = @Nom, prenom = @Prenom, telephone = @Telephone, email = @Email where id = @Id";
 
                 connexion.Open();
 
                 MySqlCommand commande = new MySqlCommand(requete, connexion);
 
-                commande.Parameters.AddWithValue("@Id", Convert.ToString(commercials.Id));
-                commande.Parameters.AddWithValue("@Nom", Convert.ToString(commercials.Nom));
-                commande.Parameters.AddWithValue("@Prenom", Convert.ToString(commercials.Prenom));
-                commande.Parameters.AddWithValue("@Email", Convert.ToString(commercials.Email));
-                commande.Parameters.AddWithValue("@Telephone", Convert.ToInt32(commercials.Telephone));
+                commande.Parameters.AddWithValue("@Nom", commercial.NOM);
+                commande.Parameters.AddWithValue("@Prenom", commercial.PRENOM);
+                commande.Parameters.AddWithValue("@Telephone", commercial.TELEPHONE);
+                commande.Parameters.AddWithValue("@Email", commercial.TELEPHONE);
+                commande.Parameters.AddWithValue("@Id", commercial.ID);
 
                 commande.ExecuteNonQuery();
 
@@ -477,7 +482,7 @@ namespace Application_Lourde_CRM
         {
             try
             {
-                requete = "delete from commercials where IdCommercial = @ID";
+                requete = "delete from commercial where id = @ID";
 
                 connexion.Open();
 
@@ -499,10 +504,120 @@ namespace Application_Lourde_CRM
 
         #endregion
 
+        #region Contact
+
+        #region Lire
+        public List<Contact> GetContact()
+        {
+            try
+            {
+                requete = "select * from contact";
+
+                connexion.Open();
+
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
+                MySqlDataReader resultat = commande.ExecuteReader();
+
+                List<Contact> list_contacts = new List<Contact>();
+
+                while (resultat.Read())
+                {
+                    Contact contact = new Contact(
+                            Convert.ToInt32(resultat["id"]),
+                            Convert.ToString(resultat["nom"]),
+                            Convert.ToString(resultat["prenom"]),
+                            Convert.ToString(resultat["telephone"]),
+                            Convert.ToString(resultat["email"]),
+                            Convert.ToString(resultat["adresse"]),
+                            Convert.ToString(resultat["ville"]),
+                            Convert.ToString(resultat["code_postal"])
+                        );
+
+                    list_contacts.Add(contact);
+                }
+
+                connexion.Close();
+
+                return list_contacts;
+            }
+            catch (Exception ex)
+            {
+                connexion.Close();
+                Console.WriteLine("Erreur GetClient " + ex.Message);
+                return new List<Contact>();
+            }
+        }
+        #endregion
+
+        #region Créer
+        public void PostContact(Contact contact)
+        {
+            try
+            {
+                requete = "INSERT INTO contact(nom, prenom, telephone, email, adresse, ville, code_postal) VALUES (@Nom, @Prenom, @Telephone, @Email, @Adresse, @Ville, @Code_Postal)";
+
+                connexion.Open();
+
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
+
+                commande.Parameters.AddWithValue("@Nom", contact.NOM);
+                commande.Parameters.AddWithValue("@Prenom", contact.PRENOM);
+                commande.Parameters.AddWithValue("@Telephone", contact.TELEPHONE);
+                commande.Parameters.AddWithValue("@Email", contact.EMAIL);
+                commande.Parameters.AddWithValue("@Adresse", contact.ADRESSE);
+                commande.Parameters.AddWithValue("@Ville", contact.VILLE);
+                commande.Parameters.AddWithValue("@Code_Postal", contact.CODE_POSTAL);
+
+                commande.ExecuteNonQuery();
+
+                connexion.Close();
+            }
+            catch (MySqlException ex)
+            {
+                connexion.Close();
+                Console.WriteLine("Erreur PostClient " + ex.Message);
+            }
+        }
+        #endregion
+
+        #region Modifier
+        public void PutContact(Contact contact)
+        {
+            try
+            {
+                requete = "update contact set nom = @Nom, prenom = @Prenom, telephone = @Telephone, email = @Email, adresse = @Adresse, ville = @Ville, code_postal = @Code_Postal where id = @Id";
+
+                connexion.Open();
+
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
+
+                commande.Parameters.AddWithValue("@Nom", contact.NOM);
+                commande.Parameters.AddWithValue("@Prenom", contact.PRENOM);
+                commande.Parameters.AddWithValue("@Telephone", contact.TELEPHONE);
+                commande.Parameters.AddWithValue("@Email", contact.EMAIL);
+                commande.Parameters.AddWithValue("@Adresse", contact.ADRESSE);
+                commande.Parameters.AddWithValue("@Ville", contact.VILLE);
+                commande.Parameters.AddWithValue("@Code_Postal", contact.CODE_POSTAL);
+                commande.Parameters.AddWithValue("@Id", Convert.ToInt32(contact.ID));
+
+                commande.ExecuteNonQuery();
+
+                connexion.Close();
+            }
+            catch (MySqlException ex)
+            {
+                connexion.Close();
+                Console.WriteLine("Erreur PutClient" + ex.Message);
+            }
+        }
+        #endregion
+
+        #endregion
+
         #region Rendez-vous
 
         #region Lire
-        public List<Rendez_vous> GetRdv()
+        public List<Rendez_Vous> GetRdv()
         {
             try
             {
@@ -513,7 +628,7 @@ namespace Application_Lourde_CRM
                 MySqlCommand commande = new MySqlCommand(requete, connexion);
                 MySqlDataReader resultat = commande.ExecuteReader();
 
-                List<Rendez_vous> cRendez_Vous = new List<Rendez_vous>();
+                List<Rendez_Vous> cRendez_Vous = new List<Rendez_Vous>();
 
                 while (resultat.Read())
                 {

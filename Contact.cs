@@ -17,7 +17,7 @@ namespace Application_Lourde_CRM
 		private string Email;
 		private string Adresse;
 		private string Ville;
-		private int Code_Postal;
+		private string Code_Postal;
 
         #endregion
 
@@ -32,7 +32,7 @@ namespace Application_Lourde_CRM
             Id = id;
         }
 
-        public Contact(string nom, string prenom, string telephone, string email, string adresse, string ville, int code_postal)
+        public Contact(string nom, string prenom, string telephone, string email, string adresse, string ville, string code_postal)
         {
             Nom = nom;
             Prenom = prenom;
@@ -43,7 +43,7 @@ namespace Application_Lourde_CRM
             Code_Postal = code_postal;
         }
 
-        public Contact(int id, string nom, string prenom, string telephone, string email, string adresse, string ville, int code_postal)
+        public Contact(int id, string nom, string prenom, string telephone, string email, string adresse, string ville, string code_postal)
         {
             Id = id;
             Nom = nom;
@@ -96,7 +96,7 @@ namespace Application_Lourde_CRM
             set { Ville = value; }
         }
 
-        public int CODE_POSTAL
+        public string CODE_POSTAL
         {
             get { return Code_Postal; }
             set { Code_Postal = value; }
