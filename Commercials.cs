@@ -6,79 +6,70 @@ using System.Threading.Tasks;
 
 namespace Application_Lourde_CRM
 {
-    public class Commercials
+    public class Commercial
     {
         #region Champs
 
-        private int _Id;
-        private string _Nom;
-        private string _Prenom;
-        private string _Email;
-        private int _Telephone;
+        private int Id;
+        private string Nom;
+        private string Prenom;
+        private string Telephone;
+        private string Email;
 
         #endregion
 
         #region Constructeurs
 
-        public Commercials()
+        public Commercial()
         {
 
         }
 
-        public Commercials(int Id)
+        public Commercial(int id)
         {
-            _Id = Id;
+            Id = id;
         }
 
-        public Commercials(string Nom, string Prenom, string Email, int Telephone)
+        public Commercial(int id, string nom, string prenom, string telephone, string email)
         {
-            _Nom = Nom;
-            _Prenom = Prenom;
-            _Email = Email;
-            _Telephone = Telephone;
-        }
-
-        public Commercials(int Id, string Nom, string Prenom, string Email, int Telephone)
-        {
-            _Id = Id;
-            _Nom = Nom;
-            _Prenom = Prenom;
-            _Email = Email;
-            _Telephone = Telephone;
+            Id = id;
+            Nom = nom;
+            Prenom = prenom;
+            Telephone = telephone;
+            Email = email;
         }
 
         #endregion
 
         #region Accesseurs/Mutateurs
 
-        public int Id
+        public int ID
         {
-            get { return _Id; }
-            set { _Id = value; }
+            get { return Id; }
+            set { Id = value; }
         }
 
-        public string Nom
+        public string NOM
         {
-            get { return _Nom; }
-            set { _Nom = value; }
+            get { return Nom; }
+            set { Nom = value; }
+        }
+        public string PRENOM
+        {
+            get { return Prenom; }
+            set { Prenom = value; }
         }
 
-        public string Prenom
+        public string EMAIL
         {
-            get { return _Prenom; }
-            set { _Prenom = value; }
+            get { return Email; }
+            set { Email = value; }
         }
 
-        public string Email
+        public string TELEPHONE
         {
-            get { return _Email; }
-            set { _Email = value; }
-        }
-
-        public int Telephone
-        {
-            get { return _Telephone; }
-            set { _Telephone = value; }
+            get { return Telephone; }
+            set { Telephone = value; }
         }
         #endregion
     }

@@ -7,10 +7,12 @@ namespace Application_Lourde_CRM
 	{
         #region Champs
 
-        private int _Id;
-        private Client _Client;
-        private Achats _Achats;
-        private DateTime _Date;
+        private int Id;
+        private Client Client;
+        private Produit Produit;
+        private int Quantite;
+        private DateTime Date;
+        private double Montant;
 
         #endregion
 
@@ -20,45 +22,59 @@ namespace Application_Lourde_CRM
 
         }
 
-        public Facture(int Id)
+        public Facture(int id)
         {
-            _Id = Id;
+            Id = id;
         }
 
-        public Facture(int Id, Client Client, Achats Achats, DateTime Date)
+        public Facture(int id, Client client, Produit produit, int quantite, DateTime date, double montant)
         {
-            _Id = Id;
-            _Client = Client;
-            _Achats = Achats;
-            _Date = Date;
+            Id = id;
+            Client = client;
+            Produit = produit;
+            Quantite = quantite;
+            Date = date;
+            Montant = montant;
         }
 
         #endregion
 
         #region Accesseurs/Mutateurs
 
-        public int Id
+        public int ID
         {
-            get { return _Id; }
-            set { _Id = value; }
+            get { return Id; }
+            set { Id = value; }
         }
 
-        public Client Client
+        public Client CLIENT
         {
-            get { return _Client; }
-            set { _Client = value; }
+            get { return Client; }
+            set { Client = value; }
         }
 
-        public Achats Achats
+        public Produit PRODUIT
         {
-            get { return _Achats; }
-            set { _Achats = value; }
+            get { return Produit; }
+            set { Produit = value; }
         }
 
-        public DateTime Date
+        public int QUANTITE
         {
-            get { return _Date; }
-            set { _Date = value; }
+            get { return Quantite; }
+            set { Quantite = value; }
+        }
+
+        public DateTime DATE
+        {
+            get { return Date; }
+            set { Date = value; }
+        }
+
+        public double MONTANT
+        {
+            get { return Montant; }
+            set { Montant = value; }
         }
 
         #endregion
@@ -67,8 +83,14 @@ namespace Application_Lourde_CRM
 
         public string Client_NomPrenom()
         {
-            string nom_prenom = _Client.Nom + _Client.Prenom;
+            string nom_prenom = Client.NOM + Client.PRENOM;
             return nom_prenom;
+        }
+
+        public string Produit_Nom()
+        {
+            string nom = Produit.NOM;
+            return nom;
         }
 
         #endregion

@@ -6,48 +6,49 @@ using System.Threading.Tasks;
 
 namespace Application_Lourde_CRM
 {
-    public class Rendez_vous
+    public class Rendez_Vous
     {
 
         #region Champs
-        private int _Id;
-        private DateTime _Date;
-        private Prospects _Prospects;
-        private Commercials _Commercials;
+        private int Id;
+        private DateTime Date;
+        private Commercial Commercial;
+        private Contact Contact;
         #endregion
 
         #region Constructeurs
-        public Rendez_vous(int Id, DateTime Date, Commercials Commercials, Prospects Prospects)
+        public Rendez_Vous(int id, DateTime date, Commercial commercial, Contact contact)
         {
-            _Id = Id;
-            _Date = Date;
-            _Prospects = Prospects;
-            _Commercials = Commercials;
+            Id = id;
+            Date = date;
+            Commercial = commercial;
+            Contact = contact;
         }
         #endregion
 
         #region Accesseurs/Mutateurs
-        public int Id
+        public int ID
         {
-            get { return _Id; }
-            set { _Id = value; }
+            get { return Id; }
+            set { Id = value; }
         }
 
-        public Prospects Prospects
-        {
-            get { return _Prospects; }
-            set { _Prospects = value; }
-        }
-
-        public Commercials Commercials
-        {
-            get { return _Commercials; }
-            set { _Commercials = value; }
-        }
-        public DateTime Date
+        public DateTime DATE
         {
             get { return Date; }
             set { Date = value; }
+        }
+
+        public Commercial COMMERCIAL
+        {
+            get { return Commercial; }
+            set { Commercial = value; }
+        }
+
+        public Contact CONTACT
+        {
+            get { return Contact; }
+            set { Contact = value; }
         }
         #endregion
 
@@ -59,16 +60,15 @@ namespace Application_Lourde_CRM
 
         public string Commercial_NomPrenom()
         {
-            string nom_prenom = _Commercials.Nom + _Commercials.Prenom;
+            string nom_prenom = Commercial.NOM + Commercial.PRENOM;
             return nom_prenom;
         }
 
-        public string Prospects_NomPrenom()
+        public string Contact_NomPrenom()
         {
-            string nom_prenom = _Prospects.Nom + _Prospects.Prenom;
+            string nom_prenom = Contact.NOM + Contact.PRENOM;
             return nom_prenom;
         }
-
         #endregion
     }
 }

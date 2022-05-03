@@ -6,110 +6,110 @@ using System.Threading.Tasks;
 
 namespace Application_Lourde_CRM
 {
-    public class Prospects
+    public class Prospect
     {
 
         #region Champs
 
-        private int _Id;
-        private string _Nom;
-        private string _Prenom;
-        private string _Email;
-        private int _Telephone;
-        private string _Adresse;
-        private string _Ville;
-        private int _Code_Postal;
+        private int Id;
+        private string Nom;
+        private string Prenom;
+        private string Telephone;
+        private string Email;
+        private string Adresse;
+        private string Ville;
+        private int Code_Postal;
 
         #endregion
 
         #region Constructeurs
 
-        public Prospects()
+        public Prospect()
         {
 
         }
 
-        public Prospects(int Id)
+        public Prospect(int id)
         {
-            _Id = Id;
+            Id = Id;
         }
 
-        public Prospects(string Nom, string Prenom)
+        public Prospect(string nom, string prenom)
         {
-            _Nom = Nom;
-            _Prenom = Prenom;
+            Nom = nom;
+            Prenom = prenom;
         }
 
-        public Prospects(string Nom, string Prenom, string Email, int Telephone, string Adresse, string Ville, int Code_Postal)
+        public Prospect(string nom, string prenom, string telephone, string email, string adresse, string ville, int code_postal)
         {
-            _Nom = Nom;
-            _Prenom = Prenom;
-            _Email = Email;
-            _Telephone = Telephone;
-            _Adresse = Adresse;
-            _Ville = Ville;
-            _Code_Postal = Code_Postal;
+            Nom = nom;
+            Prenom = prenom;
+            Telephone = telephone;
+            Email = email;
+            Adresse = adresse;
+            Ville = ville;
+            Code_Postal = code_postal;
         }
 
-        public Prospects(int Id, string Nom, string Prenom, string Email, int Telephone, string Adresse, string Ville, int Code_Postal)
+        public Prospect(int id, string nom, string prenom, string telephone, string email, string adresse, string ville, int code_postal)
         {
-            _Id = Id;
-            _Nom = Nom;
-            _Prenom = Prenom;
-            _Email = Email;
-            _Telephone = Telephone;
-            _Adresse = Adresse;
-            _Ville = Ville;
-            _Code_Postal = Code_Postal;
+            Id = id;
+            Nom = nom;
+            Prenom = prenom;
+            Telephone = telephone;
+            Email = email;
+            Adresse = adresse;
+            Ville = ville;
+            Code_Postal = code_postal;
         }
 
         #endregion
 
         #region Accesseurs/Mutateurs
 
-        public int Id
+        public int ID
         {
-            get { return _Id; }
-            set { _Id = value; }
+            get { return Id; }
+            set { Id = value; }
         }
 
-        public string Nom
+        public string NOM
         {
-            get { return _Nom; }
-            set { _Nom = value; }
+            get { return Nom; }
+            set { Nom = value; }
         }
-        public string Prenom
+        public string PRENOM
         {
-            get { return _Prenom; }
-            set { _Prenom = value; }
-        }
-
-        public string Email
-        {
-            get { return _Email; }
-            set { _Email = value; }
+            get { return Prenom; }
+            set { Prenom = value; }
         }
 
-        public int Telephone
+        public string EMAIL
         {
-            get { return _Telephone; }
-            set { _Telephone = value; }
-        }
-        public string Adresse
-        {
-            get { return _Adresse; }
-            set { _Adresse = value; }
-        }
-        public string Ville
-        {
-            get { return _Ville; }
-            set { _Ville = value; }
+            get { return Email; }
+            set { Email = value; }
         }
 
-        public int Code_Postal
+        public string TELEPHONE
         {
-            get { return _Code_Postal; }
-            set { _Code_Postal = value; }
+            get { return Telephone; }
+            set { Telephone = value; }
+        }
+        public string ADRESSE
+        {
+            get { return Adresse; }
+            set { Adresse = value; }
+        }
+        public string VILLE
+        {
+            get { return Ville; }
+            set { Ville = value; }
+        }
+
+        public int CODE_POSTAL
+        {
+            get { return Code_Postal; }
+            set { Code_Postal = value; }
         }
 
         #endregion
