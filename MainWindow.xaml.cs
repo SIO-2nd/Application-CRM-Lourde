@@ -17,7 +17,7 @@ namespace Application_Lourde_CRM
 {
         public partial class MainWindow : Window
         {
-            Database database = new Database();
+            MySql_Database database = new MySql_Database();
 
             List<Prospects> list_prospects = null;
             List<Client> list_client = null;

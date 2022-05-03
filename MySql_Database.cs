@@ -5,7 +5,7 @@ using System.Windows;
 
 namespace Application_Lourde_CRM
 {
-    class Database
+    class MySql_Database
     {
         #region Champs
 
@@ -20,12 +20,12 @@ namespace Application_Lourde_CRM
 
         #region Constructeurs
 
-        public Database()
+        public MySql_Database()
         {
             Connexion_BD();
         }
 
-        public Database(string Serveur, string User, string Password, string DataBase)
+        public MySql_Database(string Serveur, string User, string Password, string DataBase)
         {
             serveur = Serveur;
             user = User;

@@ -115,10 +115,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Achats.cs" />
-    <Compile Include="Database.cs" />
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MySql_Database.cs" />
     <Compile Include="Rendez_vous.cs" />
     <Compile Include="Commercials.cs" />
     <Compile Include="Produits.cs" />
