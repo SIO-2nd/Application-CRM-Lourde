@@ -112,22 +112,22 @@ namespace Application_Lourde_CRM
         #region Prospect
 
         #region Lire
-        public List<Prospects> GetProspect()
+        public List<Prospect> GetProspect()
         {
             try
             {
-                requete = "select * from prospects";
+                requete = "select * from prospect";
 
                 connexion.Open();
 
                 MySqlCommand commande = new MySqlCommand(requete, connexion);
                 MySqlDataReader resultat = commande.ExecuteReader();
 
-                List<Prospects> cProspect = new List<Prospects>();
+                List<Prospect> cProspect = new List<Prospect>();
 
                 while (resultat.Read())
                 {
-                    Prospects tmpProspect = new Prospects(Convert.ToInt32(resultat["IdPro"]), Convert.ToString(resultat["NomPro"]), Convert.ToString(resultat["PrePro"]), Convert.ToString(resultat["MailPro"]), Convert.ToInt32(resultat["TelPro"]), Convert.ToString(resultat["AdrPro"]), Convert.ToString(resultat["VillePro"]), Convert.ToInt32(resultat["CPPro"]));
+                    Prospect tmpProspect = new Prospect(Convert.ToInt32(resultat["IdPro"]), Convert.ToString(resultat["NomPro"]), Convert.ToString(resultat["PrePro"]), Convert.ToString(resultat["MailPro"]), Convert.ToInt32(resultat["TelPro"]), Convert.ToString(resultat["AdrPro"]), Convert.ToString(resultat["VillePro"]), Convert.ToInt32(resultat["CPPro"]));
                     cProspect.Add(tmpProspect);
                 }
 
@@ -138,7 +138,7 @@ namespace Application_Lourde_CRM
             {
                 connexion.Close();
                 Console.WriteLine("Erreur GetProspects : " + error.Message);
-                return new List<Prospects>();
+                return new List<Prospect>();
             }
 
         }
