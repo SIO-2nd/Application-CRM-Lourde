@@ -19,16 +19,16 @@ namespace Application_Lourde_CRM
         {
             MySql_Database database = new MySql_Database();
 
-            List<Prospects> list_prospects = null;
+            List<Prospect> list_prospects = null;
             List<Client> list_client = null;
-            List<Commercials> list_commercials = null;
-            List<Rendez_vous> list_rendez_vous = null;
+            List<Commercial> list_commercials = null;
+            List<Rendez_Vous> list_rendez_vous = null;
             List<Facture> list_factures = null;
 
-            Prospects prospect = null;
+            Prospect prospect = null;
             Client client = null;
-            Commercials commercials = null;
-            Rendez_vous rendez_vous = null;
+            Commercial commercials = null;
+            Rendez_Vous rendez_vous = null;
             Facture facture = null;
 
             public MainWindow()

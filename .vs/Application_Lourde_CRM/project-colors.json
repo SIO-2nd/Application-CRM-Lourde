@@ -5,6 +5,11 @@
       "ProjectGuid": "2317e11d-8952-4d4c-a5b5-88d8f7bad5db",
       "DisplayName": "Application_Lourde_CRM",
       "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Fichiers divers",
+      "ColorIndex": -1
     }
   },
   "NextColorIndex": 1

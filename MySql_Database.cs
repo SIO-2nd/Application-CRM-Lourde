@@ -518,7 +518,7 @@ namespace Application_Lourde_CRM
                 MySqlCommand commande = new MySqlCommand(requete, connexion);
                 MySqlDataReader resultat = commande.ExecuteReader();
 
-                List<Contact> list_contacts = new List<Contact>();
+                List<Contact> list_contact = new List<Contact>();
 
                 while (resultat.Read())
                 {
@@ -533,12 +533,12 @@ namespace Application_Lourde_CRM
                             Convert.ToString(resultat["code_postal"])
                         );
 
-                    list_contacts.Add(contact);
+                    list_contact.Add(contact);
                 }
 
                 connexion.Close();
 
-                return list_contacts;
+                return list_contact;
             }
             catch (Exception ex)
             {
@@ -612,6 +612,154 @@ namespace Application_Lourde_CRM
         }
         #endregion
 
+        #region Supprimer
+        public void DeleteContact(int id)
+        {
+            try
+            {
+                requete = "delete from contact where id = @ID";
+
+                connexion.Open();
+
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
+
+                commande.Parameters.AddWithValue("@ID", Convert.ToString(id));
+
+                commande.ExecuteNonQuery();
+
+                connexion.Close();
+            }
+            catch (MySqlException ex)
+            {
+                connexion.Close();
+                Console.WriteLine("Erreur DeleteCommercial " + ex.Message);
+            }
+        }
+        #endregion
+
+        #endregion
+
+        #region Produit
+
+        #region Lire
+        public List <Produit> GetProduit()
+        {
+            try
+            {
+                requete = "select * from produit";
+
+                connexion.Open();
+
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
+                MySqlDataReader resultat = commande.ExecuteReader();
+
+                List<Produit> list_produit = new List<Produit>();
+
+                while(resultat.Read())
+                {
+                    Produit produit = new Produit(
+                            Convert.ToInt32(resultat["id"]),
+                            Convert.ToString(resultat["nom"]),
+                            Convert.ToDouble(resultat["prix"]),
+                            Convert.ToString(resultat["description"])
+                        );
+
+                    list_produit.Add(produit);
+                }
+
+                connexion.Close();
+
+                return list_produit;
+            }
+            catch(MySqlException ex)
+            {
+                connexion.Close();
+                Console.WriteLine("Erreur GetProduit " + ex.Message);
+                return new List<Produit>();
+            }
+        }
+        #endregion
+
+        #region Créer
+        public void PostProduit(Produit produit)
+        {
+            try
+            {
+                requete = "INSERT INTO contact(nom, prix, description) VALUES (@Nom, @Prix, @Description)";
+
+                connexion.Open();
+
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
+
+                commande.Parameters.AddWithValue("@Nom", produit.NOM);
+                commande.Parameters.AddWithValue("@Prix", produit.PRIX);
+                commande.Parameters.AddWithValue("@Description", produit.DESCRIPTION);
+
+                commande.ExecuteNonQuery();
+
+                connexion.Close();
+            }
+            catch(MySqlException ex)
+            {
+                connexion.Close();
+                Console.WriteLine("Erreur PostClient " + ex.Message);
+            }
+        }
+        #endregion
+
+        #region Modifier
+        public void PutProduit(Produit produit)
+        {
+            try
+            {
+                requete = "update contact set nom = @Nom, prix = @Prix, description = @Description where id = @Id";
+
+                connexion.Open();
+
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
+
+                commande.Parameters.AddWithValue("@Nom", produit.NOM);
+                commande.Parameters.AddWithValue("@Prix", produit.PRIX);
+                commande.Parameters.AddWithValue("@Description", produit.DESCRIPTION);
+                commande.Parameters.AddWithValue("@Id", produit.ID);
+
+                commande.ExecuteNonQuery();
+
+                connexion.Close();
+            }
+            catch (MySqlException ex)
+            {
+                connexion.Close();
+                Console.WriteLine("Erreur PutClient" + ex.Message);
+            }
+        }
+        #endregion
+
+        #region Supprimer
+        public void DeleteProduit(int id)
+        {
+            try
+            {
+                requete = "delete from produit where id = @ID";
+
+                connexion.Open();
+
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
+
+                commande.Parameters.AddWithValue("@ID", Convert.ToString(id));
+
+                commande.ExecuteNonQuery();
+
+                connexion.Close();
+            }
+            catch (MySqlException ex)
+            {
+                connexion.Close();
+                Console.WriteLine("Erreur DeleteCommercial " + ex.Message);
+            }
+        }
+        #endregion
+
         #endregion
 
         #region Rendez-vous
@@ -632,14 +780,14 @@ namespace Application_Lourde_CRM
 
                 while (resultat.Read())
                 {
-                    Commercials commercials = new Commercials(Convert.ToInt32(resultat["IdCommercial"]));
-                    Prospects prospects = new Prospects(Convert.ToInt32(resultat["IdPro"]));
-                    Rendez_vous tmpRendez_Vous = new Rendez_vous
+                    Commercial commercials = new Commercial(Convert.ToInt32(resultat["IdCommercial"]));
+                    Prospect prospects = new Prospect(Convert.ToInt32(resultat["IdPro"]));
+                    Rendez_Vous tmpRendez_Vous = new Rendez_Vous
                         (
                             Convert.ToInt32(resultat["IdRdv"]),
                             Convert.ToDateTime(resultat["DateRdv"]),
-                            commercials,
-                            prospects
+                            commercial,
+                            prospect
                         );
 
                     cRendez_Vous.Add(tmpRendez_Vous);
@@ -653,13 +801,13 @@ namespace Application_Lourde_CRM
             {
                 connexion.Close();
                 Console.WriteLine("Erreur GetRdv " + ex.Message);
-                return new List<Rendez_vous>();
+                return new List<Rendez_Vous>();
             }
         }
         #endregion
 
         #region Créer
-        public void PostRdv(Rendez_vous rendez_vous)
+        public void PostRdv(Rendez_Vous rendez_vous)
         {
             try
             {
@@ -671,8 +819,8 @@ namespace Application_Lourde_CRM
 
                 commande.Parameters.AddWithValue("@IDRDV", Convert.ToString(rendez_vous.Id));
                 commande.Parameters.AddWithValue("@DATERDV", rendez_vous.Date);
-                commande.Parameters.AddWithValue("@IDCOMMERCIALS", rendez_vous.Commercials.Id);
-                commande.Parameters.AddWithValue("@IDPROSPECTS", rendez_vous.Prospects.Id);
+                commande.Parameters.AddWithValue("@IDCOMMERCIALS", rendez_vous.Commercial.Id);
+                commande.Parameters.AddWithValue("@IDPROSPECTS", rendez_vous.Prospect.Id);
 
                 commande.ExecuteNonQuery();
 
@@ -687,7 +835,7 @@ namespace Application_Lourde_CRM
         #endregion
 
         #region Modifier
-        public void PutRdv(Rendez_vous rendez_Vous)
+        public void PutRdv(Rendez_Vous rendez_Vous)
         {
             try
             {
@@ -819,6 +967,9 @@ namespace Application_Lourde_CRM
         #region Supprimer
         #endregion
 
+        #endregion
+
+        #region User
         #endregion
 
         #endregion
