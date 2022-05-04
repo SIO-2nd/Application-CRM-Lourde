@@ -769,7 +769,7 @@ namespace Application_Lourde_CRM
         {
             try
             {
-                requete = "select * from rendez-vous";
+                requete = "select rendez_vous.id, rendez_vous.date_heure, rendez_vous.id_commercial, rendez_vous.id_contact, commercial.nom as nom_commercial, commercial.prenom as prenom_commercial, commercial.telephone as telephone_commercial, commercial.email as email_commercial, contact.nom as nom_contact, contact.prenom as prenom_contact, contact.telephone as telephone_contact, contact.email as email_contact, contact.adresse as adresse_contact, contact.ville as ville_contact, contact.code_postal as code_postal_contact from rendez_vous INNER JOIN commercial ON rendez_vous.id_commercial = commercial.id INNER JOIN contact ON rendez_vous.id_contact = contact.id;";
 
                 connexion.Open();
 
@@ -780,17 +780,36 @@ namespace Application_Lourde_CRM
 
                 while (resultat.Read())
                 {
-                    Commercial commercials = new Commercial(Convert.ToInt32(resultat["IdCommercial"]));
-                    Prospect prospects = new Prospect(Convert.ToInt32(resultat["IdPro"]));
-                    Rendez_Vous tmpRendez_Vous = new Rendez_Vous
-                        (
-                            Convert.ToInt32(resultat["IdRdv"]),
-                            Convert.ToDateTime(resultat["DateRdv"]),
-                            commercial,
-                            prospect
+                    Commercial commercial = new Commercial(
+                            Convert.ToInt32(resultat["id_commercial"]), 
+                            Convert.ToString(resultat["nom_commercial"]), 
+                            Convert.ToString(resultat["prenom_commercial"]), 
+                            Convert.ToString(resultat["telephone_commercial"]), 
+                            Convert.ToString(resultat["email_commercial"])
                         );
 
-                    cRendez_Vous.Add(tmpRendez_Vous);
+                    Contact contact = new Contact(
+                            Convert.ToInt32(resultat["id_contact"]),
+                            Convert.ToString(resultat["nom_contact"]),
+                            Convert.ToString(resultat["prenom_contact"]),
+                            Convert.ToString(resultat["telephone_contact"]),
+                            Convert.ToString(resultat["email_contact"]),
+                            Convert.ToString(resultat["adresse_contact"]),
+                            Convert.ToString(resultat["ville_contact"]),
+                            Convert.ToString(resultat["code_postal_contact"])
+                        );
+
+                    Rendez_Vous Rendez_Vous = new Rendez_Vous
+                        (
+                            Convert.ToInt32(resultat["id"]),
+                            Convert.ToDateTime(resultat["date_heure"]),
+                            commercial,
+                            contact
+                        );
+
+
+
+                    cRendez_Vous.Add(Rendez_Vous);
                 }
 
                 connexion.Clone();
@@ -811,16 +830,15 @@ namespace Application_Lourde_CRM
         {
             try
             {
-                requete = "INSERT INTO rendez-vous(IdRdv, DateRdv, IdCommercial, IdPro) VALUES (@IDRDV, @DATERDV, @IDCOMMERCIALS, @IDPROSPECTS)";
+                requete = "INSERT INTO rendez_vous(date_heure, id_commercial, id_contact) VALUES (@Date_Heure, @Id_Commercial, @Id_Contact)";
 
                 connexion.Open();
 
                 MySqlCommand commande = new MySqlCommand(requete, connexion);
 
-                commande.Parameters.AddWithValue("@IDRDV", Convert.ToString(rendez_vous.Id));
-                commande.Parameters.AddWithValue("@DATERDV", rendez_vous.Date);
-                commande.Parameters.AddWithValue("@IDCOMMERCIALS", rendez_vous.Commercial.Id);
-                commande.Parameters.AddWithValue("@IDPROSPECTS", rendez_vous.Prospect.Id);
+                commande.Parameters.AddWithValue("@Date_Heure", rendez_vous.DATE);
+                commande.Parameters.AddWithValue("@Id_Commercial", rendez_vous.COMMERCIAL.ID);
+                commande.Parameters.AddWithValue("@Id_Contact", rendez_vous.CONTACT.ID);
 
                 commande.ExecuteNonQuery();
 
@@ -839,16 +857,16 @@ namespace Application_Lourde_CRM
         {
             try
             {
-                requete = "update rendez-vous set DateRdv = @DATERDV, IdCommercial = @IDCOMMERCIAL, IdPro = @IDPROSPECT where IdRdv = @IDRDV";
+                requete = "update rendez_vous set date_heure = @Date_Heure, id_commercial = @Id_Commercial, id_contact = @Id_Contact where id = @Id";
 
                 connexion.Open();
 
                 MySqlCommand commande = new MySqlCommand(requete, connexion);
 
-                commande.Parameters.AddWithValue("@DATERDV", rendez_Vous.Date);
-                commande.Parameters.AddWithValue("@IDCOMMERCIAL", rendez_Vous.Commercials.Id);
-                commande.Parameters.AddWithValue("@IDPROSPECT", rendez_Vous.Prospects.Id);
-                commande.Parameters.AddWithValue("@IDRDV", rendez_Vous.Id);
+                commande.Parameters.AddWithValue("@Date_Heure", rendez_Vous.DATE);
+                commande.Parameters.AddWithValue("@Id_Commercial", rendez_Vous.COMMERCIAL.ID);
+                commande.Parameters.AddWithValue("@Id_Contact", rendez_Vous.CONTACT.ID);
+                commande.Parameters.AddWithValue("@Id", rendez_Vous.ID);
 
                 commande.ExecuteNonQuery();
 
@@ -867,13 +885,13 @@ namespace Application_Lourde_CRM
         {
             try
             {
-                requete = "delete from rendez-vous where id = @ID";
+                requete = "delete from rendez_vous where id = @Id";
 
                 connexion.Open();
 
                 MySqlCommand commande = new MySqlCommand(requete, connexion);
 
-                commande.Parameters.AddWithValue("@ID", id);
+                commande.Parameters.AddWithValue("@Id", id);
 
                 commande.ExecuteNonQuery();
 
@@ -894,13 +912,11 @@ namespace Application_Lourde_CRM
         #region Lire
         public List<Facture> GetFacture()
         {
-            connexion.Open();
-
             try
             {
-                requete = "select * from facture";
+                requete = "SELECT facture.id, facture.id_client, facture.id_produit, facture.quantite, facture.date_heure, facture.montant, client.nom as nom_client, client.prenom as prenom_client, client.telephone as telephone_client, client.email as email_client, client.adresse as adresse_client, client.ville as ville_client, client.code_postal as code_postal_client, produit.nom, produit.prix, produit.description FROM `facture` INNER JOIN client ON facture.id_client = client.id INNER JOIN produit ON facture.id_produit = produit.id";
 
-
+                connexion.Open();
 
                 MySqlCommand commande = new MySqlCommand(requete, connexion);
                 MySqlDataReader resultat = commande.ExecuteReader();
@@ -909,21 +925,37 @@ namespace Application_Lourde_CRM
 
                 while (resultat.Read())
                 {
-                    Client client = new Client(Convert.ToInt32(resultat["IdCli"]));
-                    Achats achats = new Achats(Convert.ToInt32(resultat["IdAchat"]));
+                    Client client = new Client(
+                            Convert.ToInt32(resultat["id_client"]),
+                            Convert.ToString(resultat["nom_client"]),
+                            Convert.ToString(resultat["prenom_client"]),
+                            Convert.ToString(resultat["telephone_client"]),
+                            Convert.ToString(resultat["email_client"]),
+                            Convert.ToString(resultat["adresse_client"]),
+                            Convert.ToString(resultat["ville_client"]),
+                            Convert.ToString(resultat["code_postal_client"])
+                        );
 
-                    Facture tmpFacture = new Facture
-                        (
-                            Convert.ToInt32(resultat["Id"]),
+                    Produit produit = new Produit(
+                            Convert.ToInt32(resultat["id_produit"]),
+                            Convert.ToString(resultat["nom"]),
+                            Convert.ToDouble(resultat["prix"]),
+                            Convert.ToString(resultat["description"])
+                        );
+
+                    Facture tmpFacture = new Facture(
+                            Convert.ToInt32(resultat["id"]),
                             client,
-                            achats,
-                            Convert.ToDateTime(resultat["Date"])
+                            produit,
+                            Convert.ToInt32(resultat["quantite"]),
+                            Convert.ToDateTime(resultat["Date"]),
+                            Convert.ToDouble(resultat["montant"])
                         );
 
                     cFacture.Add(tmpFacture);
-                }
 
-                connexion.Close();
+                    connexion.Close();
+                }
 
                 return cFacture;
             }
@@ -941,13 +973,17 @@ namespace Application_Lourde_CRM
         {
             try
             {
-                requete = "INSERT INTO () VALUES (@)";
+                requete = "INSERT INTO `facture`(`id_client`, `id_produit`, `quantite`, `date_heure`, `montant`) VALUES (@Id_Client, @Id_Produit, @Quantite, @Date_Heure, @Montant)";
 
                 connexion.Open();
 
                 MySqlCommand commande = new MySqlCommand(requete, connexion);
 
-                commande.Parameters.AddWithValue("@", Convert.ToString(facture.Id));
+                commande.Parameters.AddWithValue("@Id_Client", facture.CLIENT.ID);
+                commande.Parameters.AddWithValue("@Id_Produit", facture.PRODUIT.ID);
+                commande.Parameters.AddWithValue("@Quantite", facture.QUANTITE);
+                commande.Parameters.AddWithValue("@Date_Heure", facture.DATE);
+                commande.Parameters.AddWithValue("@Montant", facture.MONTANT);
 
                 commande.ExecuteNonQuery();
 
@@ -962,9 +998,59 @@ namespace Application_Lourde_CRM
         #endregion
 
         #region Modifier
+        public void PutFacture(Facture facture)
+        {
+            try
+            {
+                requete = "update facture set id_client = @Id_Client, id_produit = @Id_Produit, quantite = @Quantite, date_heure = @Date_Heure montant = @Montant where id = @Id";
+
+                connexion.Open();
+
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
+
+                commande.Parameters.AddWithValue("@Id_Client", facture.CLIENT.ID);
+                commande.Parameters.AddWithValue("@Id_Produit", facture.PRODUIT.ID);
+                commande.Parameters.AddWithValue("@Quantite", facture.QUANTITE);
+                commande.Parameters.AddWithValue("@Date_Heure", facture.DATE);
+                commande.Parameters.AddWithValue("@Montant", facture.MONTANT);
+                commande.Parameters.AddWithValue("@Id", facture.ID);
+
+                commande.ExecuteNonQuery();
+
+                connexion.Close();
+            }
+            catch (MySqlException ex)
+            {
+                connexion.Close();
+                Console.WriteLine("Erreur PutCommercial " + ex.Message);
+            }
+        }
         #endregion
 
         #region Supprimer
+        public void DeleteFacture(int id)
+        {
+            try
+            {
+                requete = "delete from facture where id = @Id";
+
+                connexion.Open();
+
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
+
+                commande.Parameters.AddWithValue("@Id", id);
+
+                commande.ExecuteNonQuery();
+
+                connexion.Close();
+            }
+            catch (MySqlException ex)
+            {
+                connexion.Close();
+                Console.WriteLine("Erreur DeleteCommercial " + ex.Message);
+            }
+        }
+
         #endregion
 
         #endregion

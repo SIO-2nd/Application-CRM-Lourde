@@ -30,6 +30,14 @@ namespace Application_Lourde_CRM
             Id = id;
         }
 
+        public Commercial(string nom, string prenom, string telephone, string email)
+        {
+            Nom = nom;
+            Prenom = prenom;
+            Telephone = telephone;
+            Email = email;
+        }
+
         public Commercial(int id, string nom, string prenom, string telephone, string email)
         {
             Id = id;

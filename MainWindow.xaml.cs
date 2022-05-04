@@ -27,7 +27,7 @@ namespace Application_Lourde_CRM
 
             Prospect prospect = null;
             Client client = null;
-            Commercial commercials = null;
+            Commercial commercial = null;
             Rendez_Vous rendez_vous = null;
             Facture facture = null;
 
@@ -47,7 +47,7 @@ namespace Application_Lourde_CRM
                 DataGrid_RendezVous.ItemsSource = list_rendez_vous;
                 DataGrid_Factures.ItemsSource = list_factures;
             }
-
+        
             #region Prospects
 
             #region Actualiser
@@ -63,16 +63,16 @@ namespace Application_Lourde_CRM
             {
                 if (DataGrid_Prospects.SelectedItem != null)
                 {
-                    prospect = (Prospects)DataGrid_Prospects.SelectedItem;
+                    prospect = (Prospect)DataGrid_Prospects.SelectedItem;
 
-                    txtIdPro.Text = Convert.ToString(prospect.Id);
-                    txtNomPro.Text = Convert.ToString(prospect.Nom);
-                    txtPrenomPro.Text = Convert.ToString(prospect.Prenom);
-                    txtMailPro.Text = Convert.ToString(prospect.Email);
-                    txtTelPro.Text = Convert.ToString(prospect.Telephone);
-                    txtAdressePro.Text = Convert.ToString(prospect.Adresse);
-                    txtVillePro.Text = Convert.ToString(prospect.Ville);
-                    txtCpPro.Text = Convert.ToString(prospect.Code_Postal);
+                    txtIdPro.Text = Convert.ToString(prospect.ID);
+                    txtNomPro.Text = Convert.ToString(prospect.NOM);
+                    txtPrenomPro.Text = Convert.ToString(prospect.PRENOM);
+                    txtTelPro.Text = Convert.ToString(prospect.TELEPHONE);
+                    txtMailPro.Text = Convert.ToString(prospect.EMAIL);
+                    txtAdressePro.Text = Convert.ToString(prospect.ADRESSE);
+                    txtVillePro.Text = Convert.ToString(prospect.VILLE);
+                    txtCpPro.Text = Convert.ToString(prospect.CODE_POSTAL);
                 }
                 else
                 {
@@ -91,7 +91,7 @@ namespace Application_Lourde_CRM
             #region Ajout Prospects
             private void btnAjouterPro_Click(object sender, RoutedEventArgs e)
             {
-                prospect = new Prospects(txtNomPro.Text, txtPrenomPro.Text, txtMailPro.Text, Convert.ToInt32(txtTelPro.Text), txtAdressePro.Text, txtVillePro.Text, Convert.ToInt32(txtCpPro.Text));
+                prospect = new Prospect(txtNomPro.Text, txtPrenomPro.Text, txtTelPro.Text, txtMailPro.Text, txtAdressePro.Text, txtVillePro.Text, txtCpPro.Text);
 
                 database.PostProspect(prospect);
                 refreshProspect();
@@ -101,7 +101,7 @@ namespace Application_Lourde_CRM
             #region Modifier
             private void btnModifierPro_Click(object sender, RoutedEventArgs e)
             {
-                prospect = new Prospects(txtNomPro.Text, txtPrenomPro.Text, txtMailPro.Text, Convert.ToInt32(txtTelPro.Text), txtAdressePro.Text, txtVillePro.Text, Convert.ToInt32(txtCpPro.Text));
+                prospect = new Prospect(txtNomPro.Text, txtPrenomPro.Text, txtTelPro.Text, txtMailPro.Text, txtAdressePro.Text, txtVillePro.Text, txtCpPro.Text);
 
                 database.PutProspect(prospect);
                 refreshProspect();
@@ -135,14 +135,14 @@ namespace Application_Lourde_CRM
                 {
                     client = (Client)DataGrid_Clients.SelectedItem;
 
-                    txtIdCli.Text = Convert.ToString(client.Id);
-                    txtNomCli.Text = Convert.ToString(client.Nom);
-                    txtPrenomCli.Text = Convert.ToString(client.Prenom);
-                    txtMailCli.Text = Convert.ToString(client.Email);
-                    txtTelCli.Text = Convert.ToString(client.Telephone);
-                    txtAdresseCli.Text = Convert.ToString(client.Adresse);
-                    txtVilleCli.Text = Convert.ToString(client.Ville);
-                    txtCpCli.Text = Convert.ToString(client.Code_Postal);
+                    txtIdCli.Text = Convert.ToString(client.ID);
+                    txtNomCli.Text = Convert.ToString(client.NOM);
+                    txtPrenomCli.Text = Convert.ToString(client.PRENOM);
+                    txtMailCli.Text = Convert.ToString(client.EMAIL);
+                    txtTelCli.Text = Convert.ToString(client.TELEPHONE);
+                    txtAdresseCli.Text = Convert.ToString(client.ADRESSE);
+                    txtVilleCli.Text = Convert.ToString(client.VILLE);
+                    txtCpCli.Text = Convert.ToString(client.CODE_POSTAL);
                 }
                 else
                 {
@@ -161,7 +161,7 @@ namespace Application_Lourde_CRM
             #region Ajouter
             private void btnAjouterCli_Click(object sender, RoutedEventArgs e)
             {
-                client = new Client(txtNomCli.Text, txtPrenomCli.Text, txtMailCli.Text, Convert.ToInt32(txtTelCli.Text), txtAdresseCli.Text, txtVilleCli.Text, Convert.ToInt32(txtCpCli.Text));
+                client = new Client(txtNomCli.Text, txtPrenomCli.Text, txtTelCli.Text, txtMailCli.Text, txtAdresseCli.Text, txtVilleCli.Text, txtCpCli.Text);
 
                 database.PostClient(client);
                 refreshClients();
@@ -171,7 +171,7 @@ namespace Application_Lourde_CRM
             #region Modifier
             private void btnModifierCli_Click(object sender, RoutedEventArgs e)
             {
-                client = new Client(Convert.ToInt32(txtIdCli.Text), txtNomCli.Text, txtPrenomCli.Text, txtMailCli.Text, Convert.ToInt32(txtTelCli.Text), txtAdresseCli.Text, txtVilleCli.Text, Convert.ToInt32(txtCpCli.Text));
+                client = new Client(Convert.ToInt32(txtIdCli.Text), txtNomCli.Text, txtPrenomCli.Text, txtTelCli.Text, txtMailCli.Text, txtAdresseCli.Text, txtVilleCli.Text, txtCpCli.Text);
 
                 database.PutClient(client);
                 refreshClients();
@@ -203,13 +203,13 @@ namespace Application_Lourde_CRM
             {
                 if (DataGrid_Commercials.SelectedItem != null)
                 {
-                    commercials = (Commercials)DataGrid_Commercials.SelectedItem;
+                    commercial = (Commercial)DataGrid_Commercials.SelectedItem;
 
-                    txtIdCom.Text = Convert.ToString(commercials.Id);
-                    txtNomCom.Text = Convert.ToString(commercials.Nom);
-                    txtPrenomCom.Text = Convert.ToString(commercials.Prenom);
-                    txtMailCom.Text = Convert.ToString(commercials.Email);
-                    txtTelCom.Text = Convert.ToString(commercials.Telephone);
+                    txtIdCom.Text = Convert.ToString(commercial.ID);
+                    txtNomCom.Text = Convert.ToString(commercial.NOM);
+                    txtPrenomCom.Text = Convert.ToString(commercial.PRENOM);
+                    txtMailCom.Text = Convert.ToString(commercial.EMAIL);
+                    txtTelCom.Text = Convert.ToString(commercial.TELEPHONE);
                 }
                 else
                 {
@@ -225,9 +225,9 @@ namespace Application_Lourde_CRM
             #region Ajouter
             private void btnAjouterCom_Click(object sender, RoutedEventArgs e)
             {
-                commercials = new Commercials(txtNomCom.Text, txtPrenomCom.Text, txtMailCom.Text, Convert.ToInt32(txtTelCom.Text));
+                commercial = new Commercial(txtNomCom.Text, txtPrenomCom.Text, txtTelCom.Text, txtMailCom.Text);
                 
-                database.PostCommercial(commercials);
+                database.PostCommercial(commercial);
 
                 refreshCommercials();
             }
@@ -236,9 +236,9 @@ namespace Application_Lourde_CRM
             #region Modifier
             private void btnModifierCom_Click(object sender, RoutedEventArgs e)
             {
-                commercials = new Commercials(Convert.ToInt32(txtIdCom.Text), txtNomCom.Text, txtPrenomCom.Text, txtMailCom.Text, Convert.ToInt32(txtTelCom.Text));
+                commercial = new Commercial(Convert.ToInt32(txtIdCom.Text), txtNomCom.Text, txtPrenomCom.Text, txtTelCom.Text, txtMailCom.Text);
 
-                database.PutCommercial(commercials);
+                database.PutCommercial(commercial);
                 refreshCommercials();
             }
             #endregion
@@ -310,10 +310,10 @@ namespace Application_Lourde_CRM
                 {
                     Facture factureSelected = (Facture)DataGrid_Factures.SelectedItem;
 
-                    txtIdFact.Text = Convert.ToString(factureSelected.Id);
-                    txtIdAchat.Text = Convert.ToString(factureSelected.Achats.ID);
-                    txtIdClient.Text = Convert.ToString(factureSelected.Client.Id);
-                    txtDtFact.Text = Convert.ToString(factureSelected.Date);
+                    txtIdFact.Text = Convert.ToString(factureSelected.ID);
+                    txtIdAchat.Text = Convert.ToString(factureSelected.PRODUIT.ID);
+                    txtIdClient.Text = Convert.ToString(factureSelected.CLIENT.ID);
+                    txtDtFact.Text = Convert.ToString(factureSelected.DATE);
                 }
                 else
                 {
