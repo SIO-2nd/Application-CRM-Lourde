@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
 
 namespace Application_Lourde_CRM
 {
@@ -44,8 +45,8 @@ namespace Application_Lourde_CRM
                 DataGrid_Prospects.ItemsSource = list_prospects;
                 DataGrid_Clients.ItemsSource = list_client;
                 DataGrid_Commercials.ItemsSource = list_commercials;
-                DataGrid_RendezVous.ItemsSource = list_rendez_vous;
-                DataGrid_Factures.ItemsSource = list_factures;
+                /*DataGrid_RendezVous.ItemsSource = list_rendez_vous;
+                DataGrid_Factures.ItemsSource = list_factures;*/
             }
         
             #region Prospects
@@ -323,8 +324,22 @@ namespace Application_Lourde_CRM
                     txtDtFact.Text = "";
                 }
             }
-            #endregion
+        #endregion
 
+        #endregion
+
+            #region Autres
+            private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+            {
+                Regex regex = new Regex(@"^[0-9]*(?:\.[0-9]*)?$");
+                e.Handled = !regex.IsMatch(e.Text);
+            }
+
+            private void btnSettings_Click(object sender, RoutedEventArgs e)
+            {
+                Settings Settings = new Settings();
+                Settings.ShowDialog();
+            }
             #endregion
     }
 }
