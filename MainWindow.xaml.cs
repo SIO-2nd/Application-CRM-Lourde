@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Text.RegularExpressions;
 
 namespace Application_Lourde_CRM
 {
@@ -325,6 +326,20 @@ namespace Application_Lourde_CRM
             }
             #endregion
 
+            #endregion
+            
+            #region Autres
+            private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+            {
+                Regex regex = new Regex(@"^[0-9]*(?:\.[0-9]*)?$");
+                e.Handled = !regex.IsMatch(e.Text);
+            }
+
+            private void btnSettings_Click(object sender, RoutedEventArgs e)
+            {
+                Settings Settings = new Settings();
+                Settings.ShowDialog();
+            }
             #endregion
     }
 }
