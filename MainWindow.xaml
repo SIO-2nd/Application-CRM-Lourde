@@ -158,7 +158,7 @@
                         <ScrollBar HorizontalAlignment="Left" VerticalAlignment="Top"/>
                     </DataGrid>
                     <TextBox x:Name="txtIdRdv" HorizontalAlignment="Left" Height="23" Margin="471,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
-                    <DatePicker x:Name="dtDate" HorizontalAlignment="Left" Margin="471,48,0,0" VerticalAlignment="Top" Width="120" Background="#A5FFFFFF" BorderBrush="#FF818389"/>
+                    <DatePicker x:Name="txtDateRdv" HorizontalAlignment="Left" Margin="471,48,0,0" VerticalAlignment="Top" Width="120" Background="#A5FFFFFF" BorderBrush="#FF818389"/>
                     <Label x:Name="lblID3" Content="ID :" HorizontalAlignment="Left" Margin="442,6,0,0" VerticalAlignment="Top" Height="26" Foreground="White"/>
                     <Label x:Name="lblDate" Content="Date :" HorizontalAlignment="Left" Margin="429,45,0,0" VerticalAlignment="Top" Foreground="White"/>
                     <Label x:Name="lblProspect" Content="Contact :" HorizontalAlignment="Left" Margin="409,83,0,0" VerticalAlignment="Top" Foreground="White"/>

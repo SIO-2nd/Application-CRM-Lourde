@@ -275,7 +275,26 @@ namespace Application_Lourde_CRM
             #region Sélection
             private void DataGrid_RendezVous_SelectionChanged(object sender, SelectionChangedEventArgs e)
             {
+                if (DataGrid_RendezVous.SelectedItem != null)
+                {
+                    rendez_vous = (Rendez_Vous)DataGrid_RendezVous.SelectedItem;
 
+                    txtIdRdv.Text = Convert.ToString(rendez_vous.ID);
+                    txtDateRdv.Text = Convert.ToString(rendez_vous.DATE);
+                    txtPrenomCli.Text = Convert.ToString(rendez_vous.COMMERCIAL.ID);
+                    txtMailCli.Text = Convert.ToString(rendez_vous.COMMERCIAL.ID);
+                }
+                else
+                {
+                    txtIdCli.Text = "";
+                    txtNomCli.Text = "";
+                    txtPrenomCli.Text = "";
+                    txtMailCli.Text = "";
+                    txtTelCli.Text = "";
+                    txtAdresseCli.Text = "";
+                    txtVilleCli.Text = "";
+                    txtCpCli.Text = "";
+                }
             }
             #endregion
 
