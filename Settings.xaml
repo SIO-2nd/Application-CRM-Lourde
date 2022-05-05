@@ -16,12 +16,6 @@
             <TabControl.Background>
                 <ImageBrush ImageSource="background_transparent.png"/>
             </TabControl.Background>
-            <TabItem Header="Général">
-                <Grid>
-                    <CheckBox x:Name="cboDev" Content="Mode développeur" HorizontalAlignment="Left" Margin="13,12,0,0" VerticalAlignment="Top" Foreground="White"/>
-
-                </Grid>
-            </TabItem>
             <TabItem Header="Utilisateur">
                 <Grid>
                     <Label x:Name="lblId" Content="Identifiant :" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Foreground="White" Width="71"/>
@@ -40,6 +34,12 @@
                     <TextBox x:Name="txtBdd" HorizontalAlignment="Left" Margin="107,51,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="22"/>
                     <TextBox x:Name="txtIdServ" HorizontalAlignment="Left" Margin="107,89,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="22"/>
                     <PasswordBox x:Name="txtMdpServ" HorizontalAlignment="Left" Margin="107,127,0,0" VerticalAlignment="Top" Width="120" Height="22"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Avancé">
+                <Grid>
+                    <Label x:Name="lblScript" Content="Lancer les scripts :" HorizontalAlignment="Left" Margin="7,6,0,0" VerticalAlignment="Top" Background="{x:Null}" Foreground="White" Width="116"/>
+                    <Button x:Name="btnScript" Content="lancer les scripts" HorizontalAlignment="Left" Margin="115,10,0,0" VerticalAlignment="Top" Width="98" Height="21"/>
                 </Grid>
             </TabItem>
         </TabControl>
