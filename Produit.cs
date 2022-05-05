@@ -20,12 +20,19 @@ namespace Application_Lourde_CRM
 
         #region Constructeurs
 
-        public Produit(string Nom)
+        public Produit()
         {
 
         }
 
-        public Produit(int id, string nom, double prix, string description)
+        public Produit(string nom, string description, double prix)
+        {
+            Nom = nom;
+            Prix = prix;
+            Description = description;
+        }
+
+        public Produit(int id, string nom, string description, double prix)
         {
             Id = id;
             Nom = nom;

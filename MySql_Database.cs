@@ -660,8 +660,8 @@ namespace Application_Lourde_CRM
                     Produit produit = new Produit(
                             Convert.ToInt32(resultat["id"]),
                             Convert.ToString(resultat["nom"]),
-                            Convert.ToDouble(resultat["prix"]),
-                            Convert.ToString(resultat["description"])
+                            Convert.ToString(resultat["description"]),
+                            Convert.ToDouble(resultat["prix"])
                         );
 
                     list_produit.Add(produit);
@@ -939,8 +939,8 @@ namespace Application_Lourde_CRM
                     Produit produit = new Produit(
                             Convert.ToInt32(resultat["id_produit"]),
                             Convert.ToString(resultat["nom"]),
-                            Convert.ToDouble(resultat["prix"]),
-                            Convert.ToString(resultat["description"])
+                            Convert.ToString(resultat["description"]),
+                            Convert.ToDouble(resultat["prix"])
                         );
 
                     Facture tmpFacture = new Facture(

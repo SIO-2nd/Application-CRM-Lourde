@@ -437,6 +437,35 @@ namespace Application_Lourde_CRM
                     txtPrixProd.Text = "";
                 }
             }
+        #endregion
+
+            #region Ajouter
+            private void btnAjouterProduit_Click(object sender, RoutedEventArgs e)
+            {
+                produit = new Produit(txtNomPro.Text, txtDescriptionProd.Text, Convert.ToDouble(txtPrixProd.Text));
+
+                database.PostProduit(produit);
+
+                refreshProduit();
+            }
+        #endregion
+
+            #region Modifier
+            private void btnModifierProd(object sender, RoutedEventArgs e)
+            {
+                produit = new Produit(Convert.ToInt32(txtIdProd.Text), txtNomProd.Text, txtDescriptionProd.Text, Convert.ToDouble(txtPrixProd.Text));
+
+                database.PutProduit(produit);
+                refreshProduit();
+            }
+            #endregion
+
+            #region Supprimer
+            private void btnSupprimerProd_Click(object sender, RoutedEventArgs e)
+            {
+                database.DeleteProduit(Convert.ToInt32(txtIdProd.Text));
+                refreshProduit();
+            }
             #endregion
 
         #endregion
