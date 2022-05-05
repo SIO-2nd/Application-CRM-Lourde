@@ -54,7 +54,7 @@ namespace Application_Lourde_CRM
                 DataGrid_Clients.ItemsSource = list_client;
                 DataGrid_Commercials.ItemsSource = list_commercials;
                 DataGrid_Factures.ItemsSource = list_factures;
-                DataGrid_RendezVous.ItemsSource = list_rendez_vous; 
+                //DataGrid_RendezVous.ItemsSource = list_rendez_vous; 
         }
         
             #region Prospects
@@ -286,8 +286,8 @@ namespace Application_Lourde_CRM
                 }
                 else
                 {
-                    txtIdCli.Text = "";
-                    txtNomCli.Text = "";
+                    txtIdRdv.Text = "";
+                txtDateRdv.Text = "";
                     txtPrenomCli.Text = "";
                     txtMailCli.Text = "";
                     txtTelCli.Text = "";

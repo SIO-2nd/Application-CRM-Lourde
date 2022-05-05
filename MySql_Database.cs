@@ -72,12 +72,12 @@ namespace Application_Lourde_CRM
             // Chaîne de connexion
             string chaine_connexion = "server=" + serveur + ";userid=" + user + ";password=" + password + ";database=" + database;
 
-            // Instancie un objet MySqlConnection pour gère les connexions à la base de donnée
-
             try
             {
+                // Instancie un objet MySqlConnection pour gère les connexions à la base de donnée
                 connexion = new MySqlConnection(chaine_connexion);
 
+                //Test de connexion à la base de donnée
                 connexion.Open();
 
                 MessageBox.Show("Connexion réussit", "succès MySql", MessageBoxButton.OK);
@@ -86,6 +86,7 @@ namespace Application_Lourde_CRM
             }
             catch (MySqlException ex)
             {
+                //Gestion des exceptions
                 switch (ex.Number)
                 {
                     case 0:
