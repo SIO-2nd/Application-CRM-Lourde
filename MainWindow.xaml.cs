@@ -420,7 +420,7 @@ namespace Application_Lourde_CRM
             #region Sélection
             private void DataGrid_Produit_SelectionChanged(object sender, SelectionChangedEventArgs e)
             {
-                if (DataGrid_Commercials.SelectedItem != null)
+                if (DataGrid_Produits.SelectedItem != null)
                 {
                     produit = (Produit)DataGrid_Commercials.SelectedItem;
 
