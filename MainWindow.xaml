@@ -142,18 +142,23 @@
                             <ImageBrush ImageSource="background_transparent_white.png"/>
                         </DataGrid.Background>
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Nom commercial" Binding="{Binding Nom}" />
-                            <DataGridTextColumn Header="Prénom commercial" Binding="{Binding Prenom}" />
-                            <DataGridTextColumn Header="Téléphone commercial" Binding="{Binding Tel}" />
-                            <DataGridTextColumn Header="Email commercial" Binding="{Binding Email}" />
+                            <DataGridTextColumn Header="ID" />
+                            <DataGridTextColumn Header="Date" />
+                            <DataGridTextColumn Header="Commercial" />
+                            <DataGridTextColumn Header="Contact" />
+                            
+                            <DataGridTextColumn Header="Nom commercial" />
+                            <DataGridTextColumn Header="Prénom commercial" />
+                            <DataGridTextColumn Header="Téléphone commercial" />
+                            <DataGridTextColumn Header="Email commercial" />
 
-                            <DataGridTextColumn Header="Nom contact" Binding="{Binding Nom}" />
-                            <DataGridTextColumn Header="Prénom contact" Binding="{Binding Prenom}" />
-                            <DataGridTextColumn Header="Téléphone contact" Binding="{Binding Tel}" />
-                            <DataGridTextColumn Header="Email contact" Binding="{Binding Email}" />
-                            <DataGridTextColumn Header="Adresse contact" Binding="{Binding Adresse}" />
-                            <DataGridTextColumn Header="Ville contact" Binding="{Binding Ville}" />
-                            <DataGridTextColumn Header="Code postal contact" Binding="{Binding Cp}" />
+                            <DataGridTextColumn Header="Nom contact" />
+                            <DataGridTextColumn Header="Prénom contact" />
+                            <DataGridTextColumn Header="Téléphone contact" />
+                            <DataGridTextColumn Header="Email contact" />
+                            <DataGridTextColumn Header="Adresse contact" />
+                            <DataGridTextColumn Header="Ville contact" />
+                            <DataGridTextColumn Header="Code postal contact" />
                         </DataGrid.Columns>
                         <ScrollBar HorizontalAlignment="Left" VerticalAlignment="Top"/>
                     </DataGrid>

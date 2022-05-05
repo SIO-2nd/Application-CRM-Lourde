@@ -39,6 +39,56 @@ namespace Application_Lourde_CRM
             public MainWindow()
             {
                 InitializeComponent();
+
+                string SettingsFile = "Settings.xml";
+
+                if (File.Exists(SettingsFile))
+                {
+                    string hote;
+                    string bdd;
+                    string user;
+                    string mdp;
+
+                    try
+                    {
+                        hote = File.ReadLines(SettingsFile).Skip(2).Take(1).First();
+                    }
+                    catch (Exception ex)
+                    {
+                        hote = "";
+                    }
+
+                    try
+                    {
+                        bdd = File.ReadLines(SettingsFile).Skip(3).Take(1).First();
+                    }
+                    catch (Exception ex)
+                    {
+                        bdd= "";
+                    }
+
+                    try
+                    {
+                        user = File.ReadLines(SettingsFile).Skip(4).Take(1).First();
+                    }
+                    catch (Exception ex)
+                    {
+                        user = "";
+                    }
+
+                    try
+                    {
+                        mdp = File.ReadLines(SettingsFile).Skip(5).Take(1).First();
+                    }
+                    catch (Exception ex)
+                    {
+                        mdp = "";
+                    }
+                    
+
+                    database = new MySql_Database(hote, user, mdp, bdd);
+                }
+
                 list_prospects = database.GetProspect();
                 list_client = database.GetClient();
                 list_commercials = database.GetCommercial();

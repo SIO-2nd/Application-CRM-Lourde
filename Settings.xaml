@@ -39,7 +39,7 @@
                     <TextBox x:Name="txtHote" HorizontalAlignment="Left" Margin="107,13,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="22"/>
                     <TextBox x:Name="txtBdd" HorizontalAlignment="Left" Margin="107,51,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="22"/>
                     <TextBox x:Name="txtIdServ" HorizontalAlignment="Left" Margin="107,89,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Height="22"/>
-                    <PasswordBox x:Name="txtMdrServ" HorizontalAlignment="Left" Margin="107,127,0,0" VerticalAlignment="Top" Width="120" Height="22"/>
+                    <PasswordBox x:Name="txtMdpServ" HorizontalAlignment="Left" Margin="107,127,0,0" VerticalAlignment="Top" Width="120" Height="22"/>
                 </Grid>
             </TabItem>
         </TabControl>
