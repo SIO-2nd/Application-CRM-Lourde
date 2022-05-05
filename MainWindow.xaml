@@ -188,8 +188,8 @@
                     <Label x:Name="lblNomProd" Content="Nom :" HorizontalAlignment="Left" Margin="427,45,0,0" VerticalAlignment="Top" Foreground="White"/>
                     <Label x:Name="lblDescriptionProd" Content="Description :" HorizontalAlignment="Left" Margin="393,83,0,0" VerticalAlignment="Top" Foreground="White"/>
                     <Label x:Name="lblPrixCl" Content="Prix :" HorizontalAlignment="Left" Margin="434,174,0,0" VerticalAlignment="Top" Foreground="White"/>
-                    <Button x:Name="btnAjouterProd" Content="Ajouter" HorizontalAlignment="Left" Margin="471,325,0,0" VerticalAlignment="Top" Width="123" Click="btnAjouterCli_Click"/>
-                    <Button x:Name="btnModifierProd" Content="Modifier" HorizontalAlignment="Left" Margin="471,350,0,0" VerticalAlignment="Top" Width="123" Click="btnModifierCli_Click"/>
+                    <Button x:Name="btnAjouterProd" Content="Ajouter" HorizontalAlignment="Left" Margin="471,325,0,0" VerticalAlignment="Top" Width="123" Click="btnAjouterProd_Click"/>
+                    <Button x:Name="btnModifierProd" Content="Modifier" HorizontalAlignment="Left" Margin="471,350,0,0" VerticalAlignment="Top" Width="123" Click="btnModifierProd_Click"/>
                     <Button x:Name="btnSupprimerProd" Content="Supprimer" HorizontalAlignment="Left" Margin="471,375,0,0" VerticalAlignment="Top" Width="123" Click="btnSupprimerCli_Click"/>
                 </Grid>
             </TabItem>

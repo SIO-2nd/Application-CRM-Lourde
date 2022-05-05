@@ -440,7 +440,7 @@ namespace Application_Lourde_CRM
         #endregion
 
             #region Ajouter
-            private void btnAjouterProduit_Click(object sender, RoutedEventArgs e)
+            private void btnAjouterProd_Click(object sender, RoutedEventArgs e)
             {
                 produit = new Produit(txtNomPro.Text, txtDescriptionProd.Text, Convert.ToDouble(txtPrixProd.Text));
 
@@ -451,7 +451,7 @@ namespace Application_Lourde_CRM
         #endregion
 
             #region Modifier
-            private void btnModifierProd(object sender, RoutedEventArgs e)
+            private void btnModifierProd_Click(object sender, RoutedEventArgs e)
             {
                 produit = new Produit(Convert.ToInt32(txtIdProd.Text), txtNomProd.Text, txtDescriptionProd.Text, Convert.ToDouble(txtPrixProd.Text));
 
@@ -468,10 +468,10 @@ namespace Application_Lourde_CRM
             }
             #endregion
 
-        #endregion
+            #endregion
 
-        #region Autres
-        void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+            #region Autres
+            void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
             {
                 Regex regex = new Regex(@"^[0-9]*(?:\.[0-9]*)?$");
                 e.Handled = !regex.IsMatch(e.Text);
