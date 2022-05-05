@@ -161,12 +161,12 @@
                     <DatePicker x:Name="dtDate" HorizontalAlignment="Left" Margin="471,48,0,0" VerticalAlignment="Top" Width="120" Background="#A5FFFFFF" BorderBrush="#FF818389"/>
                     <Label x:Name="lblID3" Content="ID :" HorizontalAlignment="Left" Margin="442,6,0,0" VerticalAlignment="Top" Height="26" Foreground="White"/>
                     <Label x:Name="lblDate" Content="Date :" HorizontalAlignment="Left" Margin="429,45,0,0" VerticalAlignment="Top" Foreground="White"/>
-                    <Label x:Name="lblProspect" Content="Prospect :" HorizontalAlignment="Left" Margin="409,83,0,0" VerticalAlignment="Top" Foreground="White"/>
+                    <Label x:Name="lblProspect" Content="Contact :" HorizontalAlignment="Left" Margin="409,83,0,0" VerticalAlignment="Top" Foreground="White"/>
                     <Label x:Name="lblClient" Content="Commercial :" HorizontalAlignment="Left" Margin="390,120,0,0" VerticalAlignment="Top" Foreground="White" Width="110"/>
                     <Button x:Name="btnAjouterRdv" Content="Ajouter" HorizontalAlignment="Left" Margin="471,325,0,0" VerticalAlignment="Top" Width="123" Click="ButtonAjouterRdv_Click"/>
                     <Button x:Name="btnModifierRdv" Content="Modifier" HorizontalAlignment="Left" Margin="471,350,0,0" VerticalAlignment="Top" Width="123" Click="ButtonModifierRdv_Click"/>
                     <Button x:Name="btnSupprimerRdv" Content="Supprimer" HorizontalAlignment="Left" Margin="471,375,0,0" VerticalAlignment="Top" Width="123" Click="ButtonSupprimerRdv_Click"/>
-                    <ComboBox x:Name="cboProspect" HorizontalAlignment="Left" Margin="471,86,0,0" VerticalAlignment="Top" Width="120" Height="23"/>
+                    <ComboBox x:Name="cboContact" HorizontalAlignment="Left" Margin="471,86,0,0" VerticalAlignment="Top" Width="120" Height="23"/>
                     <ComboBox x:Name="cboCommercial" HorizontalAlignment="Left" Margin="471,124,0,0" VerticalAlignment="Top" Width="120" Height="23"/>
                 </Grid>
             </TabItem>
@@ -182,7 +182,7 @@
                     </DataGrid>
                     <TextBox x:Name="txtIdProd" HorizontalAlignment="Left" Height="23" Margin="471,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Background="White" Opacity="0.75"/>
                     <TextBox x:Name="txtNomProd" HorizontalAlignment="Left" Height="23" Margin="471,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75"/>
-                    <TextBox x:Name="txtPrenomProd" HorizontalAlignment="Left" Height="77" Margin="471,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75"/>
+                    <TextBox x:Name="txtDescriptionProd" HorizontalAlignment="Left" Height="77" Margin="471,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75"/>
                     <TextBox x:Name="txtPrixProd" HorizontalAlignment="Left" Height="23" Margin="471,178,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75" PreviewTextInput="NumberValidationTextBox"/>
                     <Label x:Name="lblIdProd" Content="ID :" HorizontalAlignment="Left" Margin="442,6,0,0" VerticalAlignment="Top" Height="26" Foreground="White"/>
                     <Label x:Name="lblNomProd" Content="Nom :" HorizontalAlignment="Left" Margin="427,45,0,0" VerticalAlignment="Top" Foreground="White"/>

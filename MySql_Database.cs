@@ -812,7 +812,7 @@ namespace Application_Lourde_CRM
                     cRendez_Vous.Add(Rendez_Vous);
                 }
 
-                connexion.Clone();
+                connexion.Close();
 
                 return cRendez_Vous;
             }

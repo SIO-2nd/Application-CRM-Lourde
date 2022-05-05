@@ -28,5 +28,10 @@ namespace Application_Lourde_CRM
         {
             this.Close();
         }
+
+        private void btnValider_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

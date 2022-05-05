@@ -57,18 +57,6 @@ namespace Application_Lourde_CRM
         {
             return Convert.ToString(Id);
         }
-
-        public string Commercial_NomPrenom()
-        {
-            string nom_prenom = Commercial.NOM + Commercial.PRENOM;
-            return nom_prenom;
-        }
-
-        public string Contact_NomPrenom()
-        {
-            string nom_prenom = Contact.NOM + Contact.PRENOM;
-            return nom_prenom;
-        }
         #endregion
     }
 }

@@ -79,6 +79,11 @@ namespace Application_Lourde_CRM
             get { return Telephone; }
             set { Telephone = value; }
         }
+
+        public override string ToString()
+        {
+            return Nom + " " + Prenom;
+        }
         #endregion
     }
 }

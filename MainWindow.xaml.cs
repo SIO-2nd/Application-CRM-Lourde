@@ -25,12 +25,16 @@ namespace Application_Lourde_CRM
             List<Commercial> list_commercials = null;
             List<Rendez_Vous> list_rendez_vous = null;
             List<Facture> list_factures = null;
+            List<Contact> list_contact = null;
+            List<Produit> list_produit = null;
 
             Prospect prospect = null;
             Client client = null;
             Commercial commercial = null;
             Rendez_Vous rendez_vous = null;
             Facture facture = null;
+            Produit produit = null;
+            Contact contact = null;
 
             public MainWindow()
             {
@@ -40,14 +44,18 @@ namespace Application_Lourde_CRM
                 list_commercials = database.GetCommercial();
                 list_rendez_vous = database.GetRdv();
                 list_factures = database.GetFacture();
+                list_contact = database.GetContact();
+                list_produit = database.GetProduit();
 
+                cboContact.ItemsSource = list_contact;
+                cboCommercial.ItemsSource = list_commercials;
 
                 DataGrid_Prospects.ItemsSource = list_prospects;
                 DataGrid_Clients.ItemsSource = list_client;
                 DataGrid_Commercials.ItemsSource = list_commercials;
-                /*DataGrid_RendezVous.ItemsSource = list_rendez_vous;
-                DataGrid_Factures.ItemsSource = list_factures;*/
-            }
+                DataGrid_Factures.ItemsSource = list_factures;
+                DataGrid_RendezVous.ItemsSource = list_rendez_vous; 
+        }
         
             #region Prospects
 
@@ -328,8 +336,113 @@ namespace Application_Lourde_CRM
 
         #endregion
 
-            #region Autres
-            private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+            #region Contact
+
+            #region Actualiser
+            private void refreshContact()
+            {
+                list_contact = database.GetContact();
+                DataGrid_Contacts.ItemsSource = list_contact;
+            }
+            #endregion
+
+            #region Sélection
+            private void DataGrid_Contact_SelectionChanged(object sender, SelectionChangedEventArgs e)
+            {
+                if (DataGrid_Contacts.SelectedItem != null)
+                {
+                    contact = (Contact)DataGrid_Commercials.SelectedItem;
+
+                    txtIdCon.Text = Convert.ToString(contact.ID);
+                    txtNomCon.Text = Convert.ToString(contact.NOM);
+                    txtPrenomCon.Text = Convert.ToString(contact.PRENOM);
+                    txtMailCon.Text = Convert.ToString(contact.EMAIL);
+                    txtTelCon.Text = Convert.ToString(contact.TELEPHONE);
+                    txtAdresseCon.Text = Convert.ToString(contact.ADRESSE);
+                    txtVilleCon.Text = Convert.ToString(contact.VILLE);
+                    txtCpCon.Text = Convert.ToString(contact.CODE_POSTAL);
+                }
+                else
+                {
+                    txtIdCon.Text = "";
+                    txtNomCon.Text = "";
+                    txtPrenomCon.Text = "";
+                    txtMailCon.Text = "";
+                    txtTelCon.Text = "";
+                    txtAdresseCon.Text = "";
+                    txtVilleCon.Text = "";
+                    txtCpCon.Text = "";
+                }
+            }
+        #endregion
+
+            #region Ajouter
+            private void btnAjouterCon_Click(object sender, RoutedEventArgs e)
+            {
+                contact = new Contact(txtNomCon.Text, txtPrenomCon.Text, txtTelCon.Text, txtMailCon.Text, Convert.ToString(txtAdresseCon), Convert.ToString(txtVilleCon), Convert.ToString(txtCpCon));
+
+                database.PostContact(contact);
+
+                refreshContact();
+            }
+        #endregion
+
+            #region Modifier
+            private void btnModifierCon_Click(object sender, RoutedEventArgs e)
+            {
+                contact = new Contact(Convert.ToInt32(txtIdCom.Text), txtNomCom.Text, txtPrenomCom.Text, txtTelCom.Text, txtMailCom.Text,Convert.ToString(txtAdresseCon), Convert.ToString(txtVilleCon), Convert.ToString(txtCpCon));
+
+                database.PutContact(contact);
+                refreshContact();
+            }
+        #endregion
+
+            #region Supprimer
+            private void btnSupprimerCon_Click(object sender, RoutedEventArgs e)
+            {
+                database.DeleteContact(Convert.ToInt32(txtIdCon.Text));
+                refreshContact();
+            }
+        #endregion
+
+        #endregion
+
+            #region Produit
+
+            #region Actualiser
+            private void refreshProduit()
+            {
+                list_produit = database.GetProduit();
+                DataGrid_Produits.ItemsSource = list_produit;
+            }
+            #endregion
+
+            #region Sélection
+            private void DataGrid_Produit_SelectionChanged(object sender, SelectionChangedEventArgs e)
+            {
+                if (DataGrid_Commercials.SelectedItem != null)
+                {
+                    produit = (Produit)DataGrid_Commercials.SelectedItem;
+
+                    txtIdPro.Text = Convert.ToString(produit.ID);
+                    txtNomPro.Text = Convert.ToString(produit.NOM);
+                    txtDescriptionProd.Text = Convert.ToString(produit.DESCRIPTION);
+                    txtPrixProd.Text = Convert.ToString(produit.PRIX);
+                }
+                else
+                {
+                    txtIdPro.Text = "";
+                    txtNomPro.Text = "";
+                    txtDescriptionProd.Text = "";
+                    txtPrixProd.Text = "";
+                }
+            }
+            #endregion
+
+        #endregion
+
+        #region Autres
+        void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
             {
                 Regex regex = new Regex(@"^[0-9]*(?:\.[0-9]*)?$");
                 e.Handled = !regex.IsMatch(e.Text);
@@ -341,5 +454,5 @@ namespace Application_Lourde_CRM
                 Settings.ShowDialog();
             }
             #endregion
-    }
+        }
 }

@@ -10,7 +10,7 @@
         <ImageBrush ImageSource="background.png"/>
     </Window.Background>
     <Grid>
-        <Button x:Name="btnValider" Content="Valider" HorizontalAlignment="Left" Margin="35,259,0,0" VerticalAlignment="Top" Width="86" Height="21"/>
+        <Button x:Name="btnValider" Content="Valider" HorizontalAlignment="Left" Margin="35,259,0,0" VerticalAlignment="Top" Width="86" Height="21" Click="btnValider_Click"/>
         <Button x:Name="btnAnnuler" Content="Annuler" HorizontalAlignment="Left" Margin="141,259,0,0" VerticalAlignment="Top" Width="86" Height="21" Click="btnAnnuler_Click"/>
         <TabControl Margin="10,7,10,42">
             <TabControl.Background>

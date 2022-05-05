@@ -101,6 +101,11 @@ namespace Application_Lourde_CRM
             get { return Code_Postal; }
             set { Code_Postal = value; }
         }
+
+        public override string ToString()
+        {
+            return Nom + " " + Prenom;
+        }
         #endregion
     }
 }

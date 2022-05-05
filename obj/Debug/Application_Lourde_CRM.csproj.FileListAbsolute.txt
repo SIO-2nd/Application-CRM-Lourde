@@ -93,3 +93,5 @@ C:\Users\Philippe\Documents\GitHub\Application-CRM-Lourde\obj\Debug\Application_
 C:\Users\Philippe\Documents\GitHub\Application-CRM-Lourde\obj\Debug\Application_Lourde_CRM.csproj.GenerateResource.cache
 C:\Users\Philippe\Documents\GitHub\Application-CRM-Lourde\obj\Debug\Application_Lourde_CRM.csproj.CoreCompileInputs.cache
 C:\Users\Philippe\Documents\GitHub\Application-CRM-Lourde\obj\Debug\Application_Lourde_CRM.csproj.CopyComplete
+C:\Users\Philippe\Documents\GitHub\Application-CRM-Lourde\obj\Debug\Settings.g.cs
+C:\Users\Philippe\Documents\GitHub\Application-CRM-Lourde\obj\Debug\Settings.baml

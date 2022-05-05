@@ -117,8 +117,7 @@ namespace Application_Lourde_CRM
         #region Methodes
         public override string ToString()
         {
-            // Méthode ToString() surchargée qui écrase la méthode ToString() de base
-            return Convert.ToString(Id);
+            return Nom + " " + Prenom;
         }
         #endregion
     }
