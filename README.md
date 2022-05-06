@@ -22,9 +22,13 @@ et la Suppression des clients, des prospects, des rendez-vous et la visualisatio
 
 <img src="img\Datas.png"/>
 
-<p>Ainsi qu'une partie pour altérer ces données ou en ajouter de nouvelles</p>
+<p>Une partie pour altérer ces données, en ajouter de nouvelles ou en supprimer</p>
 
 <img src="img\Form.png"/>
+
+<p>Ainsi qu'une partie de paramètres pour modifier ses identifiant ou ceux de la base de données que l'application va utiliser</p>
+
+<img src="img\Settings.png"/>
 
 <h2 id="docs">Documentation développeur</h2>
 
