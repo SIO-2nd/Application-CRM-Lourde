@@ -12,11 +12,11 @@ et la Suppression des clients, des prospects, des rendez-vous et la visualisatio
 
 <p>Voici son interface principale</p>
 
-<img src="img\Interface.png"/>
+<img src="img\App.png"/>
 
 <p>Elle a plusieurs onglets</p>
 
-<img src="img\Tabs.png"/>
+<img src="img\Menus.png"/>
 
 <p>Une zone d'affichage des différentes données</p>
 
@@ -63,53 +63,64 @@ et la Suppression des clients, des prospects, des rendez-vous et la visualisatio
 <p>Elle récupère les informations de la base de données utilisant cette méthode</p>
 
 ```
-        public static List<Liste> GetListe()
+        public List<List> GetList()
         {
             try
             {
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText = "select * from table";
+                requete = "select * from table";
 
-                SqlDataReader dataReader = command.ExecuteReader();
-                List<Liste> cListe = new List<Liste>();
-                while (dataReader.Read())
+                connexion.Open();
+
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
+                MySqlDataReader resultat = commande.ExecuteReader();
+
+                List<List> cList = new List<List>();
+
+                while (resultat.Read())
                 {
-                    Liste tmpListe = new Liste(
-                        Convert.ToInt32(dataReader["Number"]),
-                        Convert.ToString(dataReader["Text"])
-                    );
-                    cListe.Add(tmpListe);
+                    List tmpList = new List(
+                        Convert.ToInt32(resultat["Number"]), 
+                        Convert.ToString(resultat["String"]));
+                    cList.Add(tmpList);
                 }
-                dataReader.Close();
-                return cListe;
+
+                connexion.Close();
+                return cList;
             }
-            catch
+            catch (MySqlException error)
             {
-                Console.WriteLine("Erreur GetListe");
-                return new List<Liste>();
+                connexion.Close();
+                Console.WriteLine("Erreur GetList : " + error.Message);
+                return new List<List>();
             }
+
         }
 ```
 
 <p>Elle ajoute des données dans la base de données utilisant cette méthode</p>
 
 ```
-        public static void PutListe(Liste lst)
+        public void PostList(List List)
         {
             try
             {
-                String requete = "INSERT INTO table(Number, Text) VALUES (@Text, @Number)";
+                requete = "INSERT INTO table(number, text) VALUES (@Number, @Text)";
 
-                SqlCommand command = new SqlCommand(requete, connection);
+                connexion.Open();
 
-                command.Parameters.AddWithValue("@Number", Convert.ToString(lst.Number));
-                command.Parameters.AddWithValue("@Text", Convert.ToString(lst.Text));
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
 
-                command.ExecuteNonQuery();
+                commande.Parameters.AddWithValue("@Number", List.NUMBER);
+                commande.Parameters.AddWithValue("@Text", List.TEXT);
+
+                commande.ExecuteNonQuery();
+
+                connexion.Close();
             }
-            catch
+            catch (MySqlException ex)
             {
-                Console.WriteLine("Erreur PutListe");
+                connexion.Close();
+                Console.WriteLine("Erreur PostList : " + ex.Message);
             }
         }
 ```
@@ -117,22 +128,27 @@ et la Suppression des clients, des prospects, des rendez-vous et la visualisatio
 <p>Elle modifie des données dans la base de données utilisant cette méthode</p>
 
 ```
-        public static void EditListe(Liste lst)
+        public void PutList(List List)
         {
             try
             {
-                String requete = "update table set Number = @Number, Text = @Text";
+                requete = "update table set number = @Number, text = @Text where number = @Number";
 
-                SqlCommand command = new SqlCommand(requete, connection);
+                connexion.Open();
 
-                command.Parameters.AddWithValue("@Number", Convert.ToString(com.Number));
-                command.Parameters.AddWithValue("@Text", Convert.ToString(com.Text));
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
 
-                command.ExecuteNonQuery();
+                commande.Parameters.AddWithValue("@Number", Convert.ToString(List.NUMBER));
+                commande.Parameters.AddWithValue("@Text", Convert.ToString(List.TEXT));
+
+                commande.ExecuteNonQuery();
+
+                connexion.Close();
             }
-            catch
+            catch (MySqlException ex)
             {
-                Console.WriteLine("Erreur EditListe");
+                connexion.Close();
+                Console.WriteLine("Erreur PutList : " + ex.Message);
             }
         }
 ```
@@ -140,17 +156,26 @@ et la Suppression des clients, des prospects, des rendez-vous et la visualisatio
 <p>Elle supprime des données dans la base de données utilisant cette méthode</p>
 
 ```
-        public static void DeleteListe(string Number)
+        public void DeleteList(int id)
         {
             try
             {
-                SqlCommand command = connection.CreateCommand();
-                command.CommandText = "delete from commercial where Number = " + Number;
-                command.ExecuteNonQuery();
+                requete = "delete from table where number = @Number";
+
+                connexion.Open();
+
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
+
+                commande.Parameters.AddWithValue("@Number", Convert.ToString(number));
+
+                commande.ExecuteNonQuery();
+
+                connexion.Close();
             }
-            catch
+            catch (MySqlException ex)
             {
-                Console.WriteLine("Erreur DeleteListe");
+                connexion.Close();
+                Console.WriteLine("Erreur DeleteList " + ex.Message);
             }
         }
 ```
