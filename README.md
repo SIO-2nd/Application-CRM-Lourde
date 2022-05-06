@@ -20,7 +20,7 @@ et la Suppression des clients, des prospects, des rendez-vous et la visualisatio
 
 <p>Une zone d'affichage des différentes données</p>
 
-<img src="img\Datagrid.png"/>
+<img src="img\Datas.png"/>
 
 <p>Ainsi qu'une partie pour altérer ces données ou en ajouter de nouvelles</p>
 
