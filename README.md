@@ -26,7 +26,7 @@ et la Suppression des clients, des prospects, des rendez-vous et la visualisatio
 
 <img src="img\Form.png"/>
 
-<p>Ainsi qu'une partie de paramètres pour modifier ses identifiant ou ceux de la base de données que l'application va utiliser</p>
+<p>Ainsi qu'une partie de paramètres pour modifier ses identifiants ou ceux de la base de données utilisée</p>
 
 <img src="img\Settings.png"/>
 
