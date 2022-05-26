@@ -105,7 +105,7 @@ namespace Application_Lourde_CRM
                 DataGrid_Clients.ItemsSource = list_client;
                 DataGrid_Commercials.ItemsSource = list_commercials;
                 DataGrid_Factures.ItemsSource = list_factures;
-                //DataGrid_RendezVous.ItemsSource = list_rendez_vous; 
+                DataGrid_RendezVous.ItemsSource = list_rendez_vous;
         }
         
             #region Prospects
@@ -320,7 +320,7 @@ namespace Application_Lourde_CRM
             {
                 list_rendez_vous = database.GetRdv();
                 DataGrid_RendezVous.ItemsSource = list_rendez_vous;
-            }
+        }
             #endregion
 
             #region Sélection
@@ -332,19 +332,16 @@ namespace Application_Lourde_CRM
 
                     txtIdRdv.Text = Convert.ToString(rendez_vous.ID);
                     txtDateRdv.Text = Convert.ToString(rendez_vous.DATE);
-                    txtPrenomCli.Text = Convert.ToString(rendez_vous.COMMERCIAL.ID);
-                    txtMailCli.Text = Convert.ToString(rendez_vous.COMMERCIAL.ID);
+                    cboCommercial.Text = Convert.ToString(rendez_vous.COMMERCIAL);
+                    cboContact.Text = Convert.ToString(rendez_vous.CONTACT);
+                    
                 }
                 else
                 {
                     txtIdRdv.Text = "";
-                txtDateRdv.Text = "";
-                    txtPrenomCli.Text = "";
-                    txtMailCli.Text = "";
-                    txtTelCli.Text = "";
-                    txtAdresseCli.Text = "";
-                    txtVilleCli.Text = "";
-                    txtCpCli.Text = "";
+                    txtDateRdv.Text = "";
+                    cboCommercial.Text = "";
+                    cboContact.Text = "";
                 }
             }
             #endregion
@@ -352,7 +349,7 @@ namespace Application_Lourde_CRM
             #region Ajouter
             private void ButtonAjouterRdv_Click(object sender, RoutedEventArgs e)
             {
-
+                
             }
             #endregion
 

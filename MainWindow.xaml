@@ -137,30 +137,14 @@
             </TabItem>
             <TabItem Header="Rendez-vous" Opacity="0.9">
                 <Grid>
-                    <DataGrid x:Name="DataGrid_RendezVous" HorizontalAlignment="Left" Height="385" Margin="10,10,0,0" VerticalAlignment="Top" Width="375" AutoGenerateColumns="True" SelectionChanged="DataGrid_RendezVous_SelectionChanged" IsReadOnly="True">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <DataGrid x:Name="DataGrid_RendezVous" ItemsSource="{Binding}" HorizontalAlignment="Left" Height="385" Margin="10,10,0,0" VerticalAlignment="Top" Width="375" AutoGenerateColumns="True" SelectionChanged="DataGrid_RendezVous_SelectionChanged" IsReadOnly="True">
                         <DataGrid.Background>
                             <ImageBrush ImageSource="background_transparent_white.png"/>
                         </DataGrid.Background>
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="ID" />
-                            <DataGridTextColumn Header="Date" />
-                            <DataGridTextColumn Header="Commercial" />
-                            <DataGridTextColumn Header="Contact" />
-                            
-                            <DataGridTextColumn Header="Nom commercial" />
-                            <DataGridTextColumn Header="Prénom commercial" />
-                            <DataGridTextColumn Header="Téléphone commercial" />
-                            <DataGridTextColumn Header="Email commercial" />
 
-                            <DataGridTextColumn Header="Nom contact" />
-                            <DataGridTextColumn Header="Prénom contact" />
-                            <DataGridTextColumn Header="Téléphone contact" />
-                            <DataGridTextColumn Header="Email contact" />
-                            <DataGridTextColumn Header="Adresse contact" />
-                            <DataGridTextColumn Header="Ville contact" />
-                            <DataGridTextColumn Header="Code postal contact" />
-                        </DataGrid.Columns>
-                        <ScrollBar HorizontalAlignment="Left" VerticalAlignment="Top"/>
                     </DataGrid>
                     <TextBox x:Name="txtIdRdv" HorizontalAlignment="Left" Height="23" Margin="471,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
                     <DatePicker x:Name="txtDateRdv" HorizontalAlignment="Left" Margin="471,48,0,0" VerticalAlignment="Top" Width="120" Background="#A5FFFFFF" BorderBrush="#FF818389"/>
