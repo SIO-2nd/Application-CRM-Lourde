@@ -191,20 +191,22 @@
                         <DataGrid.Background>
                             <ImageBrush ImageSource="background_transparent_white.png"/>
                         </DataGrid.Background>
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Header="Nom" Binding="{Binding Nom}" />
-                            <DataGridTextColumn Header="Description" Binding="{Binding Description}" />
-                            <DataGridTextColumn Header="Prix" Binding="{Binding Prix}" />
-                        </DataGrid.Columns>
                     </DataGrid>
                     <TextBox x:Name="txtIdFact" HorizontalAlignment="Left" Height="23" Margin="471,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Opacity="0.75"/>
-                    <TextBox x:Name="txtIdAchat" HorizontalAlignment="Left" Height="23" Margin="471,48,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Opacity="0.75"/>
-                    <TextBox x:Name="txtIdClient" HorizontalAlignment="Left" Height="23" Margin="471,86,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Opacity="0.75"/>
-                    <Label x:Name="lblID4" Content="ID :" HorizontalAlignment="Left" Margin="442,6,0,0" VerticalAlignment="Top" Height="26" Foreground="White"/>
-                    <Label x:Name="lblIdAchat" Content="ID d'achat :" HorizontalAlignment="Left" Margin="401,45,0,0" VerticalAlignment="Top" Foreground="White"/>
-                    <Label x:Name="LblIdCli" Content="ID du client :" HorizontalAlignment="Left" Margin="394,83,0,0" VerticalAlignment="Top" Foreground="White"/>
-                    <TextBox x:Name="txtDtFact" HorizontalAlignment="Left" Height="23" Margin="471,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Opacity="0.75"/>
-                    <Label x:Name="LblIdCli_Copy" Content="Date Facture:" HorizontalAlignment="Left" Margin="394,123,0,0" VerticalAlignment="Top" Foreground="White"/>
+                    <Label x:Name="lblID4" Content="ID :" HorizontalAlignment="Left" Margin="433,7,0,0" VerticalAlignment="Top" Height="26" Foreground="White"/>
+                    <Label x:Name="lblIdAchat" Content="Produit :" HorizontalAlignment="Left" Margin="405,45,0,0" VerticalAlignment="Top" Foreground="White" RenderTransformOrigin="0.681,0.535"/>
+                    <Label x:Name="LblIdCli" Content="Client :" HorizontalAlignment="Left" Margin="409,83,0,0" VerticalAlignment="Top" Foreground="White" Height="26"/>
+                    <Label x:Name="LblIdCli_Copy" Content="Date&#xD;&#xA;" HorizontalAlignment="Left" Margin="415,123,0,0" VerticalAlignment="Top" Foreground="White" Height="24" RenderTransformOrigin="2.524,2.853"/>
+                    <DatePicker x:Name="txtDateFactures" HorizontalAlignment="Left" Margin="471,123,0,0" VerticalAlignment="Top" Width="120" Background="#A5FFFFFF" BorderBrush="#FF818389"/>
+                    <Button x:Name="btnAjouterFactures" Content="Ajouter" HorizontalAlignment="Left" Margin="471,325,0,0" VerticalAlignment="Top" Width="123"/>
+                    <Button x:Name="btnModifierFactures" Content="Modifier" HorizontalAlignment="Left" Margin="471,350,0,0" VerticalAlignment="Top" Width="123" Click="btnModifierFactures_Click"/>
+                    <Button x:Name="btnSupprimerFactures" Content="Supprimer" HorizontalAlignment="Left" Margin="471,375,0,0" VerticalAlignment="Top" Width="123" Click="btnSupprimerFactures_Click"/>
+                    <ComboBox x:Name="cboClient" HorizontalAlignment="Left" Margin="471,83,0,0" VerticalAlignment="Top" Width="120" Height="26"/>
+                    <ComboBox x:Name="cboProduit" HorizontalAlignment="Left" Margin="471,45,0,0" VerticalAlignment="Top" Width="120" Height="26"/>
+                    <Label x:Name="LblIdCli_Copy1" Content="Quantite" HorizontalAlignment="Left" Margin="404,162,0,0" VerticalAlignment="Top" Foreground="White" Height="23" RenderTransformOrigin="2.524,2.853" Width="56"/>
+                    <TextBox x:Name="txtQuantiteFact" HorizontalAlignment="Left" Height="23" Margin="471,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Opacity="0.75"/>
+                    <TextBox x:Name="txtMontantFact" HorizontalAlignment="Left" Height="23" Margin="471,197,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" Opacity="0.75"/>
+                    <Label x:Name="LblIdCli_Copy2" Content="Montant" HorizontalAlignment="Left" Margin="404,197,0,0" VerticalAlignment="Top" Foreground="White" Height="23" RenderTransformOrigin="2.524,2.853" Width="56"/>
                 </Grid>
             </TabItem>
         </TabControl>

@@ -86,7 +86,6 @@ namespace Application_Lourde_CRM
                         mdp = "";
                     }
                     
-
                     database = new MySql_Database(hote, user, mdp, bdd);
                 }
 
@@ -98,14 +97,14 @@ namespace Application_Lourde_CRM
                 list_contact = database.GetContact();
                 list_produit = database.GetProduit();
 
-                cboContact.ItemsSource = list_contact;
-                cboCommercial.ItemsSource = list_commercials;
-
                 DataGrid_Prospects.ItemsSource = list_prospects;
                 DataGrid_Clients.ItemsSource = list_client;
                 DataGrid_Commercials.ItemsSource = list_commercials;
                 DataGrid_Factures.ItemsSource = list_factures;
                 DataGrid_RendezVous.ItemsSource = list_rendez_vous;
+
+                cboContact.ItemsSource = list_contact;
+                cboCommercial.ItemsSource = list_commercials;
         }
         
             #region Prospects
@@ -320,7 +319,7 @@ namespace Application_Lourde_CRM
             {
                 list_rendez_vous = database.GetRdv();
                 DataGrid_RendezVous.ItemsSource = list_rendez_vous;
-        }
+            }
             #endregion
 
             #region Sélection
@@ -349,21 +348,35 @@ namespace Application_Lourde_CRM
             #region Ajouter
             private void ButtonAjouterRdv_Click(object sender, RoutedEventArgs e)
             {
-                
+                commercial = (Commercial)cboCommercial.SelectedItem;
+                contact = (Contact)cboContact.SelectedItem;
+
+                rendez_vous = new Rendez_Vous(Convert.ToInt32(txtIdRdv.Text), Convert.ToDateTime(txtDateRdv.Text), commercial, contact);
+
+                database.PostRdv(rendez_vous);
+
+                refreshRendez_Vous();
             }
             #endregion
 
             #region Modifier
             private void ButtonModifierRdv_Click(object sender, RoutedEventArgs e)
             {
+                commercial = (Commercial)cboCommercial.SelectedItem;
+                contact = (Contact)cboContact.SelectedItem;
 
+                rendez_vous = new Rendez_Vous(Convert.ToInt32(txtIdRdv.Text), Convert.ToDateTime(txtDateRdv.Text), commercial, contact);
+
+                database.PutRdv(rendez_vous);
+                refreshRendez_Vous();
             }
             #endregion
 
             #region Supprimer
             private void ButtonSupprimerRdv_Click(object sender, RoutedEventArgs e)
             {
-
+                database.DeleteRdv(Convert.ToInt32(txtIdRdv.Text));
+                refreshRendez_Vous();
             }
             #endregion
 
@@ -384,24 +397,73 @@ namespace Application_Lourde_CRM
             {
                 if (DataGrid_Factures.SelectedItem != null)
                 {
-                    Facture factureSelected = (Facture)DataGrid_Factures.SelectedItem;
+                    facture = (Facture)DataGrid_Factures.SelectedItem;
 
-                    txtIdFact.Text = Convert.ToString(factureSelected.ID);
-                    txtIdAchat.Text = Convert.ToString(factureSelected.PRODUIT.ID);
-                    txtIdClient.Text = Convert.ToString(factureSelected.CLIENT.ID);
-                    txtDtFact.Text = Convert.ToString(factureSelected.DATE);
+                    cboProduit.Text = Convert.ToString(facture.PRODUIT);
+                    cboClient.Text = Convert.ToString(facture.CLIENT);
+                    txtDateFactures.Text = Convert.ToString(facture.DATE);
+                    txtIdFact.Text = Convert.ToString(facture.ID);
+                    txtQuantiteFact.Text = Convert.ToString(facture.QUANTITE);
+                    txtMontantFact.Text = Convert.ToString(facture.MONTANT);
                 }
                 else
                 {
+                    cboProduit.Text = "";
+                    cboClient.Text = "";
+                    txtDateFactures.Text = "";
                     txtIdFact.Text = "";
-                    txtIdAchat.Text = "";
-                    txtIdClient.Text = "";
-                    txtDtFact.Text = "";
+                    txtQuantiteFact.Text = "";
+                    txtMontantFact.Text = "";
                 }
             }
-        #endregion
+            #endregion
 
-        #endregion
+            #region Ajouter
+            private void btnAjouterFactures_Click(object sender, RoutedEventArgs e)
+            {
+                produit = (Produit)cboProduit.SelectedItem;
+                client = (Client)cboClient.SelectedItem;
+
+                double montant = Convert.ToInt32(txtQuantiteFact.Text);
+                int quantite = Convert.ToInt32(txtMontantFact.Text);
+
+                montant = quantite * produit.PRIX;
+
+                facture = new Facture(client, produit, quantite, Convert.ToDateTime(txtDateFactures.Text), montant);
+
+                database.PostFacture(facture);
+
+                refreshFacture();
+            }
+            #endregion
+
+            #region Modifier
+            private void btnModifierFactures_Click(object sender, RoutedEventArgs e)
+            {
+                produit = (Produit)cboProduit.SelectedItem;
+                client = (Client)cboClient.SelectedItem;
+
+                double montant = Convert.ToInt32(txtQuantiteFact.Text);
+                int quantite = Convert.ToInt32(txtMontantFact.Text);
+
+                montant = quantite * produit.PRIX;
+
+                facture = new Facture(client, produit, quantite, Convert.ToDateTime(txtDateFactures.Text), montant);
+
+                database.PutFacture(facture);
+                refreshFacture();
+            }
+            #endregion
+
+            #region Supprimer
+            private void btnSupprimerFactures_Click(object sender, RoutedEventArgs e)
+            {
+                database.DeleteFacture(Convert.ToInt32(txtIdFact.Text));
+                refreshFacture();
+            }
+            #endregion
+
+            #endregion
 
             #region Contact
 
@@ -472,7 +534,7 @@ namespace Application_Lourde_CRM
             }
         #endregion
 
-        #endregion
+            #endregion
 
             #region Produit
 
@@ -504,7 +566,7 @@ namespace Application_Lourde_CRM
                     txtPrixProd.Text = "";
                 }
             }
-        #endregion
+            #endregion
 
             #region Ajouter
             private void btnAjouterProd_Click(object sender, RoutedEventArgs e)
@@ -515,7 +577,7 @@ namespace Application_Lourde_CRM
 
                 refreshProduit();
             }
-        #endregion
+            #endregion
 
             #region Modifier
             private void btnModifierProd_Click(object sender, RoutedEventArgs e)
@@ -549,6 +611,7 @@ namespace Application_Lourde_CRM
                 Settings Settings = new Settings();
                 Settings.ShowDialog();
             }
-            #endregion
+        #endregion
+
         }
 }

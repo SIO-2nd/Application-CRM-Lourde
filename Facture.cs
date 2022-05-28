@@ -37,6 +37,14 @@ namespace Application_Lourde_CRM
             Montant = montant;
         }
 
+        public Facture(Client client, Produit produit, int quantite, DateTime date, double montant)
+        {
+            Client = client;
+            Produit = produit;
+            Quantite = quantite;
+            Date = date;
+            Montant = montant;
+        }
         #endregion
 
         #region Accesseurs/Mutateurs
@@ -80,19 +88,6 @@ namespace Application_Lourde_CRM
         #endregion
 
         #region Méthode
-
-        public string Client_NomPrenom()
-        {
-            string nom_prenom = Client.NOM + Client.PRENOM;
-            return nom_prenom;
-        }
-
-        public string Produit_Nom()
-        {
-            string nom = Produit.NOM;
-            return nom;
-        }
-
         #endregion
     }
 }

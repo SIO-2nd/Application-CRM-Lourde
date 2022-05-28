@@ -67,6 +67,10 @@ namespace Application_Lourde_CRM
             set { Description = value; }
         }
 
+        public override string ToString()
+        {
+            return Nom;
+        }
         #endregion
 
         #region Methodes
