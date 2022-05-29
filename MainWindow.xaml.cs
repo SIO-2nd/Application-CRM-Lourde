@@ -89,23 +89,32 @@ namespace Application_Lourde_CRM
                     database = new MySql_Database(hote, user, mdp, bdd);
                 }
 
+                //Collection
                 list_prospects = database.GetProspect();
                 list_client = database.GetClient();
                 list_commercials = database.GetCommercial();
+                list_contact = database.GetContact();
                 list_rendez_vous = database.GetRdv();
                 list_factures = database.GetFacture();
-                list_contact = database.GetContact();
                 list_produit = database.GetProduit();
 
+                //DataGrid
                 DataGrid_Prospects.ItemsSource = list_prospects;
                 DataGrid_Clients.ItemsSource = list_client;
                 DataGrid_Commercials.ItemsSource = list_commercials;
-                DataGrid_Factures.ItemsSource = list_factures;
+                DataGrid_Contact.ItemsSource = list_contact;
+                DataGrid_Produits.ItemsSource = list_produit;
+                DataGrid_Facture.ItemsSource = list_factures;
+
+                DataGrid_Facture.ItemsSource = list_factures;
                 DataGrid_RendezVous.ItemsSource = list_rendez_vous;
 
+                // Combox box
                 cboContact.ItemsSource = list_contact;
                 cboCommercial.ItemsSource = list_commercials;
-        }
+                cboProduit.ItemsSource = list_produit;
+                cboClient.ItemsSource = list_client;
+            }
         
             #region Prospects
 
@@ -170,8 +179,11 @@ namespace Application_Lourde_CRM
             #region Supprimer
             private void btnSupprimerPro_Click(object sender, RoutedEventArgs e)
             {
-                database.DeleteProspect(Convert.ToInt32(txtIdPro.Text));
-                refreshProspect();
+                if(DataGrid_Prospects.SelectedItem != null)
+                {
+                    database.DeleteProspect(Convert.ToInt32(txtIdPro.Text));
+                    refreshProspect();
+                }
             }
             #endregion
 
@@ -240,8 +252,11 @@ namespace Application_Lourde_CRM
             #region Supprimer
             private void btnSupprimerCli_Click(object sender, RoutedEventArgs e)
             {
-                database.DeleteClient(Convert.ToInt32(txtIdCli.Text));
-                refreshClients();
+                if(DataGrid_Clients.SelectedItem != null)
+                {
+                    database.DeleteClient(Convert.ToInt32(txtIdCli.Text));
+                    refreshClients();
+                }
             }
             #endregion
 
@@ -305,8 +320,11 @@ namespace Application_Lourde_CRM
             #region Supprimer
             private void btnSupprimerCom_Click(object sender, RoutedEventArgs e)
             {
-                database.DeleteCommercial(Convert.ToInt32(txtIdCom.Text));
-                refreshCommercials();
+                if(DataGrid_Commercials.SelectedItem != null)
+                {
+                    database.DeleteCommercial(Convert.ToInt32(txtIdCom.Text));
+                    refreshCommercials();
+                }
             }
             #endregion
 
@@ -375,8 +393,11 @@ namespace Application_Lourde_CRM
             #region Supprimer
             private void ButtonSupprimerRdv_Click(object sender, RoutedEventArgs e)
             {
-                database.DeleteRdv(Convert.ToInt32(txtIdRdv.Text));
-                refreshRendez_Vous();
+                if(DataGrid_RendezVous.SelectedItem != null)
+                {
+                    database.DeleteRdv(Convert.ToInt32(txtIdRdv.Text));
+                    refreshRendez_Vous();
+                }
             }
             #endregion
 
@@ -388,16 +409,16 @@ namespace Application_Lourde_CRM
             private void refreshFacture()
             {
                 list_factures = database.GetFacture();
-                DataGrid_Factures.ItemsSource = list_factures;
+                DataGrid_Facture.ItemsSource = list_factures;
             }
             #endregion
 
             #region Sélection
-            private void DataGrid_Factures_SelectionChanged(object sender, SelectionChangedEventArgs e)
+            private void DataGrid_Facture_SelectionChanged(object sender, SelectionChangedEventArgs e)
             {
-                if (DataGrid_Factures.SelectedItem != null)
+                if (DataGrid_Facture.SelectedItem != null)
                 {
-                    facture = (Facture)DataGrid_Factures.SelectedItem;
+                    facture = (Facture)DataGrid_Facture.SelectedItem;
 
                     cboProduit.Text = Convert.ToString(facture.PRODUIT);
                     cboClient.Text = Convert.ToString(facture.CLIENT);
@@ -423,11 +444,11 @@ namespace Application_Lourde_CRM
             {
                 produit = (Produit)cboProduit.SelectedItem;
                 client = (Client)cboClient.SelectedItem;
+                
+                int quantite = Convert.ToInt32(txtQuantiteFact.Text);
+                double montant = quantite * produit.PRIX;
 
-                double montant = Convert.ToInt32(txtQuantiteFact.Text);
-                int quantite = Convert.ToInt32(txtMontantFact.Text);
-
-                montant = quantite * produit.PRIX;
+                txtMontantFact.Text = Convert.ToString(montant);
 
                 facture = new Facture(client, produit, quantite, Convert.ToDateTime(txtDateFactures.Text), montant);
 
@@ -443,10 +464,12 @@ namespace Application_Lourde_CRM
                 produit = (Produit)cboProduit.SelectedItem;
                 client = (Client)cboClient.SelectedItem;
 
-                double montant = Convert.ToInt32(txtQuantiteFact.Text);
-                int quantite = Convert.ToInt32(txtMontantFact.Text);
+                int quantite = Convert.ToInt32(txtQuantiteFact.Text);
+                double montant = 0;
 
                 montant = quantite * produit.PRIX;
+
+                txtMontantFact.Text = Convert.ToString(montant);
 
                 facture = new Facture(client, produit, quantite, Convert.ToDateTime(txtDateFactures.Text), montant);
 
@@ -458,8 +481,27 @@ namespace Application_Lourde_CRM
             #region Supprimer
             private void btnSupprimerFactures_Click(object sender, RoutedEventArgs e)
             {
-                database.DeleteFacture(Convert.ToInt32(txtIdFact.Text));
-                refreshFacture();
+                if(DataGrid_Facture.SelectedItem != null)
+                {
+                    database.DeleteFacture(Convert.ToInt32(txtIdFact.Text));
+                    refreshFacture();
+                }
+            }
+            #endregion
+
+            #region Autre
+            private void txtQuantiteFact_TextChanged(object sender, TextChangedEventArgs e)
+            {
+                if(null != (produit = (Produit)cboProduit.SelectedItem))
+                {
+                    double montant = Convert.ToInt32(txtQuantiteFact.Text) * produit.PRIX;
+
+                    txtMontantFact.Text = Convert.ToString(montant);
+                }
+                else
+                {
+                    txtMontantFact.Text = "?";
+                }
             }
             #endregion
 
@@ -471,68 +513,71 @@ namespace Application_Lourde_CRM
             private void refreshContact()
             {
                 list_contact = database.GetContact();
-                DataGrid_Contacts.ItemsSource = list_contact;
+                DataGrid_Contact.ItemsSource = list_contact;
             }
             #endregion
 
             #region Sélection
             private void DataGrid_Contact_SelectionChanged(object sender, SelectionChangedEventArgs e)
             {
-                if (DataGrid_Contacts.SelectedItem != null)
+                if (DataGrid_Contact.SelectedItem != null)
                 {
-                    contact = (Contact)DataGrid_Commercials.SelectedItem;
+                    contact = (Contact)DataGrid_Contact.SelectedItem;
 
-                    txtIdCon.Text = Convert.ToString(contact.ID);
-                    txtNomCon.Text = Convert.ToString(contact.NOM);
-                    txtPrenomCon.Text = Convert.ToString(contact.PRENOM);
-                    txtMailCon.Text = Convert.ToString(contact.EMAIL);
-                    txtTelCon.Text = Convert.ToString(contact.TELEPHONE);
-                    txtAdresseCon.Text = Convert.ToString(contact.ADRESSE);
-                    txtVilleCon.Text = Convert.ToString(contact.VILLE);
-                    txtCpCon.Text = Convert.ToString(contact.CODE_POSTAL);
+                    txtIdContact.Text = Convert.ToString(contact.ID);
+                    txtNomContact.Text = Convert.ToString(contact.NOM);
+                    txtPrenomContact.Text = Convert.ToString(contact.PRENOM);
+                    txtMailContact.Text = Convert.ToString(contact.EMAIL);
+                    txtTelContact.Text = Convert.ToString(contact.TELEPHONE);
+                    txtAdresseContact.Text = Convert.ToString(contact.ADRESSE);
+                    txtVilleContact.Text = Convert.ToString(contact.VILLE);
+                    txtCpContact.Text = Convert.ToString(contact.CODE_POSTAL);
                 }
                 else
                 {
-                    txtIdCon.Text = "";
-                    txtNomCon.Text = "";
-                    txtPrenomCon.Text = "";
-                    txtMailCon.Text = "";
-                    txtTelCon.Text = "";
-                    txtAdresseCon.Text = "";
-                    txtVilleCon.Text = "";
-                    txtCpCon.Text = "";
+                    txtIdContact.Text = "";
+                    txtNomContact.Text = "";
+                    txtPrenomContact.Text = "";
+                    txtMailContact.Text = "";
+                    txtTelContact.Text = "";
+                    txtAdresseContact.Text = "";
+                    txtVilleContact.Text = "";
+                    txtCpContact.Text = "";
                 }
             }
-        #endregion
+            #endregion
 
             #region Ajouter
-            private void btnAjouterCon_Click(object sender, RoutedEventArgs e)
+            private void btnAjouterContact_Click(object sender, RoutedEventArgs e)
             {
-                contact = new Contact(txtNomCon.Text, txtPrenomCon.Text, txtTelCon.Text, txtMailCon.Text, Convert.ToString(txtAdresseCon), Convert.ToString(txtVilleCon), Convert.ToString(txtCpCon));
+                contact = new Contact(txtNomContact.Text, txtPrenomContact.Text, txtTelContact.Text, txtMailContact.Text, Convert.ToString(txtAdresseContact), Convert.ToString(txtVilleContact), Convert.ToString(txtCpContact));
 
                 database.PostContact(contact);
 
                 refreshContact();
             }
-        #endregion
+            #endregion
 
             #region Modifier
-            private void btnModifierCon_Click(object sender, RoutedEventArgs e)
+            private void btnModifierContact_Click(object sender, RoutedEventArgs e)
             {
-                contact = new Contact(Convert.ToInt32(txtIdCom.Text), txtNomCom.Text, txtPrenomCom.Text, txtTelCom.Text, txtMailCom.Text,Convert.ToString(txtAdresseCon), Convert.ToString(txtVilleCon), Convert.ToString(txtCpCon));
+                contact = new Contact(Convert.ToInt32(txtIdCom.Text), txtNomCom.Text, txtPrenomCom.Text, txtTelCom.Text, txtMailCom.Text,Convert.ToString(txtAdresseContact), Convert.ToString(txtVilleContact), Convert.ToString(txtCpContact));
 
                 database.PutContact(contact);
                 refreshContact();
             }
-        #endregion
+            #endregion
 
             #region Supprimer
-            private void btnSupprimerCon_Click(object sender, RoutedEventArgs e)
+            private void btnSupprimerContact_Click(object sender, RoutedEventArgs e)
             {
-                database.DeleteContact(Convert.ToInt32(txtIdCon.Text));
-                refreshContact();
+                if(DataGrid_Contact.SelectedItem != null)
+                {
+                    database.DeleteContact(Convert.ToInt32(txtIdContact.Text));
+                    refreshContact();
+                }
             }
-        #endregion
+            #endregion
 
             #endregion
 
@@ -549,18 +594,18 @@ namespace Application_Lourde_CRM
             #region Sélection
             private void DataGrid_Produit_SelectionChanged(object sender, SelectionChangedEventArgs e)
             {
-                if (DataGrid_Produits.SelectedItem != null)
+                if(DataGrid_Produits.SelectedItem != null)
                 {
-                    produit = (Produit)DataGrid_Commercials.SelectedItem;
+                    produit = (Produit)DataGrid_Produits.SelectedItem;
 
-                    txtIdPro.Text = Convert.ToString(produit.ID);
-                    txtNomPro.Text = Convert.ToString(produit.NOM);
+                    txtIdProduit.Text = Convert.ToString(produit.ID);
+                    txtNomProduit.Text = Convert.ToString(produit.NOM);
                     txtDescriptionProd.Text = Convert.ToString(produit.DESCRIPTION);
                     txtPrixProd.Text = Convert.ToString(produit.PRIX);
                 }
                 else
                 {
-                    txtIdPro.Text = "";
+                    txtIdProduit.Text = "";
                     txtNomPro.Text = "";
                     txtDescriptionProd.Text = "";
                     txtPrixProd.Text = "";
@@ -582,7 +627,7 @@ namespace Application_Lourde_CRM
             #region Modifier
             private void btnModifierProd_Click(object sender, RoutedEventArgs e)
             {
-                produit = new Produit(Convert.ToInt32(txtIdProd.Text), txtNomProd.Text, txtDescriptionProd.Text, Convert.ToDouble(txtPrixProd.Text));
+                produit = new Produit(Convert.ToInt32(txtIdProduit.Text), txtNomProduit.Text, txtDescriptionProd.Text, Convert.ToDouble(txtPrixProd.Text));
 
                 database.PutProduit(produit);
                 refreshProduit();
@@ -592,7 +637,7 @@ namespace Application_Lourde_CRM
             #region Supprimer
             private void btnSupprimerProd_Click(object sender, RoutedEventArgs e)
             {
-                database.DeleteProduit(Convert.ToInt32(txtIdProd.Text));
+                database.DeleteProduit(Convert.ToInt32(txtIdProduit.Text));
                 refreshProduit();
             }
             #endregion
@@ -612,6 +657,5 @@ namespace Application_Lourde_CRM
                 Settings.ShowDialog();
             }
         #endregion
-
         }
 }

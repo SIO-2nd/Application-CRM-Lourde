@@ -70,7 +70,7 @@ namespace Application_Lourde_CRM
         private void Connexion_BD()
         {
             // Chaîne de connexion
-            string chaine_connexion = "server=" + serveur + ";userid=" + user + ";password=" + password + ";database=" + database;
+            string chaine_connexion = "server=" + serveur + ";userid=" + user + ";password=" + password + ";database=" + database + "; Convert Zero Datetime=true; persist security info=True;";
 
             try
             {
@@ -392,7 +392,7 @@ namespace Application_Lourde_CRM
                 MySqlCommand commande = new MySqlCommand(requete, connexion);
                 MySqlDataReader resultat = commande.ExecuteReader();
 
-                List<Commercial> cCommercials = new List<Commercial>();
+                List<Commercial> list_commercials = new List<Commercial>();
 
                 while (resultat.Read())
                 {
@@ -405,12 +405,12 @@ namespace Application_Lourde_CRM
                             Convert.ToString(resultat["email"])
                         );
 
-                    cCommercials.Add(tmpCommercial);
+                    list_commercials.Add(tmpCommercial);
                 }
 
                 connexion.Close();
 
-                return cCommercials;
+                return list_commercials;
             }
             catch (Exception ex)
             {
@@ -915,14 +915,14 @@ namespace Application_Lourde_CRM
         {
             try
             {
-                requete = "SELECT facture.id, facture.id_client, facture.id_produit, facture.quantite, facture.date_heure, facture.montant, client.nom as nom_client, client.prenom as prenom_client, client.telephone as telephone_client, client.email as email_client, client.adresse as adresse_client, client.ville as ville_client, client.code_postal as code_postal_client, produit.nom, produit.prix, produit.description FROM `facture` INNER JOIN client ON facture.id_client = client.id INNER JOIN produit ON facture.id_produit = produit.id";
+                requete = "SELECT facture.id, facture.id_client, facture.id_produit, facture.quantite, facture.date_heure, facture.montant, client.nom as nom_client, client.prenom as prenom_client, client.telephone as telephone_client, client.email as email_client, client.adresse as adresse_client, client.ville as ville_client, client.code_postal as code_postal_client, produit.nom as nom_produit, produit.prix as prix_produit, produit.description as description_produit FROM `facture` INNER JOIN client ON facture.id_client = client.id INNER JOIN produit ON facture.id_produit = produit.id";
 
                 connexion.Open();
 
                 MySqlCommand commande = new MySqlCommand(requete, connexion);
                 MySqlDataReader resultat = commande.ExecuteReader();
 
-                List<Facture> cFacture = new List<Facture>();
+                List<Facture> list_facture = new List<Facture>();
 
                 while (resultat.Read())
                 {
@@ -939,26 +939,26 @@ namespace Application_Lourde_CRM
 
                     Produit produit = new Produit(
                             Convert.ToInt32(resultat["id_produit"]),
-                            Convert.ToString(resultat["nom"]),
-                            Convert.ToString(resultat["description"]),
-                            Convert.ToDouble(resultat["prix"])
+                            Convert.ToString(resultat["nom_produit"]),
+                            Convert.ToString(resultat["description_produit"]),
+                            Convert.ToDouble(resultat["prix_produit"])
                         );
 
-                    Facture tmpFacture = new Facture(
+                    Facture facture = new Facture(
                             Convert.ToInt32(resultat["id"]),
                             client,
                             produit,
                             Convert.ToInt32(resultat["quantite"]),
-                            Convert.ToDateTime(resultat["Date"]),
+                            Convert.ToDateTime(resultat["date_heure"]),
                             Convert.ToDouble(resultat["montant"])
                         );
 
-                    cFacture.Add(tmpFacture);
-
-                    connexion.Close();
+                    list_facture.Add(facture);
                 }
 
-                return cFacture;
+                connexion.Close();
+
+                return list_facture;
             }
             catch (MySqlException ex)
             {
