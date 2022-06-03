@@ -5,7 +5,7 @@ using System.Windows;
 
 namespace Application_Lourde_CRM
 {
-    class MySql_Database
+    public class MySql_Database
     {
         #region Champs
 
@@ -765,12 +765,72 @@ namespace Application_Lourde_CRM
 
         #region Rendez-vous
 
+        #region Cible
+        
+        public Rendez_Vous GetTarget(int ID)
+        {
+            try
+            {
+                requete = "select rendez_vous.id, rendez_vous.date_heure, rendez_vous.id_commercial, rendez_vous.id_contact, rendez_vous.lieux,commercial.nom as nom_commercial, commercial.prenom as prenom_commercial, commercial.telephone as telephone_commercial, commercial.email as email_commercial, contact.nom as nom_contact, contact.prenom as prenom_contact, contact.telephone as telephone_contact, contact.email as email_contact, contact.adresse as adresse_contact, contact.ville as ville_contact, contact.code_postal as code_postal_contact from rendez_vous INNER JOIN commercial ON rendez_vous.id_commercial = commercial.id INNER JOIN contact ON rendez_vous.id_contact = contact.id WHERE rendez_vous.id = @ID;";
+
+                connexion.Open();
+
+                MySqlCommand commande = new MySqlCommand(requete, connexion);
+                MySqlDataReader resultat = commande.ExecuteReader();
+
+                Rendez_Vous rendez_vous = null;
+                Commercial commercial = null;
+                Contact contact = null;
+
+                while (resultat.Read())
+                {
+                    commercial = new Commercial(
+                        Convert.ToInt32(resultat["id_commercial"]),
+                        Convert.ToString(resultat["nom_commercial"]),
+                        Convert.ToString(resultat["prenom_commercial"]),
+                        Convert.ToString(resultat["telephone_commercial"]),
+                        Convert.ToString(resultat["email_commercial"])
+                    );
+
+                    contact = new Contact(
+                        Convert.ToInt32(resultat["id_contact"]),
+                        Convert.ToString(resultat["nom_contact"]),
+                        Convert.ToString(resultat["prenom_contact"]),
+                        Convert.ToString(resultat["telephone_contact"]),
+                        Convert.ToString(resultat["email_contact"]),
+                        Convert.ToString(resultat["adresse_contact"]),
+                        Convert.ToString(resultat["ville_contact"]),
+                        Convert.ToString(resultat["code_postal_contact"])
+                    );
+
+                    rendez_vous = new Rendez_Vous
+                        (
+                            Convert.ToInt32(resultat["id"]),
+                            Convert.ToDateTime(resultat["date_heure"]),
+                            commercial,
+                            contact,
+                            Convert.ToString(resultat["lieux"])
+                        );
+                }
+
+                return rendez_vous;
+            }
+            catch (MySqlException ex)
+            {
+                connexion.Close();
+                Console.WriteLine("Erreur GetTarget " + ex.Message);
+                return new Rendez_Vous();
+            }
+        }
+        
+        #endregion
+
         #region Lire
         public List<Rendez_Vous> GetRdv()
         {
             try
             {
-                requete = "select rendez_vous.id, rendez_vous.date_heure, rendez_vous.id_commercial, rendez_vous.id_contact, commercial.nom as nom_commercial, commercial.prenom as prenom_commercial, commercial.telephone as telephone_commercial, commercial.email as email_commercial, contact.nom as nom_contact, contact.prenom as prenom_contact, contact.telephone as telephone_contact, contact.email as email_contact, contact.adresse as adresse_contact, contact.ville as ville_contact, contact.code_postal as code_postal_contact from rendez_vous INNER JOIN commercial ON rendez_vous.id_commercial = commercial.id INNER JOIN contact ON rendez_vous.id_contact = contact.id;";
+                requete = "select rendez_vous.id, rendez_vous.date_heure, rendez_vous.id_commercial, rendez_vous.id_contact, rendez_vous.lieux,commercial.nom as nom_commercial, commercial.prenom as prenom_commercial, commercial.telephone as telephone_commercial, commercial.email as email_commercial, contact.nom as nom_contact, contact.prenom as prenom_contact, contact.telephone as telephone_contact, contact.email as email_contact, contact.adresse as adresse_contact, contact.ville as ville_contact, contact.code_postal as code_postal_contact from rendez_vous INNER JOIN commercial ON rendez_vous.id_commercial = commercial.id INNER JOIN contact ON rendez_vous.id_contact = contact.id;";
 
                 connexion.Open();
 
@@ -805,7 +865,8 @@ namespace Application_Lourde_CRM
                             Convert.ToInt32(resultat["id"]),
                             Convert.ToDateTime(resultat["date_heure"]),
                             commercial,
-                            contact
+                            contact,
+                            Convert.ToString(resultat["lieux"])
                         );
 
 
@@ -831,7 +892,7 @@ namespace Application_Lourde_CRM
         {
             try
             {
-                requete = "INSERT INTO rendez_vous(date_heure, id_commercial, id_contact) VALUES (@Date_Heure, @Id_Commercial, @Id_Contact)";
+                requete = "INSERT INTO rendez_vous(date_heure, id_commercial, id_contact, lieux) VALUES (@Date_Heure, @Id_Commercial, @Id_Contact, @lieux)";
 
                 connexion.Open();
 
@@ -840,6 +901,7 @@ namespace Application_Lourde_CRM
                 commande.Parameters.AddWithValue("@Date_Heure", rendez_vous.DATE);
                 commande.Parameters.AddWithValue("@Id_Commercial", rendez_vous.COMMERCIAL.ID);
                 commande.Parameters.AddWithValue("@Id_Contact", rendez_vous.CONTACT.ID);
+                commande.Parameters.AddWithValue("@lieux", rendez_vous.LIEUX);
 
                 commande.ExecuteNonQuery();
 
@@ -858,7 +920,7 @@ namespace Application_Lourde_CRM
         {
             try
             {
-                requete = "update rendez_vous set date_heure = @Date_Heure, id_commercial = @Id_Commercial, id_contact = @Id_Contact where id = @Id";
+                requete = "update rendez_vous set date_heure = @Date_Heure, id_commercial = @Id_Commercial, id_contact = @Id_Contact, lieux = @lieux where id = @Id";
 
                 connexion.Open();
 
@@ -868,6 +930,7 @@ namespace Application_Lourde_CRM
                 commande.Parameters.AddWithValue("@Id_Commercial", rendez_Vous.COMMERCIAL.ID);
                 commande.Parameters.AddWithValue("@Id_Contact", rendez_Vous.CONTACT.ID);
                 commande.Parameters.AddWithValue("@Id", rendez_Vous.ID);
+                commande.Parameters.AddWithValue("@lieux", rendez_Vous.LIEUX);
 
                 commande.ExecuteNonQuery();
 

@@ -14,22 +14,29 @@ namespace Application_Lourde_CRM
         private DateTime Date;
         private Commercial Commercial;
         private Contact Contact;
+        private string Lieux;
         #endregion
 
         #region Constructeurs
-        public Rendez_Vous(int id, DateTime date, Commercial commercial, Contact contact)
+        public Rendez_Vous()
+        {
+
+        }
+        public Rendez_Vous(int id, DateTime date, Commercial commercial, Contact contact, string lieux)
         {
             Id = id;
             Date = date;
             Commercial = commercial;
             Contact = contact;
+            Lieux = lieux;
         }
 
-        public Rendez_Vous(DateTime date, Commercial commercial, Contact contact)
+        public Rendez_Vous(DateTime date, Commercial commercial, Contact contact, string lieux)
         {
             Date = date;
             Commercial = commercial;
             Contact = contact;
+            Lieux = lieux;
         }
         #endregion
 
@@ -110,6 +117,12 @@ namespace Application_Lourde_CRM
         {
             get { return Contact.CODE_POSTAL; }
             set { Contact.CODE_POSTAL = value; }
+        }
+
+        public string LIEUX
+        {
+            get { return Lieux; }
+            set { Lieux = value; }
         }
         #endregion
 

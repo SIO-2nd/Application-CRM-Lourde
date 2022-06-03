@@ -351,7 +351,9 @@ namespace Application_Lourde_CRM
                     txtDateRdv.Text = Convert.ToString(rendez_vous.DATE);
                     cboCommercial.Text = Convert.ToString(rendez_vous.COMMERCIAL);
                     cboContact.Text = Convert.ToString(rendez_vous.CONTACT);
-                    
+                    txtlieuxRdv.Text = Convert.ToString(rendez_vous.LIEUX);
+
+
                 }
                 else
                 {
@@ -359,6 +361,7 @@ namespace Application_Lourde_CRM
                     txtDateRdv.Text = "";
                     cboCommercial.Text = "";
                     cboContact.Text = "";
+                    txtlieuxRdv.Text = "";
                 }
             }
             #endregion
@@ -369,7 +372,7 @@ namespace Application_Lourde_CRM
                 commercial = (Commercial)cboCommercial.SelectedItem;
                 contact = (Contact)cboContact.SelectedItem;
 
-                rendez_vous = new Rendez_Vous(Convert.ToInt32(txtIdRdv.Text), Convert.ToDateTime(txtDateRdv.Text), commercial, contact);
+                rendez_vous = new Rendez_Vous(Convert.ToDateTime(txtDateRdv.Text), commercial, contact, txtlieuxRdv.Text);
 
                 database.PostRdv(rendez_vous);
 
@@ -383,7 +386,7 @@ namespace Application_Lourde_CRM
                 commercial = (Commercial)cboCommercial.SelectedItem;
                 contact = (Contact)cboContact.SelectedItem;
 
-                rendez_vous = new Rendez_Vous(Convert.ToInt32(txtIdRdv.Text), Convert.ToDateTime(txtDateRdv.Text), commercial, contact);
+                rendez_vous = new Rendez_Vous(Convert.ToInt32(txtIdRdv.Text), Convert.ToDateTime(txtDateRdv.Text), commercial, contact, Convert.ToString(txtlieuxRdv.Text));
 
                 database.PutRdv(rendez_vous);
                 refreshRendez_Vous();

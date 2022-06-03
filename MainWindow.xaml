@@ -157,6 +157,8 @@
                     <Button x:Name="btnSupprimerRdv" Content="Supprimer" HorizontalAlignment="Left" Margin="471,375,0,0" VerticalAlignment="Top" Width="123" Click="ButtonSupprimerRdv_Click"/>
                     <ComboBox x:Name="cboContact" HorizontalAlignment="Left" Margin="471,86,0,0" VerticalAlignment="Top" Width="120" Height="23"/>
                     <ComboBox x:Name="cboCommercial" HorizontalAlignment="Left" Margin="471,124,0,0" VerticalAlignment="Top" Width="120" Height="23"/>
+                    <Label x:Name="lbl_lieux_rdv" Content="Lieux :" HorizontalAlignment="Left" Margin="390,164,0,0" VerticalAlignment="Top" Foreground="White" Width="110"/>
+                    <TextBox x:Name="txtlieuxRdv" HorizontalAlignment="Left" Height="23" Margin="474,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="Locaux client"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Produits" Opacity="0.9">
